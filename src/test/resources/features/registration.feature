@@ -1,1 +1,2 @@
 #@login @mainDash
+#@registration
