@@ -1,0 +1,9 @@
+<suite name="Suite">
+
+    <test name="Common Tests">
+        <classes>
+            <class name="tests.commonTest"/>
+        </classes>
+    </test>
+
+</suite>

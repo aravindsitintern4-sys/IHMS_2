@@ -1,0 +1,7 @@
+base\BasePage.class
+pages\LoginPage.class
+utils\ReusableCode.class
+pages\DashboardPage.class
+utils\ConfigReader.class
+locators\Locator.class
+factory\PlaywrightFactory.class
