@@ -1,5 +1,6 @@
 package tests;
 
+// import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.microsoft.playwright.Page;
@@ -44,33 +45,29 @@ public class LoginTest extends BaseTest {
     //     dashboard.clickDashboardOption("EMR");
     // }
 
-   @Test
-    public void MainMenuOption() {
+//    @Test
+//     public void MainMenuOption() {
 
-        //  MAIN DASHBOARD IHMS OPTION SELECTION
-        DashboardPage dashboard = new DashboardPage(page);
+//         //  MAIN DASHBOARD IHMS OPTION SELECTION
+//         DashboardPage dashboard = new DashboardPage(page);
 
-        //  USE LAMDA FUNCTION ---> BECAUSE IT'S OPENS NEW TAB AFTER THIS TEST ACTION
-        Page ihmsPage = page.waitForPopup(() -> {
-            dashboard.clickDashboardOption("IHMS");
-        });
-
-        // WAIT FOR IHMS PAGE TO LOAD
-        ihmsPage.waitForLoadState();
+//         //  USE LAMDA FUNCTION ---> BECAUSE IT'S OPENS NEW TAB AFTER THIS TEST ACTION
+//         Page ihmsPage = page.waitForPopup(() -> {
+//             dashboard.clickDashboardOption("IHMS");
+//         });
                 
-        // MAINMENU AND SUBMENU SELECTION , AND CALL THE NEW OPENED TAB 
-        ReusableCode ihmsDashboard = new ReusableCode(ihmsPage);
+//         // MAINMENU AND SUBMENU SELECTION , AND CALL THE NEW OPENED TAB 
+//         ReusableCode ihmsDashboard = new ReusableCode(ihmsPage);
 
-         //WITHOUT USING CONFIG
-        ihmsDashboard.clickMenuAndSelectSubMenu(
-                "OP Modules",
-                "Outpatient Registration");
+//          //WITHOUT USING CONFIG
+//         ihmsDashboard.clickMenuAndSelectSubMenu(
+//                 "OP Modules",
+//                 "Outpatient Registration");
+//     } 
 
-        // // USING CONFIG           
-        // ihmsDashboard.clickMenuAndSelectSubMenu(
-        //         config.get("Mainmenu"),
-        //         config.get("Submenu"));
-    } 
+
+
+
 
 
 

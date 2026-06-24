@@ -2,7 +2,7 @@
 
     <test name="Common Tests">
         <classes>
-            <class name="tests.commonTest"/>
+            <class name="tests.OPRegistrationTest"/>
         </classes>
     </test>
 

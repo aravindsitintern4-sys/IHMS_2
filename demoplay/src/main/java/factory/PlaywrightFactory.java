@@ -4,18 +4,51 @@ import com.microsoft.playwright.*;
 
 public class PlaywrightFactory {
 
-    private Playwright playwright;
-    private Browser browser;
-    private BrowserContext context;
-    private Page page;
+    Playwright playwright;
+    Browser browser;
+    BrowserContext context;
+    Page page;
 
-    public Page initBrowser() {
+    public Page initBrowser(String browserName) {
 
         playwright = Playwright.create();
 
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false).setSlowMo(1000));
+        switch (browserName.toLowerCase()) {
+
+        case "chromium":
+            browser = playwright.chromium().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false)
+                            .setSlowMo(1000));
+            break;
+
+        case "chrome":
+            browser = playwright.chromium().launch(
+                    new BrowserType.LaunchOptions()
+                            .setChannel("chrome")
+                            .setHeadless(false)
+                            .setSlowMo(1000));
+            break;
+
+        case "edge":
+            browser = playwright.chromium().launch(
+                    new BrowserType.LaunchOptions()
+                            .setChannel("msedge")
+                            .setHeadless(false)
+                            .setSlowMo(1000));
+            break;
+
+        case "firefox":
+            browser = playwright.firefox().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false)
+                            .setSlowMo(1000));
+            break;
+
+        default:
+            throw new IllegalArgumentException(
+                    "Invalid browser name: " + browserName);
+        }
 
         context = browser.newContext();
         page = context.newPage();
@@ -31,4 +64,4 @@ public class PlaywrightFactory {
             playwright.close();
         }
     }
-} 
+}

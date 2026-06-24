@@ -1,2 +1,3 @@
 basetest\BaseTest.class
-tests\commonTest.class
+tests\LoginTest.class
+tests\OPRegistrationTest.class
