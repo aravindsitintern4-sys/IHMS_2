@@ -9,7 +9,7 @@ import pages.DashboardPage;
 import utils.ReusableCode;
 // import pages.LoginPage;
 
-public class commonTest extends BaseTest {
+public class LoginTest extends BaseTest {
 
 
      // POSITIVE SCENARIO
