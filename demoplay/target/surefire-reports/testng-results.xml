@@ -1,21 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-24T17:45:36 IST" name="Surefire suite" finished-at="2026-06-24T17:46:07 IST" duration-ms="30877">
+  <suite started-at="2026-06-25T17:39:43 IST" name="Surefire suite" finished-at="2026-06-25T17:40:09 IST" duration-ms="25815">
     <groups>
     </groups>
-    <test started-at="2026-06-24T17:45:36 IST" name="Surefire test" finished-at="2026-06-24T17:46:07 IST" duration-ms="30877">
+    <test started-at="2026-06-25T17:39:43 IST" name="Surefire test" finished-at="2026-06-25T17:40:09 IST" duration-ms="25815">
       <class name="tests.OPRegistrationTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@16aa0a0a]" started-at="2026-06-24T17:45:36 IST" name="setup" finished-at="2026-06-24T17:45:44 IST" duration-ms="7642" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@6646153]" started-at="2026-06-25T17:39:43 IST" name="setup" finished-at="2026-06-25T17:39:50 IST" duration-ms="6870" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyOPRegistration()[pri:0, instance:tests.OPRegistrationTest@16aa0a0a]" started-at="2026-06-24T17:45:44 IST" name="verifyOPRegistration" finished-at="2026-06-24T17:46:06 IST" duration-ms="22746" status="PASS">
+        <test-method signature="verifyPAYOPRegistration()[pri:0, instance:tests.OPRegistrationTest@6646153]" started-at="2026-06-25T17:39:50 IST" name="verifyPAYOPRegistration" finished-at="2026-06-25T17:40:09 IST" duration-ms="18528" status="FAIL">
+          <exception class="com.microsoft.playwright.impl.TargetClosedError">
+            <message>
+              <![CDATA[Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
+}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.impl.TargetClosedError: Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
+}
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
+at com.microsoft.playwright.impl.FrameImpl.type(FrameImpl.java:780)
+at com.microsoft.playwright.impl.LocatorImpl.type(LocatorImpl.java:609)
+at com.microsoft.playwright.impl.LocatorImpl.pressSequentially(LocatorImpl.java:476)
+at com.microsoft.playwright.Locator.pressSequentially(Locator.java:4340)
+at utils.ReusableCode.inputFieldByLabel(ReusableCode.java:63)
+at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:58)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13389816085797063813\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
+}
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
+... 39 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.impl.TargetClosedError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyOPRegistration -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@16aa0a0a]" started-at="2026-06-24T17:46:06 IST" name="tearDown" finished-at="2026-06-24T17:46:07 IST" duration-ms="459" status="PASS">
+        </test-method> <!-- verifyPAYOPRegistration -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@6646153]" started-at="2026-06-25T17:40:09 IST" name="tearDown" finished-at="2026-06-25T17:40:09 IST" duration-ms="393" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

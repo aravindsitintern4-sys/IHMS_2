@@ -14,7 +14,7 @@ public class OPRegistrationPage {
     }
 
     public void selectSomeForceDropdownByLabel(String labelName, String option) {
-        String droploc = String.format(Locator.DROPDOWN_BY_LABEL,labelName);
+        String droploc = String.format(Locator.dropdownForceLoc,labelName);
         page.locator(droploc).first().selectOption(new SelectOption().setLabel(option));
     }
     

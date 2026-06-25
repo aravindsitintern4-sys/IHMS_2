@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.Map;
+
 import org.testng.annotations.Test;
 
 import com.microsoft.playwright.Page;
@@ -7,70 +9,87 @@ import com.microsoft.playwright.Page;
 import basetest.BaseTest;
 import pages.DashboardPage;
 import pages.OPRegistrationPage;
+import utils.Excel;
 import utils.ReusableCode;
+import utils.Screenshots;
 
 public class OPRegistrationTest extends BaseTest {
 
     @Test
-    public void verifyOPRegistration() {
+    public void verifyPAYOPRegistration() {
+      
+        Map<String, String> data = Excel.getTestData("opRegistrationData");
 
         DashboardPage dashboard = new DashboardPage(page);
 
-        // OPEN IHMS IN A NEW TAB 
         Page ihmsPage = page.waitForPopup(() -> {
             dashboard.clickDashboardOption("IHMS");
         });
 
-        ReusableCode reuseableAction = new ReusableCode(ihmsPage);
+        ReusableCode reusableAction = new ReusableCode(ihmsPage);
 
-        reuseableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
+        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
-        reuseableAction.selectDropdownByLabel("Pay/Free", "FREE");
+        reusableAction.selectDropdownByLabel("Pay/Free",data.get("PayFree"));
+        reusableAction.selectDropdownByLabel("Patient Type",data.get("PatientType"));             
+        reusableAction.inputFieldByLabel("First Name",data.get("FirstName"));
+        reusableAction.inputFieldByLabel("Last Name",data.get("LastName"));
+        reusableAction.inputFieldByLabel("Age",data.get("Age"));
+        reusableAction.selectRadioByLabel("Gender",data.get("Gender"));
+        reusableAction.selectDropdownByLabel("Next of Kin",data.get("NextOfKinType"));
+        reusableAction.inputFieldByLabel("Next of Kin",data.get("NextOfKinName"));
+        reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
+        if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
+            verifyReferralForm(reusableAction, data);
+        }
 
-        reuseableAction.selectDropdownByLabel("Patient Type", "DIRECT");
+        Screenshots.takeScreenshot(ihmsPage,"PAYOPRegistration");
 
-        reuseableAction.inputFieldByLabel("First Name","AAA");
+        reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
+        reusableAction.inputFieldByLabel("Door / Street",data.get("DoorStreet"));
+        reusableAction.inputFieldByLabel("Locality",data.get("Locality"));
+        reusableAction.inputFieldByLabel("City",data.get("City"));
+        reusableAction.buttonClick("Area");
+        opPage.selectSomeForceDropdownByLabel("City",data.get("Area"));
+        reusableAction.inputFieldByLabel("PinCode",data.get("PinCode"));
+        opPage.selectSomeForceDropdownByLabel("Taluk",data.get("Taluk"));
+        reusableAction.inputFieldByLabel("Mobile No",data.get("MobileNo"));
+        reusableAction.inputFieldByLabel("Email",data.get("Email"));
+        reusableAction.selectDropdownByLabel("Purpose Of Visit",data.get("PurposeVisit"));
+        reusableAction.selectDropdownByLabel("Mobile App ConsentForm",data.get("ConsentForm"));
 
-        reuseableAction.inputFieldByLabel("Last Name","ZZZ");
-
-        reuseableAction.inputFieldByLabel("Age","25");
-
-        reuseableAction.selectRadioByLabel("Gender","Male");
-
-        reuseableAction.selectDropdownByLabel("Next of Kin","S/O");
-
-        reuseableAction.inputFieldByLabel("Next of Kin","sss");
-
-        // reuseableAction.selectRadioByLabel("Normal / Referral", "Referral");
-
-        // // REFERRAL FORM
-        // reuseableAction.inputFieldByLabel("Reference No","566546");
-        // // reuseableAction.checkboxByLabel("CRS");
-        // // opPage.selectSomeForceDropdownByLabel("District","MADURAI");
-        // reuseableAction.inputFieldByLabel("Reference Date","2026-06-20");
-        // reuseableAction.selectDropdownByLabel("Referral Name","AARA EYE HOSPITAL");
-        // reuseableAction.selectDropdownByLabel("Clinic Referred to","RETINA FREE");
-        // reuseableAction.selectDropdownByLabel("Doctor Referred to","Anjana");
-        // reuseableAction.buttonClick("Save");
-
-        // // NATIONALITY ---> FOREIGNER
-        // reuseableAction.selectRadioByLabel("Nationality", "Foreigner");
-        // reuseableAction.selectDropdownByLabel("Country","CANADA");
-        // reuseableAction.inputFieldByLabel("Zip Code","45126");
-
-        // NATIONALITY ---> INDIAN
-        reuseableAction.selectRadioByLabel("Nationality", "Indian");
-        reuseableAction.inputFieldByLabel("Door / Street","98 rrr street");
-        reuseableAction.inputFieldByLabel("Locality","inside madurai");
-        reuseableAction.inputFieldByLabel("City","madurai");
-        reuseableAction.buttonClick("Area");
-        opPage.selectSomeForceDropdownByLabel("City","BEE BEE KULAM");
-        reuseableAction.inputFieldByLabel("PinCode","645126");
-        opPage.selectSomeForceDropdownByLabel("Taluk","MADURAI - GENL");
-        reuseableAction.inputFieldByLabel("Mobile No","9548645126");
-        reuseableAction.inputFieldByLabel("Email","emailihms2@gmail.com");    
-        reuseableAction.selectDropdownByLabel("Purpose Of Visit","OCT");    
+        // verifySubsidySubCategory(reusableAction, data);
+        
     }
-}   
+
+    public void verifySubsidySubCategory(
+            ReusableCode reusableAction,
+            Map<String, String> data) {
+
+        reusableAction.selectDropdownByLabel("Patient Sub Category:",data.get("PatientSubCategorySubsidy"));
+        reusableAction.selectSearchableDropdownByLabel("Concession Approved By",data.get("ApprovedBy"));
+        reusableAction.inputFieldByLabel("% Concession granted",data.get("ConcessionPercent"));
+        reusableAction.selectSearchableDropdownByLabel("Reason",data.get("Reason"));
+        reusableAction.inputFieldByLabel("Remarks",data.get("Remarks"));
+        reusableAction.buttonClick("Save");
+    }
+
+
+
+    // REFERRAL FORM
+    public void verifyReferralForm(ReusableCode reusableAction , Map<String, String> data) {
+    
+
+        reusableAction.inputFieldByLabel("Reference No",data.get("Reference No"));
+        // reusableAction.checkboxByLabel("CRS");
+        // opPage.selectSomeForceDropdownByLabel("District",data.get("MADURAI"));
+        reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
+        reusableAction.selectDropdownByLabel("Referral Name",data.get("Referral name"));
+        reusableAction.selectDropdownByLabel("Clinic Referred to",data.get("Clinic Referred to"));
+        reusableAction.selectDropdownByLabel("Doctor Referred to",data.get("Doctor Referred to"));
+        reusableAction.buttonClick("Save");
+    }
+
+}

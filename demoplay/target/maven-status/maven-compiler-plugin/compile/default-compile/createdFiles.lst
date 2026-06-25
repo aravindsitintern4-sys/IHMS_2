@@ -1,4 +1,6 @@
 base\BasePage.class
+utils\Screenshots.class
+utils\Excel.class
 pages\LoginPage.class
 utils\ReusableCode.class
 pages\DashboardPage.class
