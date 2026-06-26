@@ -54,14 +54,12 @@ public class ReusableCode {
     
     // INPUT FIELD
     public void inputFieldByLabel(String labelName, String inputValue) {
-        // String inputField =  "//label[contains(normalize-space(),'%s')]/following::input[1]";
-        // String inputLoc = String.format(inputField,labelName);
-        // page.locator(inputLoc).fill(inputValue);
         String inputField ="//label[contains(normalize-space(),'%s')]/following::input[1]";
         String inputLoc = String.format(inputField, labelName);
         page.locator(inputLoc).click();
+        page.locator(inputLoc).clear();
         page.locator(inputLoc).pressSequentially(inputValue);
-    }
+    }    
 
     // RADIO BUTTON
     public void selectRadioByLabel(String labelName, String option) {
@@ -69,14 +67,14 @@ public class ReusableCode {
         String radioLoc = String.format(radioBtn,labelName,option);
         page.locator(radioLoc).check();
     }
-
+      
     // CHECK BOX 
     public void checkboxByLabel(String labelName) {
         String checkbox = "//label[contains(normalize-space(),'%s')]/preceding-sibling::input[@type='checkbox']";
         String checkBoxLoc = String.format(checkbox,labelName);
         page.locator(checkBoxLoc).check();
     }
-
+ 
     // INPUT FIELD
     public void textAreaFieldByLabel(String labelName, String inputValue) {
         String textAreaField =  "//label[contains(normalize-space(),'%s')]/following::textarea[1]";
@@ -91,10 +89,11 @@ public class ReusableCode {
         String optionSelect ="//div[normalize-space()='%s']";
 
         page.locator(String.format(dropdownClickLoc, labelName)).click();
-        page.locator(optionInput).fill(option);
+        page.locator(optionInput).pressSequentially(option);
         page.locator(String.format(optionSelect, option)).last().click();
-    }
-
+    }  
+    
+    
     
 
 }

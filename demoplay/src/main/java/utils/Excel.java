@@ -2,6 +2,7 @@ package utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+// HASH MAP ---> STORES THE DATAS AS KEY _ VALUE PAIRS 
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +11,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Excel {
 
-    private static final String FILE_PATH =
+    private static final String filePath =
             "src/test/resources/OPRegistrationData.xlsx";
 
     public static Map<String, String> getTestData(String sheetName) {
 
         Map<String, String> data = new HashMap<>();
 
-        try (FileInputStream fis = new FileInputStream(FILE_PATH);
+        try (FileInputStream fis = new FileInputStream(filePath);
              Workbook workbook = new XSSFWorkbook(fis)) {
 
             Sheet sheet = workbook.getSheet(sheetName);
