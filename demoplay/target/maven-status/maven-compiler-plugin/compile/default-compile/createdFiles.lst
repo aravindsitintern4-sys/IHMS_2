@@ -4,8 +4,9 @@ utils\ReusableCode.class
 pages\DashboardPage.class
 pages\OPRegistrationPage.class
 utils\ConfigReader.class
+utils\JsonUtil.class
 factory\PlaywrightFactory.class
 base\BasePage.class
 utils\Excel.class
+utils\DropdownReader.class
 locators\Locator.class
-utils\DropdownStore.class

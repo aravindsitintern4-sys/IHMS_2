@@ -1,5 +1,6 @@
 package tests;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.testng.annotations.Test;
@@ -9,7 +10,7 @@ import com.microsoft.playwright.Page;
 import basetest.BaseTest;
 import pages.DashboardPage;
 import pages.OPRegistrationPage;
-import utils.DropdownStore;
+import utils.DropdownReader;
 import utils.Excel;
 import utils.ReusableCode;
 import utils.Screenshots;
@@ -17,9 +18,11 @@ import utils.Screenshots;
 public class OPRegistrationTest extends BaseTest {
     
     @Test
-    public void verifyPAYOPRegistration() {
+    public void verifyPAYOPRegistration() throws IOException {
       
         Map<String, String> data = Excel.getTestData("opRegistrationData");
+        
+        
 
         DashboardPage dashboard = new DashboardPage(page);
 
@@ -31,26 +34,30 @@ public class OPRegistrationTest extends BaseTest {
 
         reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
+        // WAIT FOR ALL SELECT LABEL VISIBLE
+        ihmsPage.locator("//select").first().waitFor();
+
+        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+ 
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
+
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
-
-        DropdownStore dropdownStore = new DropdownStore(ihmsPage);
-
-        dropdownStore.storeDropdownOptions("Taluk");
 
         reusableAction.selectDropdownByLabel("Pay/Free",data.get("PayFree"));
         reusableAction.selectDropdownByLabel("Patient Type",data.get("PatientType"));             
         reusableAction.inputFieldByLabel("First Name",data.get("FirstName"));
         reusableAction.inputFieldByLabel("Last Name",data.get("LastName"));
-        reusableAction.inputFieldByLabel("Age",data.get("Age"));
+        // reusableAction.inputFieldByLabel("Age",data.get("Age"));
         reusableAction.inputFieldByLabel("DOB",data.get("Date of Birth"));
         reusableAction.selectRadioByLabel("Gender",data.get("Gender"));
         reusableAction.selectDropdownByLabel("Next of Kin",data.get("NextOfKinType"));
         reusableAction.inputFieldByLabel("Next of Kin",data.get("NextOfKinName"));
         reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
         if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
-            verifyReferralForm(reusableAction, data);
+            verifyReferralForm(reusableAction,dropdownReader, data);
         }
-
+                                  
         // Screenshots.takeScreenshot(ihmsPage,"PAYOPRegistration");
 
         reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
@@ -65,17 +72,19 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Email",data.get("Email"));
         reusableAction.selectDropdownByLabel("Purpose Of Visit",data.get("PurposeVisit"));
         reusableAction.selectDropdownByLabel("Mobile App ConsentForm",data.get("ConsentForm"));
+        reusableAction.selectDropdownByLabel("Assign Doctor:", data.get("Assign doctor"));
         reusableAction.selectDropdownByLabel("Patient Category:",data.get("Patient category"));
-        // reusableAction.selectDropdownByLabel("Patient Sub Category:",data.get("PatientSubCategory"));
-
-        // verifySubsidySubCategory(reusableAction, data);
-        verifyCorporateCategory(reusableAction,data);
-                        
-   
+        reusableAction.selectDropdownByLabel("Patient Sub Category:",data.get("PatientSubCategory"));
+           
+        verifySubsidySubCategory(reusableAction,dropdownReader, data);
+        // verifyCorporateCategory(reusableAction,dropdownReader,data);   
+        reusableAction.buttonClick("Submit");            
     }
-   
+       
     // CORPORATE PATIENT CATEGORY
-    public void verifyCorporateCategory(ReusableCode reusableAction,Map<String, String> data) {
+    public void verifyCorporateCategory(ReusableCode reusableAction,DropdownReader dropdownReader,Map<String, String> data) throws IOException {
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
         reusableAction.selectDropdownByLabel("Corporate Name", data.get("Corporate name"));
         reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
         reusableAction.selectDropdownByLabel("Employee Grade", data.get("Employee grade"));
@@ -84,18 +93,22 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
         reusableAction.buttonClick("Submit");
     }
-
+        
     // SUBSIDY 
-    public void verifySubsidySubCategory(ReusableCode reusableAction,Map<String, String> data) {
+    public void verifySubsidySubCategory(ReusableCode reusableAction,DropdownReader dropdownReader,Map<String, String> data) throws IOException {
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
         reusableAction.selectSearchableDropdownByLabel("Subsidy Approved By",data.get("SubsidyApprovedBy"));
         reusableAction.inputFieldByLabel("% Subsidy granted",data.get("Subsidy granted"));
         reusableAction.selectSearchableDropdownByLabel("Reason",data.get("Subsidy Reason"));
         reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
         reusableAction.buttonClick("Save");
-    }             
-
+    }                                             
+     
     // REFERRAL FORM
-    public void verifyReferralForm(ReusableCode reusableAction , Map<String, String> data) {
+    public void verifyReferralForm(ReusableCode reusableAction ,DropdownReader dropdownReader, Map<String, String> data) throws IOException {
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
         reusableAction.inputFieldByLabel("Reference No",data.get("Reference No"));
         // reusableAction.checkboxByLabel("CRS");
         // opPage.selectSomeForceDropdownByLabel("District",data.get("MADURAI"));
@@ -105,4 +118,6 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.selectDropdownByLabel("Doctor Referred to",data.get("Doctor Referred to"));
         reusableAction.buttonClick("Save");
     }
+
+    
 }
