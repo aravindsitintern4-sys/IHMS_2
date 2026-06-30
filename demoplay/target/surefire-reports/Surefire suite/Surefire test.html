@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Jun 29 17:50:04 IST 2026</td>
+<td>Started on:</td><td>Tue Jun 30 17:45:25 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>59 seconds (59804 ms)</td>
+<tr><td>Total time:</td><td>12 seconds (12560 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,106 +77,14 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='tests.OPRegistrationTest.verifyPAYOPRegistration()'><b>verifyPAYOPRegistration</b><br>Test class: tests.OPRegistrationTest</td>
-<td><div><pre>com.microsoft.playwright.PlaywrightException: Error {
-  message=&apos;Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-  name=&apos;Error
-  stack=&apos;Error: Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:56)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
-	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
-	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.type(FrameImpl.java:780)
-	at com.microsoft.playwright.impl.LocatorImpl.type(LocatorImpl.java:609)
-	at com.microsoft.playwright.impl.LocatorImpl.pressSequentially(LocatorImpl.java:476)
-	at com.microsoft.playwright.Locator.pressSequentially(Locator.java:4340)
-	at utils.ReusableCode.selectSearchableDropdownByLabel(ReusableCode.java:93)
-	at tests.OPRegistrationTest.verifySubsidySubCategory(OPRegistrationTest.java:101)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:79)
+<td><div><pre>java.lang.RuntimeException: Dropdown &apos;Pay/Free&apos; not found in DropdownOptions sheet.
+	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: com.microsoft.playwright.impl.DriverException: Error {
-  message=&apos;Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-  name=&apos;Error
-  stack=&apos;Error: Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:262)
-	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 40 more
-... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace102052782", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace102052782'><pre>com.microsoft.playwright.PlaywrightException: Error {
-  message=&apos;Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-  name=&apos;Error
-  stack=&apos;Error: Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:56)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
-	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
-	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.type(FrameImpl.java:780)
-	at com.microsoft.playwright.impl.LocatorImpl.type(LocatorImpl.java:609)
-	at com.microsoft.playwright.impl.LocatorImpl.pressSequentially(LocatorImpl.java:476)
-	at com.microsoft.playwright.Locator.pressSequentially(Locator.java:4340)
-	at utils.ReusableCode.selectSearchableDropdownByLabel(ReusableCode.java:93)
-	at tests.OPRegistrationTest.verifySubsidySubCategory(OPRegistrationTest.java:101)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:79)
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1967432164", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1967432164'><pre>java.lang.RuntimeException: Dropdown &apos;Pay/Free&apos; not found in DropdownOptions sheet.
+	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -208,37 +116,9 @@ Call log:
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
-Caused by: com.microsoft.playwright.impl.DriverException: Error {
-  message=&apos;Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-  name=&apos;Error
-  stack=&apos;Error: Error: strict mode violation: locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;) resolved to 2 elements:
-    1) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid&quot;/&gt; aka locator(&quot;#subsidyApprovedBy&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-    2) &lt;input type=&quot;text&quot; placeholder=&quot;Search...&quot; class=&quot;w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched&quot;/&gt; aka locator(&quot;#subsidyReason&quot;).getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(&quot;Search...&quot;))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//input[@placeholder=&apos;Search...&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:262)
-	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 40 more
 </pre></div></td>
-<td>52</td>
-<td>tests.OPRegistrationTest@3b2cf7ab</td></tr>
+<td>4</td>
+<td>tests.OPRegistrationTest@3a079870</td></tr>
 </table><p>
 </body>
 </html>

@@ -1,60 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 60.292 s <<< FAILURE! - in TestSuite
-verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 52.793 s  <<< FAILURE!
-com.microsoft.playwright.PlaywrightException: 
-Error {
-  message='Error: strict mode violation: locator("//input[@placeholder='Search...']") resolved to 2 elements:
-    1) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid"/> aka locator("#subsidyApprovedBy").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-    2) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched"/> aka locator("#subsidyReason").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-
-  name='Error
-  stack='Error: Error: strict mode violation: locator("//input[@placeholder='Search...']") resolved to 2 elements:
-    1) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid"/> aka locator("#subsidyApprovedBy").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-    2) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched"/> aka locator("#subsidyReason").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator("//input[@placeholder='Search...']")
-
-	at tests.OPRegistrationTest.verifySubsidySubCategory(OPRegistrationTest.java:101)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:79)
-Caused by: com.microsoft.playwright.impl.DriverException: 
-Error {
-  message='Error: strict mode violation: locator("//input[@placeholder='Search...']") resolved to 2 elements:
-    1) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid"/> aka locator("#subsidyApprovedBy").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-    2) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched"/> aka locator("#subsidyReason").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-
-  name='Error
-  stack='Error: Error: strict mode violation: locator("//input[@placeholder='Search...']") resolved to 2 elements:
-    1) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-untouched ng-pristine ng-valid"/> aka locator("#subsidyApprovedBy").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-    2) <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded px-2 py-1 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ng-pristine ng-valid ng-touched"/> aka locator("#subsidyReason").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Search..."))
-
-    at CRExecutionContext.evaluateWithArguments (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\chromium\crExecutionContext.js:80:13)
-    at async LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\utils\isomorphic\manualPromise.js:94:14)
-    at async evaluateExpression (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\javascript.js:217:12)
-    at async C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:901:22
-    at async Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:871:24)
-    at async Frame.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\frames.js:1106:27)
-    at async FrameDispatcher.type (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\frameDispatcher.js:187:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-2089799998871800543\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator("//input[@placeholder='Search...']")
-
-	at tests.OPRegistrationTest.verifySubsidySubCategory(OPRegistrationTest.java:101)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:79)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.111 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 4.673 s  <<< FAILURE!
+java.lang.RuntimeException: Dropdown 'Pay/Free' not found in DropdownOptions sheet.
+	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
 

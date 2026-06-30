@@ -2,6 +2,8 @@ package utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 // HASH MAP ---> STORES THE DATAS AS KEY _ VALUE PAIRS 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,4 +48,65 @@ public class Excel {
 
         return data;
     }
+
+
+   public static Map<String, List<String>> getDropdownOptions(String sheetName) {
+
+    Map<String, List<String>> dropdownMap = new HashMap<>();
+
+    try (FileInputStream fis = new FileInputStream(filePath);
+         Workbook workbook = new XSSFWorkbook(fis)) {
+
+        Sheet sheet = workbook.getSheet(sheetName);
+
+        if (sheet == null) {
+            throw new RuntimeException("Sheet '" + sheetName + "' not found.");
+        }
+
+        DataFormatter formatter = new DataFormatter();
+
+        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+
+            Row row = sheet.getRow(i);
+
+            if (row == null) {
+                continue;
+            }
+
+            Cell labelCell = row.getCell(0);
+
+            if (labelCell == null) {
+                continue;
+            }
+
+            String label = formatter.formatCellValue(labelCell).trim();
+
+            List<String> options = new ArrayList<>();
+
+            for (int j = 1; j < row.getLastCellNum(); j++) {
+
+                Cell optionCell = row.getCell(j);
+
+                if (optionCell == null) {
+                    continue;
+                }
+
+                String option = formatter.formatCellValue(optionCell).trim();
+
+                if (!option.isEmpty()) {
+                    options.add(option);
+                }
+            }
+
+            dropdownMap.put(label, options);
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return dropdownMap;
+}
+
+
 }
