@@ -1,9 +1,56 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.111 s <<< FAILURE! - in TestSuite
-verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 4.673 s  <<< FAILURE!
-java.lang.RuntimeException: Dropdown 'Pay/Free' not found in DropdownOptions sheet.
-	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 24.868 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 17.326 s  <<< FAILURE!
+com.microsoft.playwright.impl.TargetClosedError: 
+Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator("//a[normalize-space()='Outpatient Registration']")
+-     - locator resolved to <a class="block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted"> Outpatient Registration </a>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: 
+Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator("//a[normalize-space()='Outpatient Registration']")
+-     - locator resolved to <a class="block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted"> Outpatient Registration </a>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
 

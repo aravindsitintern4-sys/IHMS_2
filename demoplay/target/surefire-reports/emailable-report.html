@@ -9,14 +9,71 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Surefire suite</th></tr>
-<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">12,560</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">24,398</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifyPAYOPRegistration</a></td><td rowspan="1">1782821732580</td><td rowspan="1">4656</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifyPAYOPRegistration</a></td><td rowspan="1">1782908570117</td><td rowspan="1">17318</td></tr></tbody>
 </table>
-<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifyPAYOPRegistration</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.RuntimeException: Dropdown &apos;Pay/Free&apos; not found in DropdownOptions sheet.
-	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
+<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifyPAYOPRegistration</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
+	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
+	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
+	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
+	at com.microsoft.playwright.impl.FrameImpl.click(FrameImpl.java:232)
+	at com.microsoft.playwright.impl.LocatorImpl.click(LocatorImpl.java:164)
+	at com.microsoft.playwright.Locator.click(Locator.java:2500)
+	at utils.ReusableCode.clickMenuAndSelectSubMenu(ReusableCode.java:39)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
+	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
+	... 39 more
 ... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

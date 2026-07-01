@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Jun 30 17:45:25 IST 2026</td>
+<td>Started on:</td><td>Wed Jul 01 17:52:43 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>12 seconds (12560 ms)</td>
+<tr><td>Total time:</td><td>24 seconds (24398 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,14 +77,101 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='tests.OPRegistrationTest.verifyPAYOPRegistration()'><b>verifyPAYOPRegistration</b><br>Test class: tests.OPRegistrationTest</td>
-<td><div><pre>java.lang.RuntimeException: Dropdown &apos;Pay/Free&apos; not found in DropdownOptions sheet.
-	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
+<td><div><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
+	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
+	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
+	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
+	at com.microsoft.playwright.impl.FrameImpl.click(FrameImpl.java:232)
+	at com.microsoft.playwright.impl.LocatorImpl.click(LocatorImpl.java:164)
+	at com.microsoft.playwright.Locator.click(Locator.java:2500)
+	at utils.ReusableCode.clickMenuAndSelectSubMenu(ReusableCode.java:39)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1967432164", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1967432164'><pre>java.lang.RuntimeException: Dropdown &apos;Pay/Free&apos; not found in DropdownOptions sheet.
-	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
+	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
+	... 39 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2035801202", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2035801202'><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
+	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
+	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
+	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
+	at com.microsoft.playwright.impl.FrameImpl.click(FrameImpl.java:232)
+	at com.microsoft.playwright.impl.LocatorImpl.click(LocatorImpl.java:164)
+	at com.microsoft.playwright.Locator.click(Locator.java:2500)
+	at utils.ReusableCode.clickMenuAndSelectSubMenu(ReusableCode.java:39)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -116,8 +203,35 @@ function toggleAllBoxes() {
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
+  message=&apos;Target page, context or browser has been closed
+  name=&apos;TargetClosedError
+  stack=&apos;TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator(&quot;//a[normalize-space()=&apos;Outpatient Registration&apos;]&quot;)
+-     - locator resolved to &lt;a class=&quot;block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted&quot;&gt; Outpatient Registration &lt;/a&gt;
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
+	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
+	... 39 more
 </pre></div></td>
-<td>4</td>
+<td>17</td>
 <td>tests.OPRegistrationTest@3a079870</td></tr>
 </table><p>
 </body>

@@ -2,24 +2,76 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-30T17:45:25 IST" name="Surefire suite" finished-at="2026-06-30T17:45:37 IST" duration-ms="12560">
+  <suite started-at="2026-07-01T17:52:43 IST" name="Surefire suite" finished-at="2026-07-01T17:53:07 IST" duration-ms="24398">
     <groups>
     </groups>
-    <test started-at="2026-06-30T17:45:25 IST" name="Surefire test" finished-at="2026-06-30T17:45:37 IST" duration-ms="12560">
+    <test started-at="2026-07-01T17:52:43 IST" name="Surefire test" finished-at="2026-07-01T17:53:07 IST" duration-ms="24398">
       <class name="tests.OPRegistrationTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-06-30T17:45:25 IST" name="setup" finished-at="2026-06-30T17:45:32 IST" duration-ms="7308" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-01T17:52:43 IST" name="setup" finished-at="2026-07-01T17:52:50 IST" duration-ms="6823" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyPAYOPRegistration()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-06-30T17:45:32 IST" name="verifyPAYOPRegistration" finished-at="2026-06-30T17:45:37 IST" duration-ms="4656" status="FAIL">
-          <exception class="java.lang.RuntimeException">
+        <test-method signature="verifyPAYOPRegistration()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-01T17:52:50 IST" name="verifyPAYOPRegistration" finished-at="2026-07-01T17:53:07 IST" duration-ms="17318" status="FAIL">
+          <exception class="com.microsoft.playwright.impl.TargetClosedError">
             <message>
-              <![CDATA[Dropdown 'Pay/Free' not found in DropdownOptions sheet.]]>
+              <![CDATA[Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator("//a[normalize-space()='Outpatient Registration']")
+-     - locator resolved to <a class="block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted"> Outpatient Registration </a>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException: Dropdown 'Pay/Free' not found in DropdownOptions sheet.
-at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:423)
-at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:264)
+              <![CDATA[com.microsoft.playwright.impl.TargetClosedError: Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator("//a[normalize-space()='Outpatient Registration']")
+-     - locator resolved to <a class="block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted"> Outpatient Registration </a>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
+at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
+at com.microsoft.playwright.impl.FrameImpl.click(FrameImpl.java:232)
+at com.microsoft.playwright.impl.LocatorImpl.click(LocatorImpl.java:164)
+at com.microsoft.playwright.Locator.click(Locator.java:2500)
+at utils.ReusableCode.clickMenuAndSelectSubMenu(ReusableCode.java:39)
+at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:145)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -51,13 +103,40 @@ at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader
 at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
 at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
 at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-13650430687892041184\package\lib\server\dispatchers\dispatcher.js:333:15)
+}
+Call log:
+-   - waiting for locator("//a[normalize-space()='Outpatient Registration']")
+-     - locator resolved to <a class="block px-4 py-2 cursor-pointer hover:bg-[rgb(0_123_185_/_19%)] ng-star-inserted"> Outpatient Registration </a>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-     - waiting 20ms
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is not visible
+-     - retrying click action
+-       - waiting 100ms
+-     24 × waiting for element to be visible, enabled and stable
+-        - element is not visible
+-      - retrying click action
+-        - waiting 500ms
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
+... 39 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.RuntimeException -->
+          </exception> <!-- com.microsoft.playwright.impl.TargetClosedError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyPAYOPRegistration -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-06-30T17:45:37 IST" name="tearDown" finished-at="2026-06-30T17:45:37 IST" duration-ms="538" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-01T17:53:07 IST" name="tearDown" finished-at="2026-07-01T17:53:07 IST" duration-ms="212" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
