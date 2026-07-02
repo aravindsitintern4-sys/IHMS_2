@@ -60,8 +60,7 @@ public class ReusableCode {
         page.locator(inputLoc).clear();
         page.locator(inputLoc).pressSequentially(inputValue);
     }    
-
-
+         
     // RADIO BUTTON
     public void selectRadioByLabel(String labelName, String option) {
         String radioBtn ="//label[contains(normalize-space(),'%s')]/following-sibling::div//label[contains(normalize-space(),'%s')]/input";

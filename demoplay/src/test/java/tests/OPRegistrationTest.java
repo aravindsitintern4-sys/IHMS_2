@@ -18,7 +18,8 @@ import utils.ReusableCode;
 import utils.Screenshots;
 
 public class OPRegistrationTest extends BaseTest {
-    
+   
+// GET THE TEST DATA FROM EXCEL WITHOUT DROPDOWN VALIDATION
 //     @Test
 //     public void verifyPAYOPRegistration() throws IOException {
       
@@ -128,6 +129,14 @@ public class OPRegistrationTest extends BaseTest {
 
 
 
+
+
+
+
+
+
+
+
 //   GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON
     @Test
     public void verifyPAYOPRegistration() throws IOException {
@@ -146,7 +155,13 @@ public class OPRegistrationTest extends BaseTest {
 
         ihmsPage.locator("//select").first().waitFor();
 
+        // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
+        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
+
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+
 
         validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
         validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
@@ -154,19 +169,23 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
         reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
         reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
-        validateAndSelectDropdown(reusableAction,"Next of Kin",data.get("NextOfKinType"));
+        ihmsPage.waitForTimeout(1000);
+        dropdownReader.refreshDropdown("Next of Kin");
+        validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
         reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
 
         reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
         if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
+            dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
             verifyReferralForm(reusableAction, data);
         }
-
+                             
         reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
         reusableAction.inputFieldByLabel("Door / Street", data.get("DoorStreet"));
         reusableAction.inputFieldByLabel("Locality", data.get("locality"));
         reusableAction.inputFieldByLabel("City", data.get("City"));
         reusableAction.buttonClick("Area");
+        dropdownReader.refreshDropdown("City /");
         validateAndSelectForceDropdown(opPage,"City /", data.get("Area"));
         reusableAction.inputFieldByLabel("PinCode", data.get("PinCode"));
         validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
@@ -178,11 +197,12 @@ public class OPRegistrationTest extends BaseTest {
         validateAndSelectDropdown(reusableAction,"Patient Category:",data.get("Patient category"));
         validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
 
-        verifySubsidySubCategory(reusableAction, data);
-
+        if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+            dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+            verifySubsidySubCategory(reusableAction, data);
+        }
         reusableAction.buttonClick("Submit");
     }
-
 
     public void verifyReferralForm(ReusableCode reusableAction,Map<String, String> data) {
         reusableAction.inputFieldByLabel("Reference No", data.get("Reference No"));
@@ -231,12 +251,21 @@ public class OPRegistrationTest extends BaseTest {
         }
         opPage.selectSomeForceDropdownByLabel(label, value);
     }
+}
 
 
 
 
 
-// //  GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM EXCEL
+
+
+
+
+
+
+
+
+//  GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM EXCEL
 // @Test
 // public void verifyPAYOPRegistration() throws IOException {
 
@@ -379,7 +408,7 @@ public class OPRegistrationTest extends BaseTest {
 //     validateOption(dropdownOptions, label, value);
 //     reusableAction.selectDropdownByLabel(label, value);
 // }
-
+  
 // private void validateAndSelectSearchableDropdown(
 //         ReusableCode reusableAction,
 //         Map<String, List<String>> dropdownOptions,
@@ -409,4 +438,4 @@ public class OPRegistrationTest extends BaseTest {
 //     return Excel.getDropdownOptions("DropdownOptions");
 // }
 
-}
+// }

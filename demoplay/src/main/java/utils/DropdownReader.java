@@ -1,3 +1,5 @@
+// GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON 
+
 package utils;
 
 import java.io.IOException;
@@ -6,111 +8,192 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class DropdownReader {
 
     private Page page;
-
-    // MAP FOR FULL EXECUTION (IF WE GIVE SEPERATELY THE DATAS STORES FOR EVERY TEST RUN)
-    private Map<String, List<String>> dropdownMap = new LinkedHashMap<>();
+    // LOAD EXISTING JSON SO REFRESHING A DROPDOWN DOESN'T OVERWRITE PREVIOUS DATA 
+    private Map<String, List<String>> dropdownMap =new LinkedHashMap<>(JsonUtil.getDropdownMap());
 
     public DropdownReader(Page page) {
         this.page = page;
     }
 
-    // NORMAL DROPDOWN
-    public void captureAllDropdowns() throws IOException {
+    // CAPTURE ALL NORMAL AND CUSTOM DROPDOWNS
+    public void captureAllDropdownOptions() throws IOException {
+        dropdownMap.clear();
+        captureAllDropdowns();
+        captureAllCustomDropdowns();
+        JsonUtil.writeJson(dropdownMap);
+        System.out.println("All dropdowns captured successfully.");
+    }
+
+    // CAPTURE NORMAL DROPDOWNS <SELECT>
+    public void captureAllDropdowns() throws IOException{
 
         Locator dropdowns = page.locator("//select");
-
         int count = dropdowns.count();
-
-        System.out.println("Total Dropdowns : " + count);
+        System.out.println("Total Normal Dropdowns : " + count);
 
         for (int i = 0; i < count; i++) {
-
             Locator dropdown = dropdowns.nth(i);
-
-            String labelXpath = "(//select)[" + (i + 1) + "]/preceding::label[1]";
-
+            String labelXpath ="(//select)[" + (i + 1) + "]/preceding::label[1]";
             String labelName = page.locator("xpath=" + labelXpath)
                     .textContent()
                     .replace("*", "")
                     .trim();
 
-            List<String> options = dropdown.locator("option").allTextContents();
-
-            List<String> uniqueOptions =
-                    new ArrayList<>(new LinkedHashSet<>(options));
-
+            List<String> options =dropdown.locator("option").allTextContents();
+            List<String> uniqueOptions =new ArrayList<>(new LinkedHashSet<>(options));
             dropdownMap.put(labelName, uniqueOptions);
+            JsonUtil.writeJson(dropdownMap);
         }
-
-        JsonUtil.writeJson(dropdownMap);
-
-        System.out.println("JSON data file created successfully");
     }
 
-
-
-    // CUSTOM DROPDOWN
+    // CAPTURE CUSTOM DROPDOWNS
     public void captureAllCustomDropdowns() throws IOException {
 
         Locator dropdowns = page.locator("app-single-select-with-search");
-
+        Locator optionsPanel = page.locator("//div[contains(@class,'max-h-48')]");
         int count = dropdowns.count();
-
         System.out.println("Total Custom Dropdowns : " + count);
 
-        Locator optionsPanel = page.locator("//div[contains(@class,'max-h-48')]");
-
         for (int i = 0; i < count; i++) {
-
             Locator dropdown = dropdowns.nth(i);
-
-            String labelXpath ="(//app-single-select-with-search)[" + (i + 1) + "]/preceding::label[1]";
-
+            String labelXpath = "(//app-single-select-with-search)[" + (i + 1) + "]/preceding::label[1]";
             String labelName = page.locator("xpath=" + labelXpath)
                     .textContent()
                     .replace("*", "")
                     .trim();
-
             System.out.println("Reading : " + labelName);
 
-            // CLOSE IF ALREADY DROPDOWN IS OPEN
             if (optionsPanel.isVisible()) {
-                page.locator("body").click();
+                page.keyboard().press("Escape");
                 page.waitForTimeout(300);
             }
 
-            // OPEN DROPDOWN
             dropdown.locator("div.cursor-pointer").click();
             optionsPanel.waitFor();
-
-            // READ OPTIONS
-            List<String> options = optionsPanel
-                    .locator("div.cursor-pointer")
-                    .allTextContents();
-
-            List<String> uniqueOptions =new ArrayList<>(new LinkedHashSet<>(options));
-
+            List<String> options = optionsPanel.locator("div.cursor-pointer").allTextContents();
+            List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
             dropdownMap.put(labelName, uniqueOptions);
-
-            System.out.println("Stored : " + labelName);
-
-            // CLOSE DROPDOWN
+            JsonUtil.writeJson(dropdownMap);
             page.keyboard().press("Escape");
-            page.locator("body").click();
+            page.waitForTimeout(300);
+            System.out.println("Stored : " + labelName);
         }
+    }
 
-        JsonUtil.writeJson(dropdownMap);
 
-        System.out.println("Custom dropdown JSON created successfully");
+    // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED 
+    public void refreshDropdown(String label) throws IOException {
+        if (refreshNormalDropdown(label)) {
+            return;
+        }
+        if (refreshCustomDropdown(label)) {
+            return;
+        }
+        throw new RuntimeException("Dropdown '" + label + "' not found.");
+    }
+
+
+    //  REFRESH NORMAL DROPDOWN
+    private boolean refreshNormalDropdown(String label) throws IOException {
+
+        Locator dropdowns = page.locator("//select");
+        int count = dropdowns.count();
+
+        for (int i = 0; i < count; i++) {
+            Locator dropdown = dropdowns.nth(i);
+            String labelXpath = "(//select)[" + (i + 1) + "]/preceding::label[1]";
+            String currentLabel = page.locator("xpath=" + labelXpath)
+                    .textContent()
+                    .replace("*", "")
+                    .trim();
+
+            if (currentLabel.equalsIgnoreCase(label)) {
+                List<String> options = dropdown.locator("option").allTextContents();
+                List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
+                dropdownMap.put(currentLabel, uniqueOptions);
+                JsonUtil.writeJson(dropdownMap);
+                System.out.println("Normal dropdown refreshed : " + currentLabel);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+    //  REFRESH CUSTOM DROPDOWN
+    private boolean refreshCustomDropdown(String label) throws IOException {
+
+        Locator dropdowns = page.locator("app-single-select-with-search");
+        Locator optionsPanel = page.locator("//div[contains(@class,'max-h-48')]");
+        int count = dropdowns.count();
+
+        for (int i = 0; i < count; i++) {
+            Locator dropdown = dropdowns.nth(i);
+            String labelXpath = "(//app-single-select-with-search)[" + (i + 1) + "]/preceding::label[1]";
+            String currentLabel = page.locator("xpath=" + labelXpath)
+                    .textContent()
+                    .replace("*", "")
+                    .trim();
+            if (currentLabel.equalsIgnoreCase(label)) {
+
+                // CLOSED ALREADY OPENED DROPDOWN
+                if (optionsPanel.count() > 0 && optionsPanel.isVisible()) {
+                    page.keyboard().press("Escape");
+                    page.waitForTimeout(300);
+                }
+
+                // OPEN DROPDOWN
+                dropdown.locator("div.cursor-pointer").click();
+                optionsPanel.waitFor();
+
+                // READ OPTIONS
+                List<String> options = optionsPanel
+                        .locator("div.cursor-pointer")
+                        .allTextContents();
+                List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
+                // MAP UPDATION
+                dropdownMap.put(currentLabel, uniqueOptions);
+                JsonUtil.writeJson(dropdownMap);
+
+                // CLOSE DROPDOWN
+                page.keyboard().press("Escape");
+                page.waitForTimeout(300);
+
+                if (optionsPanel.count() > 0 && optionsPanel.isVisible()) {
+                    page.locator("body").click();
+                    page.waitForTimeout(300);
+                }
+                System.out.println("Custom dropdown refreshed : " + currentLabel);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void captureDropdowns(String... labels) throws IOException {
+        for (String label : labels) {
+            refreshDropdown(label);
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,7 +248,6 @@ public class DropdownReader {
 //         }
 //     }
 
-
 //     // CUSTOM DROPDOWNS
 //     public void captureAllCustomDropdowns() {
 
@@ -212,7 +294,6 @@ public class DropdownReader {
 //         }
 //     }
 
-
 //     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED ----> NORMAL DROPDOWN
 //     public void captureNormalDropdown(String labelName) {
 
@@ -237,7 +318,6 @@ public class DropdownReader {
 //         }
 //         throw new RuntimeException(labelName + " dropdown options were not loaded.");
 //     }
-
 
 //     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED ----> CUSTOM DROPDOWN
 //     public void captureSingleCustomDropdown(String labelName) {
@@ -286,8 +366,7 @@ public class DropdownReader {
 //         }
 //     }
 
-
-//     // CAPUTURE DROPDOWNS ---> FOR CAPTURESIGLE AND CUSTOM METHODS 
+//     // CAPUTURE DROPDOWNS ---> FOR CAPTURE SINGLE AND CUSTOM METHODS 
 //     public void captureDropdowns(String... labels) {
 
 //         for (String label : labels) {
@@ -299,7 +378,6 @@ public class DropdownReader {
 //             }
 //         }
 //     }
-
 
 //     // WRITE TO EXCEL
 //     public void saveDropdownOptions() throws IOException {
