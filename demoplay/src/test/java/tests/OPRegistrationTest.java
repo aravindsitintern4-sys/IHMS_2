@@ -19,7 +19,7 @@ import utils.Screenshots;
 
 public class OPRegistrationTest extends BaseTest {
    
-// GET THE TEST DATA FROM EXCEL WITHOUT DROPDOWN VALIDATION
+    // GET THE TEST DATA FROM EXCEL WITHOUT DROPDOWN VALIDATION
 //     @Test
 //     public void verifyPAYOPRegistration() throws IOException {
       
@@ -137,121 +137,129 @@ public class OPRegistrationTest extends BaseTest {
 
 
 
-//   GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON
-    @Test
-    public void verifyPAYOPRegistration() throws IOException {
+// //   GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON
+//     @Test
+//     public void verifyPAYOPRegistration() throws IOException {
 
-        Map<String, String> data = Excel.getTestData("opRegistrationData");
+//         Map<String, String> data = Excel.getTestData("opRegistrationData");
 
-        DashboardPage dashboard = new DashboardPage(page);
+//         DashboardPage dashboard = new DashboardPage(page);
 
-        Page ihmsPage = page.waitForPopup(() -> {
-            dashboard.clickDashboardOption("IHMS");
-        });
+//         Page ihmsPage = page.waitForPopup(() -> {
+//             dashboard.clickDashboardOption("IHMS");
+//         });
 
-        ReusableCode reusableAction = new ReusableCode(ihmsPage);
+//         ReusableCode reusableAction = new ReusableCode(ihmsPage);
 
-        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
+//         reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
-        ihmsPage.locator("//select").first().waitFor();
+//         ihmsPage.locator("//select").first().waitFor();
 
-        // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
-        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
-        dropdownReader.captureAllDropdowns();
-        dropdownReader.captureAllCustomDropdowns();
+//         // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
+//         DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+//         dropdownReader.captureAllDropdowns();
+//         dropdownReader.captureAllCustomDropdowns();
 
-        OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+//         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
 
-        validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
-        validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
-        reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
-        reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
-        reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
-        reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
-        ihmsPage.waitForTimeout(1000);
-        dropdownReader.refreshDropdown("Next of Kin");
-        validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
-        reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
+//         validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
+//         validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
+//         reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
+//         reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
+//         reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
+//         reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
+//         ihmsPage.waitForTimeout(1000);
+//         dropdownReader.refreshDropdown("Next of Kin");
+//         validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
+//         reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
 
-        reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
-        if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
-            dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-            verifyReferralForm(reusableAction, data);
-        }
+//         reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
+//         if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
+//             dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
+//             verifyReferralForm(reusableAction, data);
+//         }
                              
-        reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
-        reusableAction.inputFieldByLabel("Door / Street", data.get("DoorStreet"));
-        reusableAction.inputFieldByLabel("Locality", data.get("locality"));
-        reusableAction.inputFieldByLabel("City", data.get("City"));
-        reusableAction.buttonClick("Area");
-        dropdownReader.refreshDropdown("City /");
-        validateAndSelectForceDropdown(opPage,"City /", data.get("Area"));
-        reusableAction.inputFieldByLabel("PinCode", data.get("PinCode"));
-        validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
-        reusableAction.inputFieldByLabel("Mobile No", data.get("MobileNo"));
-        reusableAction.inputFieldByLabel("Email", data.get("Email"));
-        validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
-        validateAndSelectDropdown(reusableAction,"Mobile App ConsentForm",data.get("ConsentForm"));
-        validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
-        validateAndSelectDropdown(reusableAction,"Patient Category:",data.get("Patient category"));
-        validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
+//         reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
+//         reusableAction.inputFieldByLabel("Door / Street", data.get("DoorStreet"));
+//         reusableAction.inputFieldByLabel("Locality", data.get("locality"));
+//         reusableAction.inputFieldByLabel("City", data.get("City"));
+//         reusableAction.buttonClick("Area");
+//         dropdownReader.refreshDropdown("City /");
+//         validateAndSelectForceDropdown(opPage,"City /", data.get("Area"));
+//         reusableAction.inputFieldByLabel("PinCode", data.get("PinCode"));
+//         validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
+//         reusableAction.inputFieldByLabel("Mobile No", data.get("MobileNo"));
+//         reusableAction.inputFieldByLabel("Email", data.get("Email"));
+//         validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
+//         validateAndSelectDropdown(reusableAction,"Mobile App ConsentForm",data.get("ConsentForm"));
+//         validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
+//         validateAndSelectDropdown(reusableAction,"Patient Category:",data.get("Patient category"));
+//         validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
 
-        if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
-            dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
-            verifySubsidySubCategory(reusableAction, data);
-        }
-        reusableAction.buttonClick("Submit");
-    }
+//         if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+//             dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+//             verifySubsidySubCategory(reusableAction, data);
+//         }
+//         reusableAction.buttonClick("Submit");
+//     }
 
-    public void verifyReferralForm(ReusableCode reusableAction,Map<String, String> data) {
-        reusableAction.inputFieldByLabel("Reference No", data.get("Reference No"));
-        reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
-        validateAndSelectDropdown(reusableAction,"Referral Name",data.get("Referral name"));
-        validateAndSelectDropdown(reusableAction,"Clinic Referred to",data.get("Clinic Referred to"));
-        validateAndSelectDropdown(reusableAction,"Doctor Referred to",data.get("Doctor Referred to"));
-        reusableAction.buttonClick("Save");
-    }
 
-    public void verifySubsidySubCategory(ReusableCode reusableAction, Map<String, String> data) {
-        validateAndSelectSearchableDropdown(reusableAction,"Subsidy Approved By",data.get("SubsidyApprovedBy"));
-        reusableAction.inputFieldByLabel("% Subsidy granted",data.get("Subsidy granted"));
-        validateAndSelectSearchableDropdown(reusableAction,"Reason",data.get("Subsidy Reason"));
-        reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
-        reusableAction.buttonClick("Save");
-    }
+//     public void verifyReferralForm(ReusableCode reusableAction,Map<String, String> data) {
+//         reusableAction.inputFieldByLabel("Reference No", data.get("Reference No"));
+//         reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
+//         validateAndSelectDropdown(reusableAction,"Referral Name",data.get("Referral name"));
+//         validateAndSelectDropdown(reusableAction,"Clinic Referred to",data.get("Clinic Referred to"));
+//         validateAndSelectDropdown(reusableAction,"Doctor Referred to",data.get("Doctor Referred to"));
+//         reusableAction.buttonClick("Save");
+//     }
 
-    public void verifyCorporateCategory(ReusableCode reusableAction,Map<String, String> data) {
-        validateAndSelectDropdown(reusableAction,"Corporate Name",data.get("Corporate name"));
-        reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
-        validateAndSelectDropdown(reusableAction,"Employee Grade",data.get("Employee grade"));
-        reusableAction.inputFieldByLabel("Employee Code",data.get("Employee code"));
-        reusableAction.inputFieldByLabel("Claim ID",data.get("Claim id"));
-        reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
-        reusableAction.buttonClick("Submit");
-    }
+//     public void verifySubsidySubCategory(ReusableCode reusableAction, Map<String, String> data) {
+//         validateAndSelectSearchableDropdown(reusableAction,"Subsidy Approved By",data.get("SubsidyApprovedBy"));
+//         reusableAction.inputFieldByLabel("% Subsidy granted",data.get("Subsidy granted"));
+//         validateAndSelectSearchableDropdown(reusableAction,"Reason",data.get("Subsidy Reason"));
+//         reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
+//         reusableAction.buttonClick("Save");
+//     }
 
-    private void validateAndSelectDropdown(ReusableCode reusableAction,String label,String value) {
-        if (!JsonUtil.containsOption(label, value)) {
-            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
-        }
-     reusableAction.selectDropdownByLabel(label, value);
-    }   
+//     public void verifyCorporateCategory(ReusableCode reusableAction,Map<String, String> data) {
+//         validateAndSelectDropdown(reusableAction,"Corporate Name",data.get("Corporate name"));
+//         reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
+//         validateAndSelectDropdown(reusableAction,"Employee Grade",data.get("Employee grade"));
+//         reusableAction.inputFieldByLabel("Employee Code",data.get("Employee code"));
+//         reusableAction.inputFieldByLabel("Claim ID",data.get("Claim id"));
+//         reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
+//         reusableAction.buttonClick("Submit");
+//     }
+
+//     private void validateAndSelectDropdown(ReusableCode reusableAction,String label,String value) {
+//         if (!JsonUtil.containsOption(label, value)) {
+//             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+//         }
+        
+//      reusableAction.selectDropdownByLabel(label, value);
+//     }   
+
                   
-    private void validateAndSelectSearchableDropdown(ReusableCode reusableAction,String label,String value) {
-        if (!JsonUtil.containsOption(label, value)) {
-            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
-        }      
-        reusableAction.selectSearchableDropdownByLabel(label, value);
-    }
+//     private void validateAndSelectSearchableDropdown(ReusableCode reusableAction,String label,String value) {
+//         if (!JsonUtil.containsOption(label, value)) {
+//             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+//         } 
 
-    private void validateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
-        if (!JsonUtil.containsOption(label, value)) {
-            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
-        }
-        opPage.selectSomeForceDropdownByLabel(label, value);
-    }
-}
+//         reusableAction.selectSearchableDropdownByLabel(label, value);
+//     }
+
+//     private void validateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
+//         if (!JsonUtil.containsOption(label, value)) {
+//             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+//         }
+
+//         opPage.selectSomeForceDropdownByLabel(label, value);
+//     }
+// }
+
+
+
 
 
 
@@ -266,176 +274,190 @@ public class OPRegistrationTest extends BaseTest {
 
 
 //  GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM EXCEL
-// @Test
-// public void verifyPAYOPRegistration() throws IOException {
+    @Test
+    public void verifyPAYOPRegistration() throws IOException {
 
-//     // READ THE TEST DATA
-//     Map<String, String> data = Excel.getTestData("opRegistrationData");
+        // READ THE TEST DATA
+        Map<String, String> data = Excel.getTestData("opRegistrationData");
 
-//     DashboardPage dashboard = new DashboardPage(page);
+        DashboardPage dashboard = new DashboardPage(page);
 
-//     Page ihmsPage = page.waitForPopup(() -> {
-//         dashboard.clickDashboardOption("IHMS");
-//     });
+        Page ihmsPage = page.waitForPopup(() -> {
+            dashboard.clickDashboardOption("IHMS");
+        });
 
-//     ReusableCode reusableAction = new ReusableCode(ihmsPage);
+        ReusableCode reusableAction = new ReusableCode(ihmsPage);
 
-//     reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
+        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
-//     ihmsPage.locator("//select").first().waitFor();
+        ihmsPage.locator("//select").first().waitFor();
 
-//     OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+        OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
-//     // STORE THE DROPDOWNS IN EXCEL
-//     DropdownReader dropdownReader = new DropdownReader(ihmsPage);
-//     dropdownReader.captureAllDropdowns();
-//     dropdownReader.captureAllCustomDropdowns();
-//     dropdownReader.saveDropdownOptions();
+        // STORE THE DROPDOWNS IN EXCEL
+        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+        dropdownReader.captureAllDropdowns();
+        dropdownReader.captureAllCustomDropdowns();
+        dropdownReader.saveDropdownOptions();
 
-//     // READ THE DROPDOWN VALUES FROM EXCEL
-//     Map<String, List<String>> dropdownOptions =Excel.getDropdownOptions("DropdownOptions");
+        // READ THE DROPDOWN VALUES FROM EXCEL
+        Map<String, List<String>> dropdownOptions =Excel.getDropdownOptions("DropdownOptions");
 
-//     validateAndSelectDropdown(reusableAction, dropdownOptions,"Pay/Free", data.get("PayFree"));
-//     validateAndSelectDropdown(reusableAction, dropdownOptions,"Patient Type", data.get("PatientType"));
-//     reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
-//     reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
-//     reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
-//     reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
- 
-//     dropdownOptions = refreshDropdownOptions(dropdownReader, "Next of Kin");
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Next of Kin",data.get("NextOfKinType"));
+        validateAndSelectDropdown(reusableAction, dropdownOptions,"Pay/Free", data.get("PayFree"));
+        validateAndSelectDropdown(reusableAction, dropdownOptions,"Patient Type", data.get("PatientType"));
+        reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
+        reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
+        reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
+        reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
+    
+        dropdownOptions = refreshDropdownOptions(dropdownReader, "Next of Kin");
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Next of Kin",data.get("NextOfKinType"));
 
-//     reusableAction.inputFieldByLabel("Next of Kin",data.get("NextOfKinName"));
-//     reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
-//     if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
-//         dropdownOptions = refreshDropdownOptions(dropdownReader,"Referral Name","Clinic Referred to","Doctor Referred to");
-//                 dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-//                 verifyReferralForm(reusableAction,dropdownOptions,data);
-//         }                      
+        reusableAction.inputFieldByLabel("Next of Kin",data.get("NextOfKinName"));
+        reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
+            if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
+                dropdownOptions = refreshDropdownOptions(dropdownReader,"Referral Name","Clinic Referred to","Doctor Referred to");
+                    dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
+                    verifyReferralForm(reusableAction,dropdownOptions,data);
+            }                      
 
-//     reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
-//     reusableAction.inputFieldByLabel("Door / Street",data.get("DoorStreet"));
-//     reusableAction.inputFieldByLabel("Locality",data.get("locality"));
-//     reusableAction.inputFieldByLabel("City",data.get("City"));
+        reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
+        reusableAction.inputFieldByLabel("Door / Street",data.get("DoorStreet"));
+        reusableAction.inputFieldByLabel("Locality",data.get("locality"));
+        reusableAction.inputFieldByLabel("City",data.get("City"));
 
-//     reusableAction.buttonClick("Area");
-//     dropdownReader.captureNormalDropdown("City /");
-//     dropdownReader.saveDropdownOptions();
-//     dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
-//     validateAndSelectForceDropdown(opPage,dropdownOptions,"City /",data.get("Area"));
+        reusableAction.buttonClick("Area");
+        dropdownReader.captureNormalDropdown("City /");
+        dropdownReader.saveDropdownOptions();
+        dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
+        validateAndSelectForceDropdown(opPage,dropdownOptions,"City /",data.get("Area"));
 
-//     reusableAction.inputFieldByLabel("PinCode",data.get("PinCode"));
-//     validateAndSelectForceDropdown(opPage,dropdownOptions,"Taluk",data.get("Taluk"));
-//     reusableAction.inputFieldByLabel("Mobile No",data.get("MobileNo"));
-//     reusableAction.inputFieldByLabel("Email",data.get("Email"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Purpose Of Visit",data.get("PurposeVisit"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Mobile App ConsentForm",data.get("ConsentForm"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Assign Doctor:",data.get("Assign doctor"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Category:",data.get("Patient category"));
+        reusableAction.inputFieldByLabel("PinCode",data.get("PinCode"));
+        validateAndSelectForceDropdown(opPage,dropdownOptions,"Taluk",data.get("Taluk"));
+        reusableAction.inputFieldByLabel("Mobile No",data.get("MobileNo"));
+        reusableAction.inputFieldByLabel("Email",data.get("Email"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Purpose Of Visit",data.get("PurposeVisit"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Mobile App ConsentForm",data.get("ConsentForm"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Assign Doctor:",data.get("Assign doctor"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Category:",data.get("Patient category"));
 
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Sub Category:",data.get("PatientSubCategory"));
-//     if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
-//         dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
-//         dropdownReader.saveDropdownOptions();
-//         dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
-//         verifySubsidySubCategory(reusableAction,dropdownOptions,data);
-//     }
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Sub Category:",data.get("PatientSubCategory"));
+            if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+                dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+                dropdownReader.saveDropdownOptions();
+                dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
+                verifySubsidySubCategory(reusableAction,dropdownOptions,data);
+            }
 
-//     reusableAction.buttonClick("Submit");
-// }
+        reusableAction.buttonClick("Submit");
+    }
 
-// public void verifyReferralForm(
-//         ReusableCode reusableAction,
-//         Map<String, List<String>> dropdownOptions,
-//         Map<String, String> data) {
+    // REFERRAL FORM
+    public void verifyReferralForm(
+            ReusableCode reusableAction,
+            Map<String, List<String>> dropdownOptions,
+            Map<String, String> data) {
 
-//     reusableAction.inputFieldByLabel("Reference No",data.get("Reference No"));
-//     reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Referral Name",data.get("Referral name"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Clinic Referred to",data.get("Clinic Referred to"));
-//     validateAndSelectDropdown(reusableAction,dropdownOptions,"Doctor Referred to",data.get("Doctor Referred to"));
-//     reusableAction.buttonClick("Save");
-// }
+        reusableAction.inputFieldByLabel("Reference No",data.get("Reference No"));
+        reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Referral Name",data.get("Referral name"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Clinic Referred to",data.get("Clinic Referred to"));
+        validateAndSelectDropdown(reusableAction,dropdownOptions,"Doctor Referred to",data.get("Doctor Referred to"));
+        reusableAction.buttonClick("Save");
+    }
 
-// public void verifySubsidySubCategory(
-//         ReusableCode reusableAction,
-//         Map<String, List<String>> dropdownOptions,
-//         Map<String, String> data) {
+    // SUBSIDY 
+    public void verifySubsidySubCategory(
+            ReusableCode reusableAction,
+            Map<String, List<String>> dropdownOptions,
+            Map<String, String> data) {
 
-//     validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Subsidy Approved By",data.get("SubsidyApprovedBy"));
-//     reusableAction.inputFieldByLabel("% Subsidy granted",data.get("Subsidy granted"));
-//     validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Reason",data.get("Subsidy Reason"));
-//     reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
-//     reusableAction.buttonClick("Save");
-// }
+        validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Subsidy Approved By",data.get("SubsidyApprovedBy"));
+        reusableAction.inputFieldByLabel("% Subsidy granted",data.get("Subsidy granted"));
+        validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Reason",data.get("Subsidy Reason"));
+        reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
+        reusableAction.buttonClick("Save");
+    }
 
+    // CONCESSION
+    public void verifyConcessionSubCategory(
+            ReusableCode reusableAction,
+            Map<String, List<String>> dropdownOptions,
+            Map<String, String> data) {
 
-// public void verifyCorporateCategory(
-//         ReusableCode reusableAction,DropdownReader dropdownReader,
-//         Map<String, List<String>> dropdownOptions,
-//         Map<String, String> data) throws IOException{
+        validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Concession Approved By",data.get("ConcessionApprovedBy"));
+        reusableAction.inputFieldByLabel("% Concession granted",data.get("Concession granted"));
+        validateAndSelectSearchableDropdown(reusableAction,dropdownOptions,"Reason",data.get("Concession Reason"));
+        reusableAction.inputFieldByLabel("Remarks",data.get("Concession remarks"));
+        reusableAction.buttonClick("Save");
+    }
 
-//     validateAndSelectDropdown(reusableAction, dropdownOptions,"Corporate Name", data.get("Corporate name"));
-//     reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
-//     validateAndSelectDropdown(reusableAction, dropdownOptions,"Employee Grade", data.get("Employee grade"));
-//     reusableAction.inputFieldByLabel("Employee Code",data.get("Employee code"));
-//     reusableAction.inputFieldByLabel("Claim ID",data.get("Claim id"));
-//     reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
-//     reusableAction.buttonClick("Submit");
-// }
+    // CORPORATE
+    public void verifyCorporateCategory(
+            ReusableCode reusableAction,DropdownReader dropdownReader,
+            Map<String, List<String>> dropdownOptions,
+            Map<String, String> data) throws IOException{
 
+        validateAndSelectDropdown(reusableAction, dropdownOptions,"Corporate Name", data.get("Corporate name"));
+        reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
+        validateAndSelectDropdown(reusableAction, dropdownOptions,"Employee Grade", data.get("Employee grade"));
+        reusableAction.inputFieldByLabel("Employee Code",data.get("Employee code"));
+        reusableAction.inputFieldByLabel("Claim ID",data.get("Claim id"));
+        reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
+        reusableAction.buttonClick("Submit");
+    }
+   
+    private void validateOption(Map<String, List<String>> dropdownOptions,String label,String value) {
 
-// private void validateOption(Map<String, List<String>> dropdownOptions,String label,String value) {
+        List<String> options = dropdownOptions.get(label);
+        if (options == null) {
+            throw new RuntimeException("Dropdown '" + label +"' not found in DropdownOptions sheet.");
+        }
+        boolean found = options.stream()
+            .map(String::trim)
+            .anyMatch(option -> option.equalsIgnoreCase(value.trim()));
+        if (!found) {
+            throw new RuntimeException("Option '" + value +"' not found under '" + label +"' in DropdownOptions sheet.");
+        }
+    }
+            
+    private void validateAndSelectDropdown(
+            ReusableCode reusableAction,
+            Map<String, List<String>> dropdownOptions,
+            String label,
+            String value) {
 
-//     List<String> options = dropdownOptions.get(label);
-//     if (options == null) {
-//         throw new RuntimeException("Dropdown '" + label +"' not found in DropdownOptions sheet.");
-//     }
-//     boolean found = options.stream()
-//             .map(String::trim)
-//             .anyMatch(option -> option.equalsIgnoreCase(value.trim()));
-//     if (!found) {
-//         throw new RuntimeException("Option '" + value +"' not found under '" + label +"' in DropdownOptions sheet.");
-//     }
-// }
+        validateOption(dropdownOptions, label, value);
+        reusableAction.selectDropdownByLabel(label, value);
+    }
+        
+    private void validateAndSelectSearchableDropdown(
+            ReusableCode reusableAction,
+            Map<String, List<String>> dropdownOptions,
+            String label,
+            String value) {
 
-// private void validateAndSelectDropdown(
-//         ReusableCode reusableAction,
-//         Map<String, List<String>> dropdownOptions,
-//         String label,
-//         String value) {
+        validateOption(dropdownOptions, label, value);
+        reusableAction.selectSearchableDropdownByLabel(label, value);
+    }
 
-//     validateOption(dropdownOptions, label, value);
-//     reusableAction.selectDropdownByLabel(label, value);
-// }
-  
-// private void validateAndSelectSearchableDropdown(
-//         ReusableCode reusableAction,
-//         Map<String, List<String>> dropdownOptions,
-//         String label,
-//         String value) {
+    private void validateAndSelectForceDropdown(
+            OPRegistrationPage opPage,
+            Map<String, List<String>> dropdownOptions,
+            String label,
+            String value) {
+        
+        validateOption(dropdownOptions, label, value);
+        opPage.selectSomeForceDropdownByLabel(label, value);
+    }
 
-//     validateOption(dropdownOptions, label, value);
-//     reusableAction.selectSearchableDropdownByLabel(label, value);
-// }
+    private Map<String, List<String>> refreshDropdownOptions(
+            DropdownReader dropdownReader,
+            String... labels) throws IOException {
 
-// private void validateAndSelectForceDropdown(
-//         OPRegistrationPage opPage,
-//         Map<String, List<String>> dropdownOptions,
-//         String label,
-//         String value) {
+        dropdownReader.captureDropdowns(labels);
+        dropdownReader.saveDropdownOptions();
+        return Excel.getDropdownOptions("DropdownOptions");
+    }
 
-//     validateOption(dropdownOptions, label, value);
-//     opPage.selectSomeForceDropdownByLabel(label, value);
-// }
-
-// private Map<String, List<String>> refreshDropdownOptions(
-//         DropdownReader dropdownReader,
-//         String... labels) throws IOException {
-
-//     dropdownReader.captureDropdowns(labels);
-//     dropdownReader.saveDropdownOptions();
-//     return Excel.getDropdownOptions("DropdownOptions");
-// }
-
-// }
+    }

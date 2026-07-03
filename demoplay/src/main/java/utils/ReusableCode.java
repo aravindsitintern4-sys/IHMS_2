@@ -1,6 +1,8 @@
 package utils;
 
 import org.testng.Assert;
+
+import com.microsoft.playwright.Keyboard;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.SelectOption;
 
@@ -29,13 +31,13 @@ public class ReusableCode {
 
     //  MAIN MENU AND SUB MENU SELECTION IN IHMS DASHBOARD  (e.g,. OP Modules -----> Outpatient Registration)
     public void clickMenuAndSelectSubMenu(String mainMenu, String subMenu) {
-        String mainMenuOption ="//span[normalize-space()='%s']";
+        String mainMenuOption ="//div[normalize-space()='%s']";
         String subMenuOption ="//a[normalize-space()='%s']";
 
         String mainLocator =String.format(mainMenuOption, mainMenu);
         String subLocator =String.format(subMenuOption, subMenu);
 
-        page.locator(mainLocator).hover();
+        page.locator(mainLocator).click();
         page.locator(subLocator).click();
     }
 
@@ -58,7 +60,9 @@ public class ReusableCode {
         String inputLoc = String.format(inputField, labelName);
         page.locator(inputLoc).click();
         page.locator(inputLoc).clear();
-        page.locator(inputLoc).pressSequentially(inputValue);
+        // page.locator(inputLoc).fill(inputValue);
+        // page.locator(inputLoc).pressSequentially(inputValue);    
+        page.keyboard().type(inputValue, new Keyboard.TypeOptions().setDelay(50));
     }    
          
     // RADIO BUTTON

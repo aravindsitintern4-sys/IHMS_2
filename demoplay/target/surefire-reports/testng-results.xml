@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-07-02T14:35:59 IST" name="Surefire suite" finished-at="2026-07-02T14:37:00 IST" duration-ms="61475">
+  <suite started-at="2026-07-03T15:13:26 IST" name="Surefire suite" finished-at="2026-07-03T15:14:35 IST" duration-ms="68506">
     <groups>
     </groups>
-    <test started-at="2026-07-02T14:35:59 IST" name="Surefire test" finished-at="2026-07-02T14:37:00 IST" duration-ms="61475">
+    <test started-at="2026-07-03T15:13:26 IST" name="Surefire test" finished-at="2026-07-03T15:14:35 IST" duration-ms="68506">
       <class name="tests.OPRegistrationTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-02T14:35:59 IST" name="setup" finished-at="2026-07-02T14:36:08 IST" duration-ms="9019" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@2aa5fe93]" started-at="2026-07-03T15:13:26 IST" name="setup" finished-at="2026-07-03T15:13:33 IST" duration-ms="7126" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyPAYOPRegistration()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-02T14:36:08 IST" name="verifyPAYOPRegistration" finished-at="2026-07-02T14:36:59 IST" duration-ms="51832" status="PASS">
+        <test-method signature="verifyPAYOPRegistration()[pri:0, instance:tests.OPRegistrationTest@2aa5fe93]" started-at="2026-07-03T15:13:33 IST" name="verifyPAYOPRegistration" finished-at="2026-07-03T15:14:34 IST" duration-ms="60882" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyPAYOPRegistration -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@3a079870]" started-at="2026-07-02T14:36:59 IST" name="tearDown" finished-at="2026-07-02T14:37:00 IST" duration-ms="598" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@2aa5fe93]" started-at="2026-07-03T15:14:34 IST" name="tearDown" finished-at="2026-07-03T15:14:35 IST" duration-ms="468" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

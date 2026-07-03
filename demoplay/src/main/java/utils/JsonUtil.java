@@ -64,8 +64,8 @@ public class JsonUtil {
             File file = new File(filePath);
             if (file.exists()) {
                 ObjectMapper mapper = new ObjectMapper();
-                dropdownMap = mapper.readValue(
-                        file,
+                // DROPDOWNMAP = { "key(label)" : ["value1","value2"]} 
+                dropdownMap = mapper.readValue(file,
                         new TypeReference<Map<String, List<String>>>() {
                         });
                 System.out.println("Dropdown JSON loaded successfully.");
@@ -89,11 +89,13 @@ public class JsonUtil {
             file.getParentFile().mkdirs();
         }
 
+        // OBJECT MAPPER CONVERTS JAVA OBJECTS INTO JSON and JSON TO JAVA OBJECTS
         ObjectMapper mapper = new ObjectMapper();
+        // PRETTY PRINTING IN JSON FILE ---> JSON INDENTATION
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.writeValue(file, dropdownMap);
 
-        // REFRESH IN MEMORY MAP
+        // REFRESH IN MEMORY MAP  ---> COPY OF THE PASSED MAP 
         JsonUtil.dropdownMap = new LinkedHashMap<>(dropdownMap);
         System.out.println("Dropdown JSON saved successfully.");
     }
