@@ -19,6 +19,8 @@ public class Locator {
     public static final String checkbox = "//label[contains(normalize-space(),'%s')]/preceding-sibling::input[@type='checkbox']";
 
     public static final String dropdownForceLoc = "//label[contains(normalize-space(),'%s')]/following::select[1]";
+
+   
     
 } 
 

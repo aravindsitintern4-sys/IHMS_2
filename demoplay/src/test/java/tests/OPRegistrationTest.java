@@ -316,16 +316,17 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Next of Kin",data.get("NextOfKinName"));
         reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
             if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
-                dropdownOptions = refreshDropdownOptions(dropdownReader,"Referral Name","Clinic Referred to","Doctor Referred to");
-                    dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-                    verifyReferralForm(reusableAction,dropdownOptions,data);
+                dropdownReader.captureDropdownsNew("Referral Name","Clinic Referred to","Doctor Referred to");
+                dropdownReader.saveDropdownOptions();
+                dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
+                verifyReferralForm(opPage,reusableAction,dropdownOptions,data);
             }                      
-
+                  
         reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
         reusableAction.inputFieldByLabel("Door / Street",data.get("DoorStreet"));
         reusableAction.inputFieldByLabel("Locality",data.get("locality"));
         reusableAction.inputFieldByLabel("City",data.get("City"));
-
+            
         reusableAction.buttonClick("Area");
         dropdownReader.captureNormalDropdown("City /");
         dropdownReader.saveDropdownOptions();
@@ -340,27 +341,34 @@ public class OPRegistrationTest extends BaseTest {
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Mobile App ConsentForm",data.get("ConsentForm"));
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Assign Doctor:",data.get("Assign doctor"));
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Category:",data.get("Patient category"));
-
-        validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Sub Category:",data.get("PatientSubCategory"));
-            if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
-                dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+        if ("CORPORATE".equalsIgnoreCase(data.get("Patient category"))) {
+                dropdownReader.captureNormalDropdown("Corporate Name", "Employee Grade");
                 dropdownReader.saveDropdownOptions();
                 dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
-                verifySubsidySubCategory(reusableAction,dropdownOptions,data);
+                verifyCorporateCategory(reusableAction,dropdownOptions,data);
             }
-
+     
+        // validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Sub Category:",data.get("PatientSubCategory"));
+        //     if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+        //         dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+        //         dropdownReader.saveDropdownOptions();
+        //         dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
+        //         verifySubsidySubCategory(reusableAction,dropdownOptions,data);
+        //     }
+     
         reusableAction.buttonClick("Submit");
     }
-
+   
     // REFERRAL FORM
     public void verifyReferralForm(
+            OPRegistrationPage opPage,
             ReusableCode reusableAction,
             Map<String, List<String>> dropdownOptions,
             Map<String, String> data) {
 
         reusableAction.inputFieldByLabel("Reference No",data.get("Reference No"));
         reusableAction.inputFieldByLabel("Reference Date",data.get("Reference date"));
-        validateAndSelectDropdown(reusableAction,dropdownOptions,"Referral Name",data.get("Referral name"));
+        selectNewChangeDropdownByLabel(opPage,dropdownOptions,"Referral Name",data.get("Referral name"));
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Clinic Referred to",data.get("Clinic Referred to"));
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Doctor Referred to",data.get("Doctor Referred to"));
         reusableAction.buttonClick("Save");
@@ -378,7 +386,7 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Remarks",data.get("Subsidy remarks"));
         reusableAction.buttonClick("Save");
     }
-
+     
     // CONCESSION
     public void verifyConcessionSubCategory(
             ReusableCode reusableAction,
@@ -394,7 +402,7 @@ public class OPRegistrationTest extends BaseTest {
 
     // CORPORATE
     public void verifyCorporateCategory(
-            ReusableCode reusableAction,DropdownReader dropdownReader,
+            ReusableCode reusableAction,
             Map<String, List<String>> dropdownOptions,
             Map<String, String> data) throws IOException{
 
@@ -436,7 +444,7 @@ public class OPRegistrationTest extends BaseTest {
             Map<String, List<String>> dropdownOptions,
             String label,
             String value) {
-
+                
         validateOption(dropdownOptions, label, value);
         reusableAction.selectSearchableDropdownByLabel(label, value);
     }
@@ -449,6 +457,16 @@ public class OPRegistrationTest extends BaseTest {
         
         validateOption(dropdownOptions, label, value);
         opPage.selectSomeForceDropdownByLabel(label, value);
+    }
+
+    private void selectNewChangeDropdownByLabel(
+        OPRegistrationPage opPage,
+        Map<String, List<String>> dropdownOptions,
+        String label,
+        String value) {
+
+        validateOption(dropdownOptions, label, value);
+        opPage.newChangeDropdown(label, value);
     }
 
     private Map<String, List<String>> refreshDropdownOptions(

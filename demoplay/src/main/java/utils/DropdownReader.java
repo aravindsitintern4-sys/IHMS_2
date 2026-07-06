@@ -213,6 +213,8 @@ import java.util.Map;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import com.microsoft.playwright.options.WaitForSelectorState;
+
 public class DropdownReader {
 
     private Page page;
@@ -295,29 +297,61 @@ public class DropdownReader {
     }
 
     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED ----> NORMAL DROPDOWN
-    public void captureNormalDropdown(String labelName) {
+    // public void captureNormalDropdown(String labelName) {
 
-        Locator dropdown = page.locator("//label[contains(normalize-space(),'" + labelName + "')]/following::select[1]");
+    //     Locator dropdown = page.locator("//label[contains(normalize-space(),'" + labelName + "')]/following::select[1]");
 
-        // WAIT UNTIL DROPDOWN ENABLE
+    //     // WAIT UNTIL DROPDOWN ENABLE
+    //     dropdown.waitFor();
+
+    //     int retry = 20;
+
+    //     while (retry-- > 0) {
+    //         List<String> options = dropdown.locator("option").allTextContents();
+    //         List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
+
+    //         // IGNORE TEMPORARY STATE, BECAUSE THAT HOLD ONLY TWO OPTIONS WHEN DISABLED STATE (SELECT AND NO DATA FOUND)
+    //         if (uniqueOptions.size() > 2 && !uniqueOptions.contains("No data Found")) {
+    //             dropdownMap.put(labelName, uniqueOptions);
+    //             System.out.println(labelName + " Loaded --> " + uniqueOptions);
+    //             return;
+    //         }
+    //         page.waitForTimeout(500);
+    //     }
+    //     throw new RuntimeException(labelName + " dropdown options were not loaded.");
+    // }
+
+    public void captureNormalDropdown(String... labels) {
+
+    for (String labelName : labels) {
+
+        Locator dropdown = page.locator(
+            "//label[contains(normalize-space(),'" + labelName + "')]/following::select[1]"
+        );
+
         dropdown.waitFor();
 
         int retry = 20;
 
         while (retry-- > 0) {
+
             List<String> options = dropdown.locator("option").allTextContents();
             List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
 
-            // IGNORE TEMPORARY STATE, BECAUSE THAT HOLD ONLY TWO OPTIONS WHEN DISABLED STATE (SELECT AND NO DATA FOUND)
             if (uniqueOptions.size() > 2 && !uniqueOptions.contains("No data Found")) {
+
                 dropdownMap.put(labelName, uniqueOptions);
                 System.out.println(labelName + " Loaded --> " + uniqueOptions);
-                return;
+                break;
             }
+
             page.waitForTimeout(500);
+        }        
+        if (!dropdownMap.containsKey(labelName)) {
+            throw new RuntimeException(labelName + " dropdown options were not loaded.");
         }
-        throw new RuntimeException(labelName + " dropdown options were not loaded.");
     }
+}
 
     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED ----> CUSTOM DROPDOWN
     public void captureSingleCustomDropdown(String labelName) {
@@ -337,7 +371,7 @@ public class DropdownReader {
                 page.waitForTimeout(300);
             }
         }
-
+         
         // OPEN CURRENT DROPDOWN
         dropdown.locator("div.cursor-pointer").click();
         optionsPanel.waitFor();
@@ -367,28 +401,87 @@ public class DropdownReader {
     }
 
     // CAPUTURE DROPDOWNS ---> FOR CAPTURE SINGLE AND CUSTOM METHODS 
-    public void captureDropdowns(String... labels) {
+    // public void captureDropdowns(String... labels) {
+    //     for (String label : labels) {
+    //         Locator normal = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::select[1]");
+    //         if (normal.count() > 0) {
+    //             captureNormalDropdown(label);
+    //         }
+    //          else {
+    //             captureSingleCustomDropdown(label);
+    //         }
+    //     }
+    // }
 
+    public void captureDropdowns(String... labels) {
         for (String label : labels) {
-            Locator normal = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::select[1]");
-            if (normal.count() > 0) {
+            Locator normalDropdown = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::select[1]");
+            Locator searchableDropdown = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::app-single-select-with-search[1]");
+            if (normalDropdown.count() > 0) {
                 captureNormalDropdown(label);
-            } else {
+            }else if (searchableDropdown.count() > 0) {
                 captureSingleCustomDropdown(label);
+            } else {
+                throw new RuntimeException("No dropdown found for : " + label);
             }
         }
     }
-
+    
     // WRITE TO EXCEL
     public void saveDropdownOptions() throws IOException {
         Excel.writeDropdownOptions(dropdownMap);
         System.out.println("Dropdown options written to Excel successfully.");
     }
 
-
     // GETTER METHOD ALLOWS OTHER CLASSES TO READ THE MAP 
     public Map<String, List<String>> getDropdownMap() {
         return dropdownMap;
     }
+
+    public void captureDropdownsNew(String... labels) {
+        for (String label : labels) {
+            Locator appDropdown = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::app-dropdown[1]");
+            Locator searchableDropdown = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::app-single-select-with-search[1]");
+            Locator normalDropdown = page.locator("//label[contains(normalize-space(),'" + label + "')]/following::select[1]");
+            if (appDropdown.count() > 0) {
+                System.out.println(label + " -> APP DROPDOWN");
+                captureAppDropdownNew(label);
+            } else if (searchableDropdown.count() > 0) {
+                System.out.println(label + " -> SEARCHABLE");
+                captureSingleCustomDropdown(label);
+            } else if (normalDropdown.count() > 0) {
+                System.out.println(label + " -> NORMAL");
+                captureNormalDropdown(label);
+            } else {
+                throw new RuntimeException("No dropdown found : " + label);
+            }
+        }
+    }
+
+    public void captureAppDropdownNew(String labelName) {
+        System.out.println("Reading : " + labelName);
+        Locator button = page.locator("//label[contains(normalize-space(),'" + labelName + "')]/following::app-dropdown[1]//button");
+        Locator dropdown = page.locator("//label[contains(normalize-space(),'" + labelName + "')]/following::app-dropdown[1]//select");
+        // OPEN DROPDOWN
+        button.click();
+        page.waitForTimeout(1000);
+        int retry = 20;
+        while (retry-- > 0) {
+            List<String> options = dropdown.locator("option").allTextContents();
+            List<String> unique = new ArrayList<>(new LinkedHashSet<>(options));
+            unique.removeIf(String::isBlank);
+            if (unique.size() > 1) {
+                dropdownMap.put(labelName, unique);
+                System.out.println("Stored : " + labelName);
+                System.out.println(unique);
+                // CLOSE DROPDOWN
+                page.keyboard().press("Escape");
+                return;
+            }
+            page.waitForTimeout(500);
+        }
+        throw new RuntimeException(labelName + " options not loaded.");
+    }
+
 
 }
