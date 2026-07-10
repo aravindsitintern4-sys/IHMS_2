@@ -17,7 +17,7 @@ public class ConfigReader {
                     .getResourceAsStream("config.properties");
 
             if (fis == null) {
-                throw new RuntimeException("config.properties NOT found in src/test/resources");
+                throw new RuntimeException("config.properties NOT FOUND in src/test/resources");
             }
 
             prop.load(fis);

@@ -355,7 +355,7 @@ public class DropdownReader {
 
     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED ----> CUSTOM DROPDOWN
     public void captureSingleCustomDropdown(String labelName) {
-
+ 
         Locator dropdown = page.locator("//label[contains(normalize-space(),'" + labelName + "')]/following::app-single-select-with-search[1]");
         Locator optionsPanel = page.locator("//div[contains(@class,'max-h-48')]");
         System.out.println("Reading : " + labelName);

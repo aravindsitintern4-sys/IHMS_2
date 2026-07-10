@@ -327,7 +327,7 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Locality",data.get("locality"));
         reusableAction.inputFieldByLabel("City",data.get("City"));
             
-        reusableAction.buttonClick("Area");
+        reusableAction.buttonClick("Area");         
         dropdownReader.captureNormalDropdown("City /");
         dropdownReader.saveDropdownOptions();
         dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
@@ -342,10 +342,8 @@ public class OPRegistrationTest extends BaseTest {
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Assign Doctor:",data.get("Assign doctor"));
         validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Category:",data.get("Patient category"));
         if ("CORPORATE".equalsIgnoreCase(data.get("Patient category"))) {
-                dropdownReader.captureNormalDropdown("Corporate Name", "Employee Grade");
-                dropdownReader.saveDropdownOptions();
-                dropdownOptions = Excel.getDropdownOptions("DropdownOptions");
-                verifyCorporateCategory(reusableAction,dropdownOptions,data);
+                dropdownOptions = refreshDropdownOptions(dropdownReader, "Corporate Name");
+                verifyCorporateCategory(reusableAction,dropdownOptions,data,dropdownReader);
             }
      
         // validateAndSelectDropdown(reusableAction,dropdownOptions,"Patient Sub Category:",data.get("PatientSubCategory"));
@@ -404,11 +402,11 @@ public class OPRegistrationTest extends BaseTest {
     public void verifyCorporateCategory(
             ReusableCode reusableAction,
             Map<String, List<String>> dropdownOptions,
-            Map<String, String> data) throws IOException{
+            Map<String, String> data, DropdownReader dropdownReader) throws IOException{
 
         validateAndSelectDropdown(reusableAction, dropdownOptions,"Corporate Name", data.get("Corporate name"));
         reusableAction.inputFieldByLabel("Document Ref.No",data.get("Document Ref.no"));
-        validateAndSelectDropdown(reusableAction, dropdownOptions,"Employee Grade", data.get("Employee grade"));
+        // validateAndSelectDropdown(reusableAction, dropdownOptions,"Employee Grade", data.get("Employee grade"));
         reusableAction.inputFieldByLabel("Employee Code",data.get("Employee code"));
         reusableAction.inputFieldByLabel("Claim ID",data.get("Claim id"));
         reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
