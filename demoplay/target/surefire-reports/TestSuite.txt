@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 53.038 s - in TestSuite
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 41.025 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 33.554 s  <<< FAILURE!
+java.lang.RuntimeException: Option 'Esha' not found under 'Assign Doctor:' in JSON.
+	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:323)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:213)
+
