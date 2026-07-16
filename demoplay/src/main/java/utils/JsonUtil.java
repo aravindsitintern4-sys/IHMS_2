@@ -40,6 +40,7 @@ package utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,4 +121,24 @@ public class JsonUtil {
     public static Map<String, List<String>> getDropdownMap() {
         return dropdownMap;
     }
+
+
+    public static void clearJson() {
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), new HashMap<String, List<String>>());
+
+            dropdownMap.clear();
+            System.out.println("Dropdown JSON cleared.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void reloadJson() {
+        loadJson();
+    }
+
 }

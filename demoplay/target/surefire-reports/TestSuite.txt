@@ -1,9 +1,54 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 41.025 s <<< FAILURE! - in TestSuite
-verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 33.554 s  <<< FAILURE!
-java.lang.RuntimeException: Option 'Esha' not found under 'Assign Doctor:' in JSON.
-	at tests.OPRegistrationTest.validateAndSelectDropdown(OPRegistrationTest.java:323)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:213)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 31.58 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 24.36 s  <<< FAILURE!
+com.microsoft.playwright.impl.TargetClosedError: 
+Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError:Target page, context or browser has been closed
+Error
+    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
+    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
+    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
+    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
+    at Array.map (<anonymous>)
+    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
+    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
+    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
+    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
+    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
+    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
+    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
+}
+Call log:
+-   - waiting for locator("//h3[normalize-space()='IHMS']")
+
+	at tests.OPRegistrationTest.lambda$verifyPAYOPRegistration$0(OPRegistrationTest.java:158)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:157)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: 
+Error {
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError:Target page, context or browser has been closed
+Error
+    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
+    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
+    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
+    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
+    at Array.map (<anonymous>)
+    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
+    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
+    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
+    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
+    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
+    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
+    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
+}
+Call log:
+-   - waiting for locator("//h3[normalize-space()='IHMS']")
+
+	at tests.OPRegistrationTest.lambda$verifyPAYOPRegistration$0(OPRegistrationTest.java:158)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:157)
 

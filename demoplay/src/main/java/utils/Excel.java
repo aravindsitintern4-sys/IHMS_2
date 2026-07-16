@@ -66,84 +66,54 @@ public class Excel {
 
     private static final String FILE_PATH = "src/test/resources/OPRegistrationDataJsonValidation.xlsx";
 
-    /**
-     * Reads one person's data from the specified value column.
-     * Column 0 = Keys
-     * Column 1 = Person 1
-     * Column 2 = Person 2
-     * Column 3 = Person 3 ...
-     */
+    //  Reads one person's data from the specified value column.
+    
     public static Map<String, String> getTestData(String sheetName, int valueColumn) {
 
         Map<String, String> data = new HashMap<>();
 
         try (FileInputStream fis = new FileInputStream(FILE_PATH);
-             Workbook workbook = new XSSFWorkbook(fis)) {
-
+            Workbook workbook = new XSSFWorkbook(fis)) {
             Sheet sheet = workbook.getSheet(sheetName);
             DataFormatter formatter = new DataFormatter();
-
             for (int i = 0; i <= sheet.getLastRowNum(); i++) {
-
                 Row row = sheet.getRow(i);
                 if (row == null) {
                     continue;
                 }
-
                 Cell keyCell = row.getCell(0);
                 Cell valueCell = row.getCell(valueColumn);
-
                 if (keyCell == null) {
                     continue;
                 }
-
                 String key = formatter.formatCellValue(keyCell).trim();
                 String value = valueCell == null ? "" : formatter.formatCellValue(valueCell).trim();
-
                 data.put(key, value);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return data;
     }
 
-    /**
-     * Returns the last populated data column.
-     * Example:
-     * Column 0 = Keys
-     * Column 1 = Person 1
-     * Column 2 = Person 2
-     * Column 3 = Person 3
-     *
-     * Returns 3.
-     */
+    
+    // Returns the last populated data column.
     public static int getLastDataColumn(String sheetName) {
 
         try (FileInputStream fis = new FileInputStream(FILE_PATH);
-             Workbook workbook = new XSSFWorkbook(fis)) {
-
+            Workbook workbook = new XSSFWorkbook(fis)) {
             Sheet sheet = workbook.getSheet(sheetName);
-
             int lastColumn = 0;
-
             for (int i = 0; i <= sheet.getLastRowNum(); i++) {
-
                 Row row = sheet.getRow(i);
-
                 if (row != null) {
                     lastColumn = Math.max(lastColumn, row.getLastCellNum() - 1);
                 }
             }
-
             return lastColumn;
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return 0;
     }
 }

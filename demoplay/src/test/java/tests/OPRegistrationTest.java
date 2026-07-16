@@ -144,9 +144,9 @@ public class OPRegistrationTest extends BaseTest {
 
     int lastColumn = Excel.getLastDataColumn("opRegistrationData");
 
-    for (int column = 1; column <= lastColumn; column++) {
+    for (int column = 1; column <= lastColumn; column++) {    
 
-        System.out.println("Executing Person Data in Column: " + column);
+        System.out.println("Executing Person Data in Column: " + column); 
 
         Map<String, String> data = Excel.getTestData("opRegistrationData", column);
 
@@ -162,6 +162,9 @@ public class OPRegistrationTest extends BaseTest {
 
         reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
+        JsonUtil.clearJson();
+        JsonUtil.reloadJson();                          
+
         ihmsPage.locator("//select").first().waitFor();
 
         // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
@@ -169,9 +172,9 @@ public class OPRegistrationTest extends BaseTest {
         dropdownReader.captureAllDropdowns();
         dropdownReader.captureAllCustomDropdowns();
 
+        System.out.println(JsonUtil.getOptions("Patient Category:"));
+
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
-
-
 
         validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
 
@@ -239,6 +242,7 @@ public class OPRegistrationTest extends BaseTest {
             }
         }
 
+        // PAYMENT TYPE
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
              validateAndSelectDropdown(reusableAction,"Payment Type:",data.get("PaymentType"));
         }
@@ -247,7 +251,7 @@ public class OPRegistrationTest extends BaseTest {
 
 
 
-        // NEXT PATIENT DATA INTEGRATION's CONFIRMATION
+       // NEXT PATIENT DATA INTEGRATION's CONFIRMATION
        System.out.println("Completed Column: " + column);
     }
        
