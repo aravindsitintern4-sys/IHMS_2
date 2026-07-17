@@ -9,75 +9,10 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Surefire suite</th></tr>
-<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">31,066</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Surefire test</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">136,096</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifyPAYOPRegistration</a></td><td rowspan="1">1784179794085</td><td rowspan="1">24348</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifyPAYOPRegistration</a></td><td rowspan="1">1784287324692</td><td rowspan="1">128214</td></tr></tbody>
 </table>
-<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifyPAYOPRegistration</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
-	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
-	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at pages.DashboardPage.clickDashboardOption(DashboardPage.java:15)
-	at tests.OPRegistrationTest.lambda$verifyPAYOPRegistration$0(OPRegistrationTest.java:158)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:134)
-	at com.microsoft.playwright.impl.PageImpl.waitForEventWithTimeout(PageImpl.java:535)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopupImpl(PageImpl.java:503)
-	at com.microsoft.playwright.impl.PageImpl.lambda$waitForPopup$4(PageImpl.java:496)
-	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:49)
-	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:84)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopup(PageImpl.java:496)
-	at com.microsoft.playwright.Page.waitForPopup(Page.java:7908)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:157)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
-	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 47 more
-... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifyPAYOPRegistration</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

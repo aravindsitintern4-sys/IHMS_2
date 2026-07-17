@@ -143,8 +143,12 @@ public class OPRegistrationTest extends BaseTest {
     public void verifyPAYOPRegistration() throws IOException {
 
     int lastColumn = Excel.getLastDataColumn("opRegistrationData");
+    System.out.println("LAST COLUMN COUNT: " + lastColumn);
 
-    for (int column = 1; column <= lastColumn; column++) {    
+    for (int column = 1; column <= lastColumn; column++) {  
+        
+        // JsonUtil.clearJson();
+        // JsonUtil.reloadJson(); 
 
         System.out.println("Executing Person Data in Column: " + column); 
 
@@ -160,24 +164,21 @@ public class OPRegistrationTest extends BaseTest {
 
         ReusableCode reusableAction = new ReusableCode(ihmsPage);
 
-        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
-
-        JsonUtil.clearJson();
-        JsonUtil.reloadJson();                          
+        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");                         
 
         ihmsPage.locator("//select").first().waitFor();
 
         // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
         DropdownReader dropdownReader = new DropdownReader(ihmsPage);
-        dropdownReader.captureAllDropdowns();
-        dropdownReader.captureAllCustomDropdowns();
-
-        System.out.println(JsonUtil.getOptions("Patient Category:"));
+        // dropdownReader.captureAllDropdowns();
+        // dropdownReader.captureAllCustomDropdowns();
+        dropdownReader.captureAllDropdownOptions();     
 
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
         validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
-
+        dropdownReader.refreshDropdown("Patient Category:");
+        System.out.println(JsonUtil.getOptions("Patient Category:"));  
         String PayFreeSelection = data.get("PayFree");
         if ((!"CAMP".equalsIgnoreCase(PayFreeSelection))){
             validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
@@ -187,7 +188,7 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
         reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
         reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
-        ihmsPage.waitForTimeout(1000);
+        // ihmsPage.waitForTimeout(1000);
         dropdownReader.refreshDropdown("Next of Kin");
         validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
         reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
@@ -224,12 +225,11 @@ public class OPRegistrationTest extends BaseTest {
         }
         else if ("COMMUNITY CENTER".equalsIgnoreCase(data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(data.get("Patient category")))) {
                 dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-                verifyReferralForm(reusableAction, data,dropdownReader,opPage);
+                verifyReferralForm(reusableAction, data,dropdownReader,opPage);       
         }
 
         String patientCategory = data.get("Patient category");
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
-
             // PATIENT SUB CATEGORY 
             validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
             if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
@@ -238,8 +238,8 @@ public class OPRegistrationTest extends BaseTest {
             }
             else if ("Concession".equalsIgnoreCase(data.get("PatientSubCategory"))) {
                 dropdownReader.captureDropdowns("Concession Approved By","Reason");
-                verifyConcessionSubCategory(reusableAction, data);
-            }
+                verifyConcessionSubCategory(reusableAction, data);                            
+            }              
         }
 
         // PAYMENT TYPE
@@ -249,9 +249,7 @@ public class OPRegistrationTest extends BaseTest {
         
         reusableAction.buttonClick("Submit");
 
-
-
-       // NEXT PATIENT DATA INTEGRATION's CONFIRMATION
+       // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
        System.out.println("Completed Column: " + column);
     }
        
@@ -272,6 +270,7 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Reference No", data.get("Reference No"));
         reusableAction.inputFieldByLabel("Reference Date", data.get("Reference date"));
 
+        // DIFFERENT OPTIONS ARE PRESENT BASED ON PATIENT CATEGORY
         String patientCategory = data.get("Patient category");
         if ("COMMUNITY CENTER".equalsIgnoreCase(patientCategory)) {
             newValidateAndSelectForceDropdown(opPage,"Referral Name",data.get("Referral name from community center"));
@@ -281,6 +280,7 @@ public class OPRegistrationTest extends BaseTest {
             newValidateAndSelectForceDropdown(opPage,"Referral Name",data.get("Referral name"));
         }
 
+        // DIFFERENT OPTIONS ARE PRESENT BASED ON PAY/FREE
         String PayFreeSelection = data.get("PayFree");
         if (("FREE".equalsIgnoreCase(PayFreeSelection)) || ("CAMP".equalsIgnoreCase(PayFreeSelection))){
             validateAndSelectDropdown(reusableAction,"Clinic Referred to",data.get("Clinic Referred to Free or Camp"));

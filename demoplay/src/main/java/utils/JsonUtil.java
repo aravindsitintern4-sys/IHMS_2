@@ -65,7 +65,7 @@ public class JsonUtil {
             File file = new File(filePath);
             if (file.exists()) {
                 ObjectMapper mapper = new ObjectMapper();
-                // DROPDOWNMAP = { "key(label)" : ["value1","value2"]} 
+                // DROPDOWNMAP = { "key(label)" : ["value1","value2"]} JSON FORMAT
                 dropdownMap = mapper.readValue(file,
                         new TypeReference<Map<String, List<String>>>() {
                         });
@@ -76,7 +76,7 @@ public class JsonUtil {
 
         } catch (IOException e) {
             e.printStackTrace();
-            // KEEP EMPTY MAP INSTEAD OF NULL
+            // KEEP EMPTY MAP 
             dropdownMap = new LinkedHashMap<>();
         }
     }
@@ -122,7 +122,7 @@ public class JsonUtil {
         return dropdownMap;
     }
 
-
+    // CLEAR THE JSON FILE BEFORE NEXT PATIENT
     public static void clearJson() {
 
         try {
@@ -135,10 +135,6 @@ public class JsonUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void reloadJson() {
-        loadJson();
     }
 
 }

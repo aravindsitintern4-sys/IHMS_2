@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Surefire test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Jul 16 10:59:47 IST 2026</td>
+<td>Started on:</td><td>Fri Jul 17 16:51:57 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>31 seconds (31066 ms)</td>
+<tr><td>Total time:</td><td>136 seconds (136096 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -77,169 +77,8 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='tests.OPRegistrationTest.verifyPAYOPRegistration()'><b>verifyPAYOPRegistration</b><br>Test class: tests.OPRegistrationTest</td>
-<td><div><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
-	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
-	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at pages.DashboardPage.clickDashboardOption(DashboardPage.java:15)
-	at tests.OPRegistrationTest.lambda$verifyPAYOPRegistration$0(OPRegistrationTest.java:158)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:134)
-	at com.microsoft.playwright.impl.PageImpl.waitForEventWithTimeout(PageImpl.java:535)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopupImpl(PageImpl.java:503)
-	at com.microsoft.playwright.impl.PageImpl.lambda$waitForPopup$4(PageImpl.java:496)
-	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:49)
-	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:84)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopup(PageImpl.java:496)
-	at com.microsoft.playwright.Page.waitForPopup(Page.java:7908)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:157)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
-	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 47 more
-... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace605705199", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace605705199'><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
-	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
-	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at pages.DashboardPage.clickDashboardOption(DashboardPage.java:15)
-	at tests.OPRegistrationTest.lambda$verifyPAYOPRegistration$0(OPRegistrationTest.java:158)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:134)
-	at com.microsoft.playwright.impl.PageImpl.waitForEventWithTimeout(PageImpl.java:535)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopupImpl(PageImpl.java:503)
-	at com.microsoft.playwright.impl.PageImpl.lambda$waitForPopup$4(PageImpl.java:496)
-	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:49)
-	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:84)
-	at com.microsoft.playwright.impl.PageImpl.waitForPopup(PageImpl.java:496)
-	at com.microsoft.playwright.Page.waitForPopup(Page.java:7908)
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:157)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
-	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
-	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
-	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
-Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
-  message=&apos;Target page, context or browser has been closed
-  name=&apos;TargetClosedError
-  stack=&apos;TargetClosedError:Target page, context or browser has been closed
-Error
-    at captureRawStack (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\stackTrace.js:32:17)
-    at LongStandingScope._race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:87:58)
-    at LongStandingScope.race (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:80:17)
-    at C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:45
-    at Array.map (&lt;anonymous&gt;)
-    at LongStandingScope.raceMultiple (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\utils\isomorphic\manualPromise.js:77:32)
-    at Frame.retryWithProgressAndTimeouts (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:865:60)
-    at async Frame.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\frames.js:944:27)
-    at async FrameDispatcher.click (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\frameDispatcher.js:117:12)
-    at async ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\progress.js:139:41)
-    at async FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:91:14)
-    at async DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-15303142060707032562\package\lib\server\dispatchers\dispatcher.js:322:22)
-}
-Call log:
--   - waiting for locator(&quot;//h3[normalize-space()=&apos;IHMS&apos;]&quot;)
-
-	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
-	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
-	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 47 more
-</pre></div></td>
-<td>24</td>
+<td></td>
+<td>128</td>
 <td>tests.OPRegistrationTest@5c1a8622</td></tr>
 </table><p>
 </body>

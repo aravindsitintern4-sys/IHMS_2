@@ -15,7 +15,8 @@ public class DropdownReader {
 
     private Page page;
     // LOAD EXISTING JSON SO REFRESHING A DROPDOWN DOESN'T OVERWRITE PREVIOUS DATA 
-    private Map<String, List<String>> dropdownMap =new LinkedHashMap<>(JsonUtil.getDropdownMap());
+    // private Map<String, List<String>> dropdownMap =new LinkedHashMap<>(JsonUtil.getDropdownMap());
+    private Map<String, List<String>> dropdownMap = new LinkedHashMap<>();
 
     public DropdownReader(Page page) {
         this.page = page;
@@ -26,7 +27,6 @@ public class DropdownReader {
         dropdownMap.clear();
         captureAllDropdowns();
         captureAllCustomDropdowns();
-        JsonUtil.writeJson(dropdownMap);
         System.out.println("All dropdowns captured successfully.");
     }
 
@@ -125,7 +125,7 @@ public class DropdownReader {
         return false;
     }
 
-    
+       
     //  REFRESH CUSTOM DROPDOWN
     private boolean refreshCustomDropdown(String label) throws IOException {
 

@@ -66,7 +66,7 @@ public class Excel {
 
     private static final String FILE_PATH = "src/test/resources/OPRegistrationDataJsonValidation.xlsx";
 
-    //  Reads one person's data from the specified value column.
+    //  READS ONE PAIENT'S DATA FROM SPECIFIED VALUE COLUMN 
     
     public static Map<String, String> getTestData(String sheetName, int valueColumn) {
 
@@ -97,7 +97,7 @@ public class Excel {
     }
 
     
-    // Returns the last populated data column.
+    // RETURNS THE LAST COLUMN 
     public static int getLastDataColumn(String sheetName) {
 
         try (FileInputStream fis = new FileInputStream(FILE_PATH);
