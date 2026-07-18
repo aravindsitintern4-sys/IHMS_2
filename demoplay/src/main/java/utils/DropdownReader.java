@@ -182,6 +182,21 @@ public class DropdownReader {
             refreshDropdown(label);
         }
     }
+
+
+    public void captureDropdownWithoutLabel(String heading) throws IOException {
+
+        String dropdownXpath ="//*[normalize-space()='%s']/following::select[1]";
+        Locator dropdown = page.locator(String.format(dropdownXpath, heading));
+
+        List<String> options = dropdown.locator("option").allTextContents();
+        List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
+
+        dropdownMap.put(heading, uniqueOptions);
+        JsonUtil.writeJson(dropdownMap);
+
+        System.out.println("Stored : " + heading);
+    }
 }
 
 

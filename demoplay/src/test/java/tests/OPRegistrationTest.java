@@ -177,8 +177,12 @@ public class OPRegistrationTest extends BaseTest {
         OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
         validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
+
+        // REFRESH PATIENT CATEGORY BASED ON PAY/FREE/CAMP
         dropdownReader.refreshDropdown("Patient Category:");
         System.out.println(JsonUtil.getOptions("Patient Category:"));  
+       
+        // PATIENT TYPE
         String PayFreeSelection = data.get("PayFree");
         if ((!"CAMP".equalsIgnoreCase(PayFreeSelection))){
             validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
@@ -189,10 +193,13 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
         reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
         // ihmsPage.waitForTimeout(1000);
+
+        // NEXT OF KIN
         dropdownReader.refreshDropdown("Next of Kin");
         validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
         reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
 
+        // NORMAL / REFERRAL TYPE
         reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
         if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
             dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
@@ -212,39 +219,74 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.inputFieldByLabel("Email", data.get("Email"));
         validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
 
+        // CONSENT FORM AND ASSIGN DOCTOR
         if (("PAY".equalsIgnoreCase(PayFreeSelection))){
-        validateAndSelectDropdown(reusableAction,"Mobile App Consent Form",data.get("ConsentForm"));
-        validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
+            validateAndSelectDropdown(reusableAction,"Mobile App Consent Form",data.get("ConsentForm"));
+            validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
         }
 
         // PATIENT CATEGORY
+        String RefferralType = data.get("ReferralType");
         validateAndSelectDropdown(reusableAction,"Patient Category:",data.get("Patient category"));
         if ("CORPORATE".equalsIgnoreCase(data.get("Patient category"))) {
             dropdownReader.captureDropdowns("Corporate Name","Employee Grade");
             verifyCorporateCategory(reusableAction, data,dropdownReader);
         }
-        else if ("COMMUNITY CENTER".equalsIgnoreCase(data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(data.get("Patient category")))) {
+        else if (!"Referral".equalsIgnoreCase(RefferralType)){
+            if ("COMMUNITY CENTER".equalsIgnoreCase(data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(data.get("Patient category")))) {
                 dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
                 verifyReferralForm(reusableAction, data,dropdownReader,opPage);       
+                }
         }
 
+        // PATIENT SUB CATEGORY
         String patientCategory = data.get("Patient category");
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
-            // PATIENT SUB CATEGORY 
-            validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
-            if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
-                dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
-                verifySubsidySubCategory(reusableAction, data);           
+
+
+            String patientSubCategory = data.get("PatientSubCategory");
+
+            if (patientSubCategory != null && !patientSubCategory.trim().isEmpty()) {
+
+                validateAndSelectDropdown(reusableAction, "Patient Sub Category:", patientSubCategory);
+
+                if ("Subsidy".equalsIgnoreCase(patientSubCategory)) {
+                    dropdownReader.captureDropdowns("Subsidy Approved By", "Reason");
+                    verifySubsidySubCategory(reusableAction, data);
+                } else if ("Concession".equalsIgnoreCase(patientSubCategory)) {
+                    dropdownReader.captureDropdowns("Concession Approved By", "Reason");
+                    verifyConcessionSubCategory(reusableAction, data);
+                }
             }
-            else if ("Concession".equalsIgnoreCase(data.get("PatientSubCategory"))) {
-                dropdownReader.captureDropdowns("Concession Approved By","Reason");
-                verifyConcessionSubCategory(reusableAction, data);                            
-            }              
         }
+        //     // PATIENT SUB CATEGORY 
+        //     validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
+        //     if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+        //         dropdownReader.captureDropdowns("Subsidy Approved By","Reason");
+        //         verifySubsidySubCategory(reusableAction, data);           
+        //     }
+        //     else if ("Concession".equalsIgnoreCase(data.get("PatientSubCategory"))) {
+        //         dropdownReader.captureDropdowns("Concession Approved By","Reason");
+        //         verifyConcessionSubCategory(reusableAction, data);                                 
+        //     }             
+        // }
+
 
         // PAYMENT TYPE
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
              validateAndSelectDropdown(reusableAction,"Payment Type:",data.get("PaymentType"));
+             String PaymentType = data.get("PaymentType");
+             if (("OTHERS".equalsIgnoreCase(PaymentType))){
+                dropdownReader.captureDropdownWithoutLabel("Select Counter");
+                validateAndSelectCounter(reusableAction,"Select Counter",data.get("selectCounter"));
+                reusableAction.buttonClick("Select");
+                reusableAction.buttonClick("Yes");
+                reusableAction.testClick("Credit Card");
+                reusableAction.closeIcon("Select Counter");
+             }
+             else{
+                reusableAction.linkIcon("+");
+             }
         }
         
         reusableAction.buttonClick("Submit");
@@ -252,7 +294,7 @@ public class OPRegistrationTest extends BaseTest {
        // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
        System.out.println("Completed Column: " + column);
     }
-       
+    
     }
 
 
@@ -264,7 +306,6 @@ public class OPRegistrationTest extends BaseTest {
     //     validateAndSelectDropdown(reusableAction,"Doctor Referred to",data.get("Doctor Referred to"));   
     //     reusableAction.buttonClick("Save");   
     // }
-
     // REFERRAL FORM
     public void verifyReferralForm(ReusableCode reusableAction,Map<String, String> data,DropdownReader dropdownReader,OPRegistrationPage opPage) throws IOException {
         reusableAction.inputFieldByLabel("Reference No", data.get("Reference No"));
@@ -279,7 +320,6 @@ public class OPRegistrationTest extends BaseTest {
         } else {
             newValidateAndSelectForceDropdown(opPage,"Referral Name",data.get("Referral name"));
         }
-
         // DIFFERENT OPTIONS ARE PRESENT BASED ON PAY/FREE
         String PayFreeSelection = data.get("PayFree");
         if (("FREE".equalsIgnoreCase(PayFreeSelection)) || ("CAMP".equalsIgnoreCase(PayFreeSelection))){
@@ -350,7 +390,12 @@ public class OPRegistrationTest extends BaseTest {
         opPage.newChangeDropdown(label, value);
     }
 
-
+    private void validateAndSelectCounter(ReusableCode reusableAction,String heading,String value) {
+        if (!JsonUtil.containsOption(heading, value)) {
+            throw new RuntimeException("Option '" + value + "' not found under 'Select' in JSON.");
+        }
+        reusableAction.selectDropdownWithoutLabel(heading,value);
+    }
 
     
 

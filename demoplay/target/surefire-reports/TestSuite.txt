@@ -1,4 +1,32 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 136.627 s - in TestSuite
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 74.129 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 66.815 s  <<< FAILURE!
+com.microsoft.playwright.TimeoutError: 
+Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\progress.js:65:26)
+    at FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:91:31)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:322:39)
+}
+Call log:
+-   - waiting for locator("//button[.//span[normalize-space()='Credit Card']]")
+
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:284)
+Caused by: com.microsoft.playwright.TimeoutError: 
+Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\progress.js:65:26)
+    at FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:91:31)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:322:39)
+}
+Call log:
+-   - waiting for locator("//button[.//span[normalize-space()='Credit Card']]")
+
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:284)
+

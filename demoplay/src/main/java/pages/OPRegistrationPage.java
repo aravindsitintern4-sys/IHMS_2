@@ -30,5 +30,7 @@ public class OPRegistrationPage {
         page.locator(String.format(optionSelect, option)).last().click();
     }
 
+    
+
    
 }

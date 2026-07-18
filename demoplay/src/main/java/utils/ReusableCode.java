@@ -45,9 +45,15 @@ public class ReusableCode {
     public void buttonClick(String btnName) {
         String buttonClick = "//button[normalize-space()='%s']";
         page.click(String.format(buttonClick,btnName));
+        // String buttonClick =
+        //         "//button[normalize-space()='%s'] | " +
+        //         "//button[.//span[normalize-space(.)='%s']]";
+
+        //     page.locator(String.format(buttonClick, btnName, btnName)).click();
     } 
 
-    // DROPDOWN 
+
+    // DROPDOWN WITH LABEL
     public void selectDropdownByLabel(String labelName, String option) {
         String dropdownXpath ="//label[contains(normalize-space(),'%s')]/parent::*//select";
         String dropLoc = String.format(dropdownXpath, labelName);
@@ -96,6 +102,31 @@ public class ReusableCode {
         page.locator(optionInput).pressSequentially(option);
         page.locator(String.format(optionSelect, option)).last().click();
     }  
+
+    // DROPDOWN WITHOUT LABEL
+    public void selectDropdownWithoutLabel(String heading, String option) {
+        String dropdownXpath ="//*[normalize-space()='%s']/following::select[1]";
+        page.locator(String.format(dropdownXpath, heading)).selectOption(new SelectOption().setLabel(option));
+    }
     
+
+    // CLOSE (X) ICON
+    public void closeIcon(String heading) {   
+        String closeIcon ="//*[name()='svg' and @class='lucide'] | " + "//*[name()='svg' and contains(@class,'absolute')]";;
+        page.locator(String.format(closeIcon, heading)).click();
+    }
+
+    // PLUS (+) ICON
+    public void linkIcon(String icon) {   
+        String iconLink ="//a[normalize-space()='%s']";
+        page.locator(String.format(iconLink, icon)).click();
+    }
+
+
+    // test click
+    public void testClick(String optionBtn) {   
+        String buttonXpath = "//button[.//span[normalize-space()='%s']]";
+        page.locator(String.format(buttonXpath, optionBtn)).click();
+    }
 
 }
