@@ -1,32 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 74.129 s <<< FAILURE! - in TestSuite
-verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 66.815 s  <<< FAILURE!
-com.microsoft.playwright.TimeoutError: 
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 69.35 s <<< FAILURE! - in TestSuite
+verifyPAYOPRegistration(tests.OPRegistrationTest)  Time elapsed: 61.328 s  <<< FAILURE!
+com.microsoft.playwright.impl.TargetClosedError: 
 Error {
-  message='Timeout 30000ms exceeded.
-  name='TimeoutError
-  stack='TimeoutError: Timeout 30000ms exceeded.
-    at ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\progress.js:65:26)
-    at FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:91:31)
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:322:39)
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[.//span[normalize-space()='Credit Card']]")
-
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:284)
-Caused by: com.microsoft.playwright.TimeoutError: 
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:220)
+Caused by: com.microsoft.playwright.impl.TargetClosedError: 
 Error {
-  message='Timeout 30000ms exceeded.
-  name='TimeoutError
-  stack='TimeoutError: Timeout 30000ms exceeded.
-    at ProgressController.run (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\progress.js:65:26)
-    at FrameDispatcher._runCommand (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:91:31)
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17110905558599355045\package\lib\server\dispatchers\dispatcher.js:322:39)
+  message='Target page, context or browser has been closed
+  name='TargetClosedError
+  stack='TargetClosedError: Target page, context or browser has been closed
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-3779845462637091283\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[.//span[normalize-space()='Credit Card']]")
-
-	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:284)
+	at tests.OPRegistrationTest.verifyPAYOPRegistration(OPRegistrationTest.java:220)
 

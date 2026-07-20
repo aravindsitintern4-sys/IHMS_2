@@ -51,6 +51,7 @@
 package utils;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,6 +117,48 @@ public class Excel {
         }
         return 0;
     }
+
+
+
+    // AFTER SUBMIT STORE THE UIN,MRN,LOCATION OF PATIENT IN EXCEL
+    public static void updateCell(String sheetName, int valueColumn, String key, String value) {
+
+        try (
+            FileInputStream fis = new FileInputStream(FILE_PATH);
+            Workbook workbook = new XSSFWorkbook(fis)
+            ) {
+            Sheet sheet = workbook.getSheet(sheetName);
+            for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row == null) {
+                    continue;
+                }
+                Cell keyCell = row.getCell(0);
+
+                if (keyCell != null &&
+                    key.equalsIgnoreCase(new DataFormatter().formatCellValue(keyCell).trim())) {
+
+                    Cell valueCell = row.getCell(valueColumn);
+
+                    if (valueCell == null) {
+                        valueCell = row.createCell(valueColumn);
+                    }
+
+                    valueCell.setCellValue(value);
+                    break;
+                }
+            }
+            fis.close();
+            FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            workbook.write(fos);
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
 
 

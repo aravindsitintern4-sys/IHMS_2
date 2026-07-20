@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.testng.annotations.Test;
 
 import com.microsoft.playwright.Page;
@@ -148,13 +150,22 @@ public class OPRegistrationTest extends BaseTest {
     for (int column = 1; column <= lastColumn; column++) {  
         
         // JsonUtil.clearJson();
-        // JsonUtil.reloadJson(); 
-
-        System.out.println("Executing Person Data in Column: " + column); 
+        // JsonUtil.reloadJson();
+        // System.out.println("Executing Person Data in Column: " + column); 
 
         Map<String, String> data = Excel.getTestData("opRegistrationData", column);
 
         // Map<String, String> data = Excel.getTestData("opRegistrationData");
+
+        // IF THE WHOLE COLUMN IS EMPTY STOP TEST RUN
+        boolean isColumnEmpty = data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
+
+        if (isColumnEmpty) {
+            System.out.println("Column " + column + " is empty. Stopping execution.");
+            break;
+        }
+
+        System.out.println("Executing Person Data in Column: " + column); 
 
         DashboardPage dashboard = new DashboardPage(page);
 
@@ -217,6 +228,7 @@ public class OPRegistrationTest extends BaseTest {
         validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
         reusableAction.inputFieldByLabel("Mobile No", data.get("MobileNo"));
         reusableAction.inputFieldByLabel("Email", data.get("Email"));
+        dropdownReader.refreshDropdown("Purpose Of Visit");
         validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
 
         // CONSENT FORM AND ASSIGN DOCTOR
@@ -242,7 +254,6 @@ public class OPRegistrationTest extends BaseTest {
         // PATIENT SUB CATEGORY
         String patientCategory = data.get("Patient category");
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
-
 
             String patientSubCategory = data.get("PatientSubCategory");
 
@@ -274,22 +285,34 @@ public class OPRegistrationTest extends BaseTest {
 
         // PAYMENT TYPE
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
-             validateAndSelectDropdown(reusableAction,"Payment Type:",data.get("PaymentType"));
-             String PaymentType = data.get("PaymentType");
-             if (("OTHERS".equalsIgnoreCase(PaymentType))){
+            // dropdownReader.refreshDropdown("Payment Type:");
+            validateAndSelectDropdown(reusableAction,"Payment Type:",data.get("PaymentType"));
+            String PaymentType = data.get("PaymentType");
+            if (("OTHERS".equalsIgnoreCase(PaymentType))){
                 dropdownReader.captureDropdownWithoutLabel("Select Counter");
                 validateAndSelectCounter(reusableAction,"Select Counter",data.get("selectCounter"));
                 reusableAction.buttonClick("Select");
                 reusableAction.buttonClick("Yes");
-                reusableAction.testClick("Credit Card");
-                reusableAction.closeIcon("Select Counter");
-             }
-             else{
-                reusableAction.linkIcon("+");
-             }
+                // reusableAction.testClick(); 
+                // reusableAction.closeIcon("Select Counter");    
+            }
+            else{    
+                reusableAction.linkIcon("+");     
+            }
         }
         
         reusableAction.buttonClick("Submit");
+
+        // AFTER SUBMIT STORE THE UIN,MRN,LOCATION OF PATIENT IN EXCEL
+        String mrn = reusableAction.getPopupValue("MRN");
+        String uin = reusableAction.getPopupValue("UIN");
+        String location = reusableAction.getPopupValue("Location");
+
+        Excel.updateCell("opRegistrationData", column, "MRN", mrn);
+        Excel.updateCell("opRegistrationData", column, "UIN", uin);
+        Excel.updateCell("opRegistrationData", column, "Location", location);
+
+        reusableAction.buttonClick("×");
 
        // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
        System.out.println("Completed Column: " + column);
@@ -395,12 +418,72 @@ public class OPRegistrationTest extends BaseTest {
             throw new RuntimeException("Option '" + value + "' not found under 'Select' in JSON.");
         }
         reusableAction.selectDropdownWithoutLabel(heading,value);
+    }  
+
+
+//  @Test
+    public void verifyReprint() throws IOException {
+
+    int lastColumn = Excel.getLastDataColumn("opRegistrationData");
+    System.out.println("LAST COLUMN COUNT: " + lastColumn);
+
+    for (int column = 1; column <= lastColumn; column++) {  
+        
+        // JsonUtil.clearJson();
+        // JsonUtil.reloadJson();
+        // System.out.println("Executing Person Data in Column: " + column); 
+
+        Map<String, String> data = Excel.getTestData("opRegistrationData", column);
+
+        // Map<String, String> data = Excel.getTestData("opRegistrationData");
+
+        // IF THE WHOLE COLUMN IS EMPTY STOP TEST RUN
+        boolean isColumnEmpty = data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
+
+        if (isColumnEmpty) {
+            System.out.println("Column " + column + " is empty. Stopping execution.");
+            break;
+        }
+
+        DashboardPage dashboard = new DashboardPage(page);
+
+        System.out.println("Executing Person Data in Column: " + column);
+
+        Page ihmsPage = page.waitForPopup(() -> {
+            dashboard.clickDashboardOption("IHMS");
+        });
+
+        ReusableCode reusableAction = new ReusableCode(ihmsPage);
+
+        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");                         
+
+        ihmsPage.locator("//select").first().waitFor();
+
+        // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
+        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+        // dropdownReader.captureAllDropdowns();
+        // dropdownReader.captureAllCustomDropdowns();
+          
+
+        // OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+
+        reusableAction.buttonClick("Reprint");
+        dropdownReader.captureAllDropdownOptions();
+        // validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientTypeReprint"));
+        // reusableAction.inputFieldByLabel("Date",data.get("dateReprint"));
+        dropdownReader.refreshDropdown("Reprint");
+        validateAndSelectDropdown(reusableAction,"Reprint",data.get("ReprintChoice"));
+        reusableAction.inputFieldByLabel("UIN",data.get("uinReprint"));
+        validateAndSelectDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
+        reusableAction.buttonClick("Submit");
     }
 
+}
     
 
-    
+
 }
+
 
 
 

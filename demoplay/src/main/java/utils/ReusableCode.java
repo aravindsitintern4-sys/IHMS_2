@@ -122,11 +122,22 @@ public class ReusableCode {
         page.locator(String.format(iconLink, icon)).click();
     }
 
-
     // test click
-    public void testClick(String optionBtn) {   
-        String buttonXpath = "//button[.//span[normalize-space()='%s']]";
-        page.locator(String.format(buttonXpath, optionBtn)).click();
+    public void testClick() {
+        String buttonCss = "button.ap-bg-gray-200:nth-child(1) > span:nth-child(1)";
+        page.locator(String.format(buttonCss)).click();
+    }   
+
+    public String getPopupValue(String label) {
+
+        String xpath =
+            "//label[normalize-space()='%s']/following-sibling::div";
+
+        return page.locator(String.format(xpath, label))
+                .textContent()
+                .trim();
     }
+
+    
 
 }
