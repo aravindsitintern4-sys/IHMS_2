@@ -14,4 +14,10 @@ public class DashboardPage {
     public void clickDashboardOption(String optionName) {
         page.click(String.format(Locator.DashboardOption,optionName));
     }
+
+    // PROFILE ICON
+    public void profileIcon() {   
+        String profileIcon = "//a[@id='userDropdown']";
+        page.locator(String.format(profileIcon)).click();
+    }
 }

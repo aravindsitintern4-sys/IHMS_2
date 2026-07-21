@@ -169,6 +169,9 @@ public class OPRegistrationTest extends BaseTest {
 
         DashboardPage dashboard = new DashboardPage(page);
 
+        // PROFILE ICON TEST
+        dashboard.profileIcon();
+
         Page ihmsPage = page.waitForPopup(() -> {
             dashboard.clickDashboardOption("IHMS");
         });
@@ -200,7 +203,12 @@ public class OPRegistrationTest extends BaseTest {
         }
 
         reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
-        reusableAction.inputFieldByLabel("Last Name", data.get("LastName"));
+
+        // NOT MANDATORY FIELD
+        String LastName = data.get("LastName");
+        if (reusableAction.hasValue(LastName))
+        reusableAction.inputFieldByLabel("Last Name", LastName);
+
         reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
         reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
         // ihmsPage.waitForTimeout(1000);
@@ -216,26 +224,86 @@ public class OPRegistrationTest extends BaseTest {
             dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
             verifyReferralForm(reusableAction, data,dropdownReader,opPage);
         }
-                             
-        reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
-        reusableAction.inputFieldByLabel("Door / Street", data.get("DoorStreet"));
-        reusableAction.inputFieldByLabel("Locality", data.get("locality"));
-        reusableAction.inputFieldByLabel("City", data.get("City"));
-        reusableAction.buttonClick("Area");
-        dropdownReader.refreshDropdown("City /");
-        validateAndSelectForceDropdown(opPage,"City /", data.get("Area"));
-        reusableAction.inputFieldByLabel("PinCode", data.get("PinCode"));
-        validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
-        reusableAction.inputFieldByLabel("Mobile No", data.get("MobileNo"));
-        reusableAction.inputFieldByLabel("Email", data.get("Email"));
+         
+        
+        // reusableAction.selectRadioByLabel("Nationality",data.get("Nationality"));
+        // reusableAction.inputFieldByLabel("Door / Street", data.get("DoorStreet"));
+        // reusableAction.inputFieldByLabel("Locality", data.get("locality"));
+        // reusableAction.inputFieldByLabel("City", data.get("City"));
+        // reusableAction.buttonClick("Area");
+        // dropdownReader.refreshDropdown("City /");
+        // validateAndSelectForceDropdown(opPage,"City /", data.get("Area"));
+        // reusableAction.inputFieldByLabel("PinCode", data.get("PinCode"));
+        // validateAndSelectForceDropdown(opPage,"Taluk", data.get("Taluk"));
+        // reusableAction.inputFieldByLabel("Mobile No", data.get("MobileNo"));
+        // reusableAction.inputFieldByLabel("Email", data.get("Email"));
+
+        // FOR NON MANDATORY FIELD VALIDATION PURPOSE
+        String doorStreet = data.get("DoorStreet");
+        String locality = data.get("locality");
+        String city = data.get("City");
+        String area = data.get("Area");
+        String pinCode = data.get("PinCode");
+        String taluk = data.get("Taluk");
+        String mobileNo = data.get("MobileNo");
+        String email = data.get("Email");
+
+        String nationality = data.get("Nationality");
+        reusableAction.selectRadioByLabel("Nationality",nationality);
+        if (("Foreigner".equalsIgnoreCase(nationality))){
+            verifyForeignerNationality(reusableAction,data,dropdownReader);
+        }
+
+        if ((!"Foreigner".equalsIgnoreCase(nationality))){
+
+            if (reusableAction.hasValue(doorStreet))
+            reusableAction.inputFieldByLabel("Door / Street", doorStreet);
+
+            if (reusableAction.hasValue(locality))
+                reusableAction.inputFieldByLabel("Locality", locality);
+
+            if (reusableAction.hasValue(city))
+                reusableAction.inputFieldByLabel("City", city);
+
+            if (reusableAction.hasValue(area)) {
+                reusableAction.buttonClick("Area");
+                dropdownReader.refreshDropdown("City /");
+                validateAndSelectForceDropdown(opPage, "City /", area);
+            }
+
+            if (reusableAction.hasValue(pinCode))
+                reusableAction.inputFieldByLabel("PinCode", pinCode);
+
+            // TALUK -----> MANDATORY FIELD
+            validateAndSelectForceDropdown(opPage, "Taluk", taluk);
+
+        }
+
+        if (reusableAction.hasValue(mobileNo))
+            reusableAction.inputFieldByLabel("Mobile No", mobileNo);
+             
+        if (reusableAction.hasValue(email))
+            reusableAction.inputFieldByLabel("Email", email); 
+        
+
         dropdownReader.refreshDropdown("Purpose Of Visit");
         validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
+
 
         // CONSENT FORM AND ASSIGN DOCTOR
         if (("PAY".equalsIgnoreCase(PayFreeSelection))){
             validateAndSelectDropdown(reusableAction,"Mobile App Consent Form",data.get("ConsentForm"));
+            String mobileConsentForm = data.get("ConsentForm");
+            if (("Yes".equalsIgnoreCase(mobileConsentForm))){
+                reusableAction.inputFieldByLabel("Mobile App Consent Form", data.get("MobileNo"));
+            }
             validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
         }
+
+
+        // CHECK PATIENT DETAILS POPUP VISIBILITY (FOR ALREADY REGISTERED PATIENT)
+        CheckPatientDetailsPopupVisibility(reusableAction);
+
 
         // PATIENT CATEGORY
         String RefferralType = data.get("ReferralType");
@@ -243,12 +311,12 @@ public class OPRegistrationTest extends BaseTest {
         if ("CORPORATE".equalsIgnoreCase(data.get("Patient category"))) {
             dropdownReader.captureDropdowns("Corporate Name","Employee Grade");
             verifyCorporateCategory(reusableAction, data,dropdownReader);
-        }
+        }  
         else if (!"Referral".equalsIgnoreCase(RefferralType)){
             if ("COMMUNITY CENTER".equalsIgnoreCase(data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(data.get("Patient category")))) {
                 dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-                verifyReferralForm(reusableAction, data,dropdownReader,opPage);       
-                }
+                verifyReferralForm(reusableAction, data,dropdownReader,opPage);
+            }
         }
 
         // PATIENT SUB CATEGORY
@@ -291,33 +359,47 @@ public class OPRegistrationTest extends BaseTest {
             if (("OTHERS".equalsIgnoreCase(PaymentType))){
                 dropdownReader.captureDropdownWithoutLabel("Select Counter");
                 validateAndSelectCounter(reusableAction,"Select Counter",data.get("selectCounter"));
-                reusableAction.buttonClick("Select");
-                reusableAction.buttonClick("Yes");
-                // reusableAction.testClick(); 
+                reusableAction.buttonClick("Select");                  
+                 reusableAction.buttonClick("Yes");  
+                // reusableAction.testClick();
                 // reusableAction.closeIcon("Select Counter");    
             }
             else{    
-                reusableAction.linkIcon("+");     
+                reusableAction.linkIcon("+"); 
             }
         }
+        
         
         reusableAction.buttonClick("Submit");
 
         // AFTER SUBMIT STORE THE UIN,MRN,LOCATION OF PATIENT IN EXCEL
-        String mrn = reusableAction.getPopupValue("MRN");
-        String uin = reusableAction.getPopupValue("UIN");
-        String location = reusableAction.getPopupValue("Location");
+        if (reusableAction.isPopupVisible("Saved Successfully")) {
 
-        Excel.updateCell("opRegistrationData", column, "MRN", mrn);
-        Excel.updateCell("opRegistrationData", column, "UIN", uin);
-        Excel.updateCell("opRegistrationData", column, "Location", location);
+            String mrn = reusableAction.getPopupValue("MRN");
+            String uin = reusableAction.getPopupValue("UIN");
+            String location = reusableAction.getPopupValue("Location");
 
-        reusableAction.buttonClick("×");
+            Excel.updateCell("opRegistrationData", column, "MRN", mrn);
+            Excel.updateCell("opRegistrationData", column, "UIN", uin);
+            Excel.updateCell("opRegistrationData", column, "Location", location);
 
-       // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
-       System.out.println("Completed Column: " + column);
+            reusableAction.buttonClick("×");
+        }
+
+        // HOME ICON TEST
+        reusableAction.homeIcon();
+
+        // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
+        System.out.println("Completed Column: " + column);
     }
     
+    }
+
+
+    public void CheckPatientDetailsPopupVisibility(ReusableCode reusableAction) {
+        if (reusableAction.isPopupVisible("Patient Details")) {
+                reusableAction.closeIcon("Patient Details");
+            }
     }
 
 
@@ -384,6 +466,14 @@ public class OPRegistrationTest extends BaseTest {
         reusableAction.textAreaFieldByLabel("Remarks / Registration No",data.get("Corporate remarks"));
         reusableAction.buttonClick("Submit");
     }
+
+    // NATIONALITY
+    public void verifyForeignerNationality(ReusableCode reusableAction,Map<String, String> data, DropdownReader dropdownReader) throws IOException {
+        dropdownReader.refreshDropdown("Country");
+        validateAndSelectDropdown(reusableAction,"Country",data.get("Foreign country"));
+        reusableAction.inputFieldByLabel("Zip Code",data.get("zip code"));
+    }
+
 
     private void validateAndSelectDropdown(ReusableCode reusableAction,String label,String value) {
         if (!JsonUtil.containsOption(label, value)) {
@@ -475,7 +565,7 @@ public class OPRegistrationTest extends BaseTest {
         validateAndSelectDropdown(reusableAction,"Reprint",data.get("ReprintChoice"));
         reusableAction.inputFieldByLabel("UIN",data.get("uinReprint"));
         validateAndSelectDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
-        reusableAction.buttonClick("Submit");
+        reusableAction.buttonClick("Submit"); 
     }
 
 }

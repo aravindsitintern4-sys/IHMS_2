@@ -116,28 +116,50 @@ public class ReusableCode {
         page.locator(String.format(closeIcon, heading)).click();
     }
 
+    
+    // HOME ICON
+    public void homeIcon() {   
+        String homeIcon ="//lucide-icon[contains(@class,'cursor-pointer')]"; 
+        page.locator(String.format(homeIcon)).click();
+    }
+
+  
+
     // PLUS (+) ICON
     public void linkIcon(String icon) {   
         String iconLink ="//a[normalize-space()='%s']";
         page.locator(String.format(iconLink, icon)).click();
     }
 
-    // test click
+    // PAYMENT TYPE OTHERS TEST PURPOSE
     public void testClick() {
         String buttonCss = "button.ap-bg-gray-200:nth-child(1) > span:nth-child(1)";
         page.locator(String.format(buttonCss)).click();
     }   
 
+    //  STORING PURPOSE OF UIN,MRN
     public String getPopupValue(String label) {
-
-        String xpath =
-            "//label[normalize-space()='%s']/following-sibling::div";
-
+        String xpath ="//label[normalize-space()='%s']/following-sibling::div";
         return page.locator(String.format(xpath, label))
                 .textContent()
                 .trim();
     }
 
-    
+    // POPUP VISIBILITY
+    public boolean isPopupVisible(String title) {
+        String xpath = "//*[normalize-space()='%s']";
+        return page.locator(String.format(xpath, title)).isVisible();
+    }
+
+
+    // NULL VALUE CHECKING 
+    public boolean hasValue(String value) {
+        return value != null && !value.trim().isEmpty();
+    }
+
+    public void pressKey(String key) {
+        page.keyboard().press(key);
+    }
+
 
 }
