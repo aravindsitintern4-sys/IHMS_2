@@ -1,10 +1,15 @@
 package utils;
 
+
+import java.util.List;
+
 import org.testng.Assert;
 
 import com.microsoft.playwright.Keyboard;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.SelectOption;
+
+import com.microsoft.playwright.Locator.ClickOptions;
 
 
 import locators.Locator;
@@ -132,10 +137,11 @@ public class ReusableCode {
     }
 
     // PAYMENT TYPE OTHERS TEST PURPOSE
-    public void testClick() {
-        String buttonCss = "button.ap-bg-gray-200:nth-child(1) > span:nth-child(1)";
-        page.locator(String.format(buttonCss)).click();
-    }   
+    public void testClick(String btn) {
+        String buttonXpath = "//h3[normalize-space()='Payment Methods']/following-sibling::div//button[.//span[normalize-space()='%s']]";
+        page.locator(String.format(buttonXpath, btn))
+            .click(new ClickOptions().setForce(true));
+    }
 
     //  STORING PURPOSE OF UIN,MRN
     public String getPopupValue(String label) {
@@ -148,8 +154,8 @@ public class ReusableCode {
     // POPUP VISIBILITY
     public boolean isPopupVisible(String title) {
         String xpath = "//*[normalize-space()='%s']";
-        return page.locator(String.format(xpath, title)).isVisible();
-    }
+        return page.locator(String.format(xpath, title)).isVisible();        
+    } 
 
 
     // NULL VALUE CHECKING 
@@ -160,6 +166,18 @@ public class ReusableCode {
     public void pressKey(String key) {
         page.keyboard().press(key);
     }
+
+    // CLOSE WINDOW  ----> "X" IN WIDOW
+    public void closeNewWindow() {
+        List<Page> pages = page.context().pages();
+
+        if (pages.size() > 1) {
+            Page newPage = pages.get(pages.size() - 1);
+            newPage.close();
+            page.bringToFront();
+        }
+    }
+
 
 
 }

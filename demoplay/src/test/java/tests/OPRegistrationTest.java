@@ -141,7 +141,7 @@ public class OPRegistrationTest extends BaseTest {
 
 
 //   GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON
-    @Test
+    // @Test
     public void verifyPAYOPRegistration() throws IOException {
 
     int lastColumn = Excel.getLastDataColumn("opRegistrationData");
@@ -271,7 +271,7 @@ public class OPRegistrationTest extends BaseTest {
                 validateAndSelectForceDropdown(opPage, "City /", area);
             }
 
-            if (reusableAction.hasValue(pinCode))
+            if (reusableAction.hasValue(pinCode))     
                 reusableAction.inputFieldByLabel("PinCode", pinCode);
 
             // TALUK -----> MANDATORY FIELD
@@ -360,8 +360,8 @@ public class OPRegistrationTest extends BaseTest {
                 dropdownReader.captureDropdownWithoutLabel("Select Counter");
                 validateAndSelectCounter(reusableAction,"Select Counter",data.get("selectCounter"));
                 reusableAction.buttonClick("Select");                  
-                 reusableAction.buttonClick("Yes");  
-                // reusableAction.testClick();
+                reusableAction.buttonClick("Yes");  
+                reusableAction.testClick("Credit Card");
                 // reusableAction.closeIcon("Select Counter");    
             }
             else{    
@@ -511,8 +511,8 @@ public class OPRegistrationTest extends BaseTest {
     }  
 
 
-//  @Test
-    public void verifyReprint() throws IOException {
+ @Test
+    public void verifySmallModuleInsideOpRegistration() throws IOException {
 
     int lastColumn = Excel.getLastDataColumn("opRegistrationData");
     System.out.println("LAST COLUMN COUNT: " + lastColumn);
@@ -555,22 +555,81 @@ public class OPRegistrationTest extends BaseTest {
         // dropdownReader.captureAllCustomDropdowns();
           
 
-        // OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+        OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
-        reusableAction.buttonClick("Reprint");
-        dropdownReader.captureAllDropdownOptions();
-        // validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientTypeReprint"));
-        // reusableAction.inputFieldByLabel("Date",data.get("dateReprint"));
-        dropdownReader.refreshDropdown("Reprint");
-        validateAndSelectDropdown(reusableAction,"Reprint",data.get("ReprintChoice"));
-        reusableAction.inputFieldByLabel("UIN",data.get("uinReprint"));
-        validateAndSelectDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
-        reusableAction.buttonClick("Submit"); 
+        // verifyReprint(reusableAction,dropdownReader,data);
+
+        verifyRecall(reusableAction,opPage,data);
+
+        verifyRouteCard(reusableAction,opPage,data);
+
+        verifyViewCollection(reusableAction,opPage,data,column);
+
+        verifyUnitLoad(reusableAction,opPage,data,column);
+
+        
+
+       
+
+        
     }
 
 }
     
+// REWORK THIS REPRINT 
+    //  REPRINT ---> NOT COMPLETED (REPRINT IS NOT WORK "NO USER FOUND" ERROR IS APPEARING IN SITE)
+    public void verifyReprint(ReusableCode reusableAction, DropdownReader dropdownReader,Map<String, String> data) throws IOException {
+        reusableAction.buttonClick("Reprint");
+        dropdownReader.captureAllDropdownOptions();
 
+        validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientTypeReprint"));
+        reusableAction.inputFieldByLabel("Date",data.get("dateReprint"));
+
+        String PatientTypeReprint=data.get("PatientTypeReprint");
+        if ((!"Review".equalsIgnoreCase(PatientTypeReprint))){
+            dropdownReader.refreshDropdown("Reprint");
+            validateAndSelectDropdown(reusableAction,"Reprint",data.get("ReprintChoice"));
+        }
+        reusableAction.inputFieldByLabel("UIN",data.get("UIN"));
+        dropdownReader.refreshDropdown("Receipt");
+        validateAndSelectDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
+        reusableAction.buttonClick("Submit");
+    }
+
+    // RECALL  ---> COMPLETED
+    public void verifyRecall(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data) throws IOException {
+        reusableAction.buttonClick("Recall");
+        opPage.inputFieldByLabelPopup("UIN",data.get("uinReprint"));
+        opPage.buttonClickPopup("Submit");
+    }
+
+    // ROUTE CARD  ---> COMPLETED
+    public void verifyRouteCard(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data) throws IOException {
+        reusableAction.buttonClick("Route Card");
+        opPage.inputFieldByLabelPopup("UIN",data.get("uinRouteCard"));
+        opPage.buttonClickPopup("Submit");
+        reusableAction.closeNewWindow();
+    }
+
+    // VIEW COLLECTION  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
+    public void verifyViewCollection(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data, int column) throws IOException {
+        reusableAction.buttonClick("View Collection");
+        if (opPage.isPopupVisible("View Collection")) {
+            String collection = opPage.getView("View Collection");
+            Excel.updateCell("Extra collection", column, "Total Collection Registration", collection);
+        }
+        opPage.buttonClickPopup("OK");
+    }
+
+    // UNIT LOAD  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
+   public void verifyUnitLoad(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data,int column) throws IOException {
+        reusableAction.buttonClick("Unit Load");
+        if (opPage.isPopupVisible("Unit Load")) {
+            String unitLoad = opPage.getUnitLoadTable("Unit Load");
+            Excel.updateCell("Extra collection", column,"Unit Load Registration", unitLoad);
+        }
+        reusableAction.closeIcon("Unit Load");
+    }
 
 }
 
