@@ -14,5 +14,6 @@
   "Patient Category:" : [ "Select", " COMMUNITY CENTER ", " CORPORATE ", " FULL PAYMENT ", " VISION CENTER " ],
   "Patient Sub Category:" : [ "Select", " Subsidy ", " Concession " ],
   "Payment Type:" : [ "Select", " CASH ", " OTHERS " ],
-  "Receipt" : [ "Select", " No data Found " ]
+  "Receipt" : [ "Select", " O26271958 - 23/07/2026 " ],
+  "Reprint" : [ "Select", " ID Card ", " Receipt " ]
 }

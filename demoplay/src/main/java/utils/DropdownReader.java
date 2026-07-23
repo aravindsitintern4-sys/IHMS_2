@@ -87,6 +87,22 @@ public class DropdownReader {
     }
 
 
+    public void captureTableDropdown(String tableHeader) throws IOException {
+        page.locator("//td[normalize-space()='" + tableHeader + "']/following-sibling::td//button").click();
+
+        page.locator("//input[@placeholder='Search...']").waitFor();
+
+        List<String> options = page.locator("//div[@role='option']").allTextContents();
+
+        List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
+
+        dropdownMap.put(tableHeader, uniqueOptions);
+        JsonUtil.writeJson(dropdownMap);    
+
+        page.keyboard().press("Escape");
+    }
+
+
     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED 
     public void refreshDropdown(String label) throws IOException {
         if (refreshNormalDropdown(label)) {

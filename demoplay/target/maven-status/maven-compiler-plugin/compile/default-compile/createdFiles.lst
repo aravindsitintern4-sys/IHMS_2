@@ -8,6 +8,7 @@ utils\JsonUtil.class
 factory\PlaywrightFactory.class
 base\BasePage.class
 utils\Excel.class
+pages\BillingPage.class
 utils\DropdownReader.class
 utils\JsonUtil$1.class
 locators\Locator.class

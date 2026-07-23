@@ -179,5 +179,27 @@ public class ReusableCode {
     }
 
 
+    // POPUP 
+
+     //  INPUT FIELD
+    public void inputFieldByLabelPopup(String labelName, String inputValue) {
+        String inputField ="//div[contains(@class,'fixed')]//label[contains(normalize-space(),'%s')]/following-sibling::input";
+        String inputLoc = String.format(inputField, labelName);
+        page.locator(inputLoc).click();
+        page.locator(inputLoc).clear();  
+        page.keyboard().type(inputValue, new Keyboard.TypeOptions().setDelay(50));
+    } 
+
+    public void selectDropdownByLabelInsidePopup(String labelName, String option) {
+        String dropdownXpath ="//div[contains(@class,'fixed')]//label[contains(normalize-space(),'%s')]/parent::*//select";
+        String dropLoc = String.format(dropdownXpath, labelName);
+        page.locator(dropLoc).selectOption(new SelectOption().setLabel(option));
+    }
+    
+    public void buttonClickPopup(String btnName) {
+        String buttonClick = "//div[contains(@class,'fixed')]//button[normalize-space()='%s']";
+        page.click(String.format(buttonClick,btnName));
+    } 
+
 
 }

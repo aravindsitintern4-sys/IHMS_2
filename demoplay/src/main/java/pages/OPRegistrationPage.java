@@ -34,19 +34,7 @@ public class OPRegistrationPage {
     }
 
 
-    //  INPUT FIELD
-    public void inputFieldByLabelPopup(String labelName, String inputValue) {
-        String inputField ="//div[contains(@class,'fixed')]//label[contains(normalize-space(),'%s')]/following-sibling::input";
-        String inputLoc = String.format(inputField, labelName);
-        page.locator(inputLoc).click();
-        page.locator(inputLoc).clear();  
-        page.keyboard().type(inputValue, new Keyboard.TypeOptions().setDelay(50));
-    } 
-    
-    public void buttonClickPopup(String btnName) {
-        String buttonClick = "//div[contains(@class,'fixed')]//button[normalize-space()='%s']";
-        page.click(String.format(buttonClick,btnName));
-    } 
+   
 
     public String getView(String value) {
         String xpath = "//h2[normalize-space()='%s']/following-sibling::div//div[contains(@class,'text-left')]";

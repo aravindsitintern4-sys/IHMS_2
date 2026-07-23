@@ -1,6 +1,7 @@
 package tests;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,8 +13,10 @@ import org.testng.annotations.Test;
 import com.microsoft.playwright.Page;
 
 import basetest.BaseTest;
+import pages.BillingPage;
 import pages.DashboardPage;
 import pages.OPRegistrationPage;
+import tests.TestContext;
 import utils.DropdownReader;
 import utils.Excel;
 import utils.JsonUtil;
@@ -27,17 +30,11 @@ public class OPRegistrationTest extends BaseTest {
 //     public void verifyPAYOPRegistration() throws IOException {
       
 //         Map<String, String> data = Excel.getTestData("opRegistrationData");
-        
-        
-
 //         DashboardPage dashboard = new DashboardPage(page);
-
 //         Page ihmsPage = page.waitForPopup(() -> {
 //             dashboard.clickDashboardOption("IHMS");
 //         });
-
 //         ReusableCode reusableAction = new ReusableCode(ihmsPage);
-
 //         reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");
 
 //         // WAIT FOR ALL SELECT LABEL VISIBLE
@@ -136,93 +133,60 @@ public class OPRegistrationTest extends BaseTest {
 
 
 
-
-
-
-
 //   GET TEST DATA FROM EXCEL AND COMAPARE THE DROPDOWN VALUES FROM JSON
-    // @Test
-    public void verifyPAYOPRegistration() throws IOException {
-
+// @Test(priority = 1)
+public void verifyOPRegistration() throws IOException {
+    
     int lastColumn = Excel.getLastDataColumn("opRegistrationData");
-    System.out.println("LAST COLUMN COUNT: " + lastColumn);
+    System.out.println("Last Column = " + lastColumn);
 
-    for (int column = 1; column <= lastColumn; column++) {  
-        
-        // JsonUtil.clearJson();
-        // JsonUtil.reloadJson();
-        // System.out.println("Executing Person Data in Column: " + column); 
+    for (int column = 1; column <= lastColumn; column++) {
 
-        Map<String, String> data = Excel.getTestData("opRegistrationData", column);
+        // INITIAL METHOS CALLING
+        TestContext ctx = CallInitialMethods("OP Modules", "Outpatient Registration","opRegistrationData",column);
 
-        // Map<String, String> data = Excel.getTestData("opRegistrationData");
-
-        // IF THE WHOLE COLUMN IS EMPTY STOP TEST RUN
-        boolean isColumnEmpty = data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
-
+        boolean isColumnEmpty = ctx.data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
         if (isColumnEmpty) {
             System.out.println("Column " + column + " is empty. Stopping execution.");
             break;
         }
+        System.out.println("Executing Person Data in Column: " + column);
 
-        System.out.println("Executing Person Data in Column: " + column); 
+        ctx.dropdownReader.captureAllDropdownOptions(); 
 
-        DashboardPage dashboard = new DashboardPage(page);
-
-        // PROFILE ICON TEST
-        dashboard.profileIcon();
-
-        Page ihmsPage = page.waitForPopup(() -> {
-            dashboard.clickDashboardOption("IHMS");
-        });
-
-        ReusableCode reusableAction = new ReusableCode(ihmsPage);
-
-        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");                         
-
-        ihmsPage.locator("//select").first().waitFor();
-
-        // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
-        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
-        // dropdownReader.captureAllDropdowns();
-        // dropdownReader.captureAllCustomDropdowns();
-        dropdownReader.captureAllDropdownOptions();     
-
-        OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
-
-        validateAndSelectDropdown(reusableAction,"Pay/Free",data.get("PayFree"));
+        validateAndSelectDropdown(ctx.reusableAction,"Pay/Free",ctx.data.get("PayFree"));
 
         // REFRESH PATIENT CATEGORY BASED ON PAY/FREE/CAMP
-        dropdownReader.refreshDropdown("Patient Category:");
+        ctx.dropdownReader.refreshDropdown("Patient Category:");
         System.out.println(JsonUtil.getOptions("Patient Category:"));  
        
         // PATIENT TYPE
-        String PayFreeSelection = data.get("PayFree");
+        String PayFreeSelection = ctx.data.get("PayFree");
         if ((!"CAMP".equalsIgnoreCase(PayFreeSelection))){
-            validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientType"));
+            validateAndSelectDropdown(ctx.reusableAction,"Patient Type",ctx.data.get("PatientType"));
         }
 
-        reusableAction.inputFieldByLabel("First Name", data.get("FirstName"));
+        ctx.reusableAction.inputFieldByLabel("First Name", ctx.data.get("FirstName"));
 
         // NOT MANDATORY FIELD
-        String LastName = data.get("LastName");
-        if (reusableAction.hasValue(LastName))
-        reusableAction.inputFieldByLabel("Last Name", LastName);
+        String LastName = ctx.data.get("LastName");
+        if (ctx.reusableAction.hasValue(LastName))
+        ctx.reusableAction.inputFieldByLabel("Last Name", LastName);
 
-        reusableAction.inputFieldByLabel("DOB", data.get("Date of Birth"));
-        reusableAction.selectRadioByLabel("Gender", data.get("Gender"));
+        ctx.reusableAction.inputFieldByLabel("DOB", ctx.data.get("Date of Birth"));
+        ctx.reusableAction.selectRadioByLabel("Gender", ctx.data.get("Gender"));
         // ihmsPage.waitForTimeout(1000);
 
         // NEXT OF KIN
-        dropdownReader.refreshDropdown("Next of Kin");
-        validateAndSelectDropdown(reusableAction, "Next of Kin", data.get("NextOfKinType"));
-        reusableAction.inputFieldByLabel("Next of Kin", data.get("NextOfKinName"));
+        ctx.dropdownReader.refreshDropdown("Next of Kin");
+        validateAndSelectDropdown(ctx.reusableAction, "Next of Kin", ctx.data.get("NextOfKinType"));
+        ctx.reusableAction.inputFieldByLabel("Next of Kin", ctx.data.get("NextOfKinName"));
 
         // NORMAL / REFERRAL TYPE
-        reusableAction.selectRadioByLabel("Normal / Referral",data.get("ReferralType"));
-        if ("Referral".equalsIgnoreCase(data.get("ReferralType"))) {
-            dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-            verifyReferralForm(reusableAction, data,dropdownReader,opPage);
+        ctx.reusableAction.selectRadioByLabel("Normal / Referral",ctx.data.get("ReferralType"));
+        if ("Referral".equalsIgnoreCase(ctx.data.get("ReferralType"))) {
+            ctx.dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
+            verifyReferralForm(ctx.reusableAction, ctx.data,ctx.dropdownReader,ctx.opPage);
         }
          
         
@@ -239,105 +203,105 @@ public class OPRegistrationTest extends BaseTest {
         // reusableAction.inputFieldByLabel("Email", data.get("Email"));
 
         // FOR NON MANDATORY FIELD VALIDATION PURPOSE
-        String doorStreet = data.get("DoorStreet");
-        String locality = data.get("locality");
-        String city = data.get("City");
-        String area = data.get("Area");
-        String pinCode = data.get("PinCode");
-        String taluk = data.get("Taluk");
-        String mobileNo = data.get("MobileNo");
-        String email = data.get("Email");
+        String doorStreet = ctx.data.get("DoorStreet");
+        String locality = ctx.data.get("locality");
+        String city = ctx.data.get("City");
+        String area = ctx.data.get("Area");
+        String pinCode = ctx.data.get("PinCode");
+        String taluk = ctx.data.get("Taluk");
+        String mobileNo = ctx.data.get("MobileNo");
+        String email = ctx.data.get("Email");
 
-        String nationality = data.get("Nationality");
-        reusableAction.selectRadioByLabel("Nationality",nationality);
+        String nationality = ctx.data.get("Nationality");
+        ctx.reusableAction.selectRadioByLabel("Nationality",nationality);
         if (("Foreigner".equalsIgnoreCase(nationality))){
-            verifyForeignerNationality(reusableAction,data,dropdownReader);
+            verifyForeignerNationality(ctx.reusableAction,ctx.data,ctx.dropdownReader);
         }
 
         if ((!"Foreigner".equalsIgnoreCase(nationality))){
 
-            if (reusableAction.hasValue(doorStreet))
-            reusableAction.inputFieldByLabel("Door / Street", doorStreet);
+            if (ctx.reusableAction.hasValue(doorStreet))
+            ctx.reusableAction.inputFieldByLabel("Door / Street", doorStreet);
 
-            if (reusableAction.hasValue(locality))
-                reusableAction.inputFieldByLabel("Locality", locality);
+            if (ctx.reusableAction.hasValue(locality))
+                ctx.reusableAction.inputFieldByLabel("Locality", locality);
 
-            if (reusableAction.hasValue(city))
-                reusableAction.inputFieldByLabel("City", city);
+            if (ctx.reusableAction.hasValue(city))
+                ctx.reusableAction.inputFieldByLabel("City", city);
 
-            if (reusableAction.hasValue(area)) {
-                reusableAction.buttonClick("Area");
-                dropdownReader.refreshDropdown("City /");
-                validateAndSelectForceDropdown(opPage, "City /", area);
+            if (ctx.reusableAction.hasValue(area)) {
+                ctx.reusableAction.buttonClick("Area");
+                ctx.dropdownReader.refreshDropdown("City /");
+                validateAndSelectForceDropdown(ctx.opPage, "City /", area);
             }
 
-            if (reusableAction.hasValue(pinCode))     
-                reusableAction.inputFieldByLabel("PinCode", pinCode);
+            if (ctx.reusableAction.hasValue(pinCode))     
+                ctx.reusableAction.inputFieldByLabel("PinCode", pinCode);
 
             // TALUK -----> MANDATORY FIELD
-            validateAndSelectForceDropdown(opPage, "Taluk", taluk);
+            validateAndSelectForceDropdown(ctx.opPage, "Taluk", taluk);
 
         }
 
-        if (reusableAction.hasValue(mobileNo))
-            reusableAction.inputFieldByLabel("Mobile No", mobileNo);
+        if (ctx.reusableAction.hasValue(mobileNo))
+            ctx.reusableAction.inputFieldByLabel("Mobile No", mobileNo);
              
-        if (reusableAction.hasValue(email))
-            reusableAction.inputFieldByLabel("Email", email); 
+        if (ctx.reusableAction.hasValue(email))
+            ctx.reusableAction.inputFieldByLabel("Email", email); 
         
 
-        dropdownReader.refreshDropdown("Purpose Of Visit");
-        validateAndSelectDropdown(reusableAction,"Purpose Of Visit",data.get("PurposeVisit"));
+        ctx.dropdownReader.refreshDropdown("Purpose Of Visit");
+        validateAndSelectDropdown(ctx.reusableAction,"Purpose Of Visit",ctx.data.get("PurposeVisit"));
 
 
         // CONSENT FORM AND ASSIGN DOCTOR
         if (("PAY".equalsIgnoreCase(PayFreeSelection))){
-            validateAndSelectDropdown(reusableAction,"Mobile App Consent Form",data.get("ConsentForm"));
-            String mobileConsentForm = data.get("ConsentForm");
+            validateAndSelectDropdown(ctx.reusableAction,"Mobile App Consent Form",ctx.data.get("ConsentForm"));
+            String mobileConsentForm = ctx.data.get("ConsentForm");
             if (("Yes".equalsIgnoreCase(mobileConsentForm))){
-                reusableAction.inputFieldByLabel("Mobile App Consent Form", data.get("MobileNo"));
+                ctx.reusableAction.inputFieldByLabel("Mobile App Consent Form", ctx.data.get("MobileNo"));
             }
-            validateAndSelectDropdown(reusableAction,"Assign Doctor:",data.get("Assign doctor"));
+            validateAndSelectDropdown(ctx.reusableAction,"Assign Doctor:",ctx.data.get("Assign doctor"));
         }
 
 
         // CHECK PATIENT DETAILS POPUP VISIBILITY (FOR ALREADY REGISTERED PATIENT)
-        CheckPatientDetailsPopupVisibility(reusableAction);
+        CheckPatientDetailsPopupVisibility(ctx.reusableAction);
 
 
         // PATIENT CATEGORY
-        String RefferralType = data.get("ReferralType");
-        validateAndSelectDropdown(reusableAction,"Patient Category:",data.get("Patient category"));
-        if ("CORPORATE".equalsIgnoreCase(data.get("Patient category"))) {
-            dropdownReader.captureDropdowns("Corporate Name","Employee Grade");
-            verifyCorporateCategory(reusableAction, data,dropdownReader);
+        String RefferralType = ctx.data.get("ReferralType");
+        validateAndSelectDropdown(ctx.reusableAction,"Patient Category:",ctx.data.get("Patient category"));
+        if ("CORPORATE".equalsIgnoreCase(ctx.data.get("Patient category"))) {
+            ctx.dropdownReader.captureDropdowns("Corporate Name","Employee Grade");
+            verifyCorporateCategory(ctx.reusableAction, ctx.data,ctx.dropdownReader);
         }  
         else if (!"Referral".equalsIgnoreCase(RefferralType)){
-            if ("COMMUNITY CENTER".equalsIgnoreCase(data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(data.get("Patient category")))) {
-                dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
-                verifyReferralForm(reusableAction, data,dropdownReader,opPage);
+            if ("COMMUNITY CENTER".equalsIgnoreCase(ctx.data.get("Patient category")) || ("VISION CENTER".equalsIgnoreCase(ctx.data.get("Patient category")))) {
+                ctx.dropdownReader.captureDropdowns("Referral Name","Clinic Referred to","Doctor Referred to");
+                verifyReferralForm(ctx.reusableAction, ctx.data,ctx.dropdownReader,ctx.opPage);
             }
         }
 
         // PATIENT SUB CATEGORY
-        String patientCategory = data.get("Patient category");
+        String patientCategory = ctx.data.get("Patient category");
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
 
-            String patientSubCategory = data.get("PatientSubCategory");
-
+            String patientSubCategory = ctx.data.get("PatientSubCategory");
             if (patientSubCategory != null && !patientSubCategory.trim().isEmpty()) {
-
-                validateAndSelectDropdown(reusableAction, "Patient Sub Category:", patientSubCategory);
+                validateAndSelectDropdown(ctx.reusableAction, "Patient Sub Category:", patientSubCategory);
 
                 if ("Subsidy".equalsIgnoreCase(patientSubCategory)) {
-                    dropdownReader.captureDropdowns("Subsidy Approved By", "Reason");
-                    verifySubsidySubCategory(reusableAction, data);
+                    ctx.dropdownReader.captureDropdowns("Subsidy Approved By", "Reason");
+                    verifySubsidySubCategory(ctx.reusableAction, ctx.data);
                 } else if ("Concession".equalsIgnoreCase(patientSubCategory)) {
-                    dropdownReader.captureDropdowns("Concession Approved By", "Reason");
-                    verifyConcessionSubCategory(reusableAction, data);
+                    ctx.dropdownReader.captureDropdowns("Concession Approved By", "Reason");
+                    verifyConcessionSubCategory(ctx.reusableAction, ctx.data);
                 }
             }
         }
+    
+
         //     // PATIENT SUB CATEGORY 
         //     validateAndSelectDropdown(reusableAction,"Patient Sub Category:",data.get("PatientSubCategory"));
         //     if ("Subsidy".equalsIgnoreCase(data.get("PatientSubCategory"))) {
@@ -354,46 +318,47 @@ public class OPRegistrationTest extends BaseTest {
         // PAYMENT TYPE
         if ((!"CORPORATE".equalsIgnoreCase(patientCategory)) && (!"FREE".equalsIgnoreCase(PayFreeSelection)) && (!"CAMP".equalsIgnoreCase(PayFreeSelection))){
             // dropdownReader.refreshDropdown("Payment Type:");
-            validateAndSelectDropdown(reusableAction,"Payment Type:",data.get("PaymentType"));
-            String PaymentType = data.get("PaymentType");
+            validateAndSelectDropdown(ctx.reusableAction,"Payment Type:",ctx.data.get("PaymentType"));
+            String PaymentType = ctx.data.get("PaymentType");
             if (("OTHERS".equalsIgnoreCase(PaymentType))){
-                dropdownReader.captureDropdownWithoutLabel("Select Counter");
-                validateAndSelectCounter(reusableAction,"Select Counter",data.get("selectCounter"));
-                reusableAction.buttonClick("Select");                  
-                reusableAction.buttonClick("Yes");  
-                reusableAction.testClick("Credit Card");
+                ctx.dropdownReader.captureDropdownWithoutLabel("Select Counter");
+                validateAndSelectCounter(ctx.reusableAction,"Select Counter",ctx.data.get("selectCounter"));
+                ctx.reusableAction.buttonClick("Select");                  
+                ctx.reusableAction.buttonClick("Yes");  
+                ctx.reusableAction.testClick("Credit Card");
                 // reusableAction.closeIcon("Select Counter");    
             }
             else{    
-                reusableAction.linkIcon("+"); 
+                ctx.reusableAction.linkIcon("+"); 
             }
         }
         
         
-        reusableAction.buttonClick("Submit");
+        ctx.reusableAction.buttonClick("Submit");
 
         // AFTER SUBMIT STORE THE UIN,MRN,LOCATION OF PATIENT IN EXCEL
-        if (reusableAction.isPopupVisible("Saved Successfully")) {
+        if (ctx.reusableAction.isPopupVisible("Saved Successfully")) {
 
-            String mrn = reusableAction.getPopupValue("MRN");
-            String uin = reusableAction.getPopupValue("UIN");
-            String location = reusableAction.getPopupValue("Location");
+            String mrn = ctx.reusableAction.getPopupValue("MRN");
+            String uin = ctx.reusableAction.getPopupValue("UIN");
+            String location = ctx.reusableAction.getPopupValue("Location");
 
-            Excel.updateCell("opRegistrationData", column, "MRN", mrn);
-            Excel.updateCell("opRegistrationData", column, "UIN", uin);
-            Excel.updateCell("opRegistrationData", column, "Location", location);
+            Excel.updateCell("opRegistrationData", ctx.column, "MRN", mrn);
+            Excel.updateCell("opRegistrationData", ctx.column, "UIN", uin);
+            Excel.updateCell("opRegistrationData", ctx.column, "Location", location);
 
-            reusableAction.buttonClick("×");
+            ctx.reusableAction.buttonClick("×");
         }
 
         // HOME ICON TEST
-        reusableAction.homeIcon();
+        ctx.reusableAction.homeIcon();
 
         // NEXT PATIENT DATA INTEGRATION'S CONFIRMATION (VIA COLUMN COUNT)
-        System.out.println("Completed Column: " + column);
+        System.out.println("Completed Column: " + ctx.column);
     }
     
     }
+
 
 
     public void CheckPatientDetailsPopupVisibility(ReusableCode reusableAction) {
@@ -475,140 +440,184 @@ public class OPRegistrationTest extends BaseTest {
     }
 
 
-    private void validateAndSelectDropdown(ReusableCode reusableAction,String label,String value) {
+    public void validateAndSelectDropdown(ReusableCode reusableAction,String label,String value) {
         if (!JsonUtil.containsOption(label, value)) {
             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
         }
      reusableAction.selectDropdownByLabel(label, value);
     }   
              
-    private void validateAndSelectSearchableDropdown(ReusableCode reusableAction,String label,String value) {
+    public void validateAndSelectSearchableDropdown(ReusableCode reusableAction,String label,String value) {
         if (!JsonUtil.containsOption(label, value)) {
             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
         } 
         reusableAction.selectSearchableDropdownByLabel(label, value);
     }
 
-    private void validateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
+    public void validateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
         if (!JsonUtil.containsOption(label, value)) {
             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
         }
         opPage.selectSomeForceDropdownByLabel(label, value);
     }
 
-    private void newValidateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
+    public void newValidateAndSelectForceDropdown(OPRegistrationPage opPage,String label,String value) {
         if (!JsonUtil.containsOption(label, value)) {
             throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
         }
         opPage.newChangeDropdown(label, value);
     }
 
-    private void validateAndSelectCounter(ReusableCode reusableAction,String heading,String value) {
+    public void validateAndSelectCounter(ReusableCode reusableAction,String heading,String value) {
         if (!JsonUtil.containsOption(heading, value)) {
             throw new RuntimeException("Option '" + value + "' not found under 'Select' in JSON.");
         }
         reusableAction.selectDropdownWithoutLabel(heading,value);
-    }  
-
-
- @Test
-    public void verifySmallModuleInsideOpRegistration() throws IOException {
-
-    int lastColumn = Excel.getLastDataColumn("opRegistrationData");
-    System.out.println("LAST COLUMN COUNT: " + lastColumn);
-
-    for (int column = 1; column <= lastColumn; column++) {  
-        
-        // JsonUtil.clearJson();
-        // JsonUtil.reloadJson();
-        // System.out.println("Executing Person Data in Column: " + column); 
-
-        Map<String, String> data = Excel.getTestData("opRegistrationData", column);
-
-        // Map<String, String> data = Excel.getTestData("opRegistrationData");
-
-        // IF THE WHOLE COLUMN IS EMPTY STOP TEST RUN
-        boolean isColumnEmpty = data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
-
-        if (isColumnEmpty) {
-            System.out.println("Column " + column + " is empty. Stopping execution.");
-            break;
+    } 
+    
+    public void newValidateAndSelectPopUpDropdown(ReusableCode reusableAction,String label,String value) {
+            if (!JsonUtil.containsOption(label, value)) {
+                throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+            }
+            reusableAction.selectDropdownByLabelInsidePopup(label, value);
         }
 
-        DashboardPage dashboard = new DashboardPage(page);
 
-        System.out.println("Executing Person Data in Column: " + column);
+//  @Test
+//     public void verifySmallModuleInsideOpRegistrationnnn() throws IOException {
+//         CallInitialMethods();
+//         // verifyReprint(reusableAction,dropdownReader,data);
+//         verifyRecall(reusableAction,opPage,data);
+//         verifyRouteCard(reusableAction,opPage,data);
+//         verifyViewCollection(reusableAction,opPage,data,column);
+//         verifyUnitLoad(reusableAction,opPage,data,column);   
+//     }
+// }
+    
+//  public void CallInitialMethodsss(){
+//         int lastColumn = Excel.getLastDataColumn("opRegistrationData");
+    // System.out.println("LAST COLUMN COUNT: " + lastColumn);
+    // for (int column = 1; column <= lastColumn; column++) {  
+    //     // JsonUtil.clearJson();
+    //     // JsonUtil.reloadJson();
+    //     // System.out.println("Executing Person Data in Column: " + column); 
+    //     Map<String, String> data = Excel.getTestData("opRegistrationData", column);
+    //     // Map<String, String> data = Excel.getTestData("opRegistrationData");
+    //     // IF THE WHOLE COLUMN IS EMPTY STOP TEST RUN
+    //     boolean isColumnEmpty = data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
+    //     if (isColumnEmpty) {
+    //         System.out.println("Column " + column + " is empty. Stopping execution.");
+    //         break;
+    //     }
+    //     System.out.println("Executing Person Data in Column: " + column); 
+    //     DashboardPage dashboard = new DashboardPage(page);
+    //     // PROFILE ICON TEST
+    //     dashboard.profileIcon();
+    //     Page ihmsPage = page.waitForPopup(() -> {
+    //         dashboard.clickDashboardOption("IHMS");
+    //     });
+    //     ReusableCode reusableAction = new ReusableCode(ihmsPage);
+    //     reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");                         
+    //     ihmsPage.locator("//select").first().waitFor();
+    //     // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
+    //     DropdownReader dropdownReader = new DropdownReader(ihmsPage);
+    //     // dropdownReader.captureAllDropdowns();
+    //     // dropdownReader.captureAllCustomDropdowns();
+    //     dropdownReader.captureAllDropdownOptions();     
+    //     OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+//     }
+// }
 
-        Page ihmsPage = page.waitForPopup(() -> {
-            dashboard.clickDashboardOption("IHMS");
-        });
 
-        ReusableCode reusableAction = new ReusableCode(ihmsPage);
+    // // INITIAL METHOD ---> COMMON FOR ALL
+    // public TestContext CallInitialMethods(String mainMenu,String subMenu,String sheetName,int column) {
 
-        reusableAction.clickMenuAndSelectSubMenu("OP Modules","Outpatient Registration");                         
+    //     Map<String, String> data = Excel.getTestData(sheetName, column);
 
-        ihmsPage.locator("//select").first().waitFor();
+    //     DashboardPage dashboard = new DashboardPage(page);
 
-        // CAPTURE ALL DROPDOWN AND STORE IT IN JASON
-        DropdownReader dropdownReader = new DropdownReader(ihmsPage);
-        // dropdownReader.captureAllDropdowns();
-        // dropdownReader.captureAllCustomDropdowns();
-          
+    //     Page ihmsPage = page.waitForPopup(() -> {
+    //         dashboard.clickDashboardOption("IHMS");
+    //     });
 
-        OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
+    //     ReusableCode reusableAction = new ReusableCode(ihmsPage);
 
-        // verifyReprint(reusableAction,dropdownReader,data);
+    //     // reusableAction.clickMenuAndSelectSubMenu("OP Modules", "Outpatient Registration");
+    //     reusableAction.clickMenuAndSelectSubMenu(mainMenu, subMenu);
 
-        verifyRecall(reusableAction,opPage,data);
+    //     ihmsPage.locator("//select").first().waitFor();
 
-        verifyRouteCard(reusableAction,opPage,data);
+    //     DropdownReader dropdownReader = new DropdownReader(ihmsPage);
 
-        verifyViewCollection(reusableAction,opPage,data,column);
+    //     OPRegistrationPage opPage = new OPRegistrationPage(ihmsPage);
 
-        verifyUnitLoad(reusableAction,opPage,data,column);
+    //     BillingPage billPage = new BillingPage(ihmsPage);
 
-        
+    //     return new TestContext(reusableAction, dropdownReader, opPage, billPage, data, column);
+    // }
 
-       
 
-        
+
+
+// SMALL MODULES ----> REPRINT,RECALL,UNIT LOAD,ROUTE CARD,VIEW COLLECTION FROM REGISTRATION PAGE
+@Test(priority = 2)
+public void verifySmallModuleInsideOpRegistration() throws IOException {
+
+    int lastColumn = Excel.getLastDataColumn("Extra collection");
+    System.out.println("Last Column = " + lastColumn);
+
+    for (int column = 1; column <= lastColumn; column++) {
+
+        TestContext ctx = CallInitialMethods("OP Modules", "Outpatient Registration","Extra collection",column);
+
+        // verifyReprint(ctx.reusableAction,ctx.opPage,ctx.dropdownReader,ctx.data);
+
+        // verifyRecall(ctx.reusableAction, ctx.opPage, ctx.data); 
+
+        verifyRouteCard(ctx.reusableAction, ctx.data);
+
+        verifyViewCollection(ctx.reusableAction, ctx.opPage, ctx.data, ctx.column);
+
+        verifyUnitLoad(ctx.reusableAction, ctx.opPage, ctx.data, ctx.column);   
     }
 
 }
-    
+
 // REWORK THIS REPRINT 
-    //  REPRINT ---> NOT COMPLETED (REPRINT IS NOT WORK "NO USER FOUND" ERROR IS APPEARING IN SITE)
-    public void verifyReprint(ReusableCode reusableAction, DropdownReader dropdownReader,Map<String, String> data) throws IOException {
+    //  REPRINT ---> NOT COMPLETED (REPRINT IS NOT WORK "NO USER FOUND" ERROR IS APPEARS IN SITE)
+    public void verifyReprint(ReusableCode reusableAction,OPRegistrationPage opPage,DropdownReader dropdownReader,Map<String, String> data) throws IOException {
         reusableAction.buttonClick("Reprint");
         dropdownReader.captureAllDropdownOptions();
 
-        validateAndSelectDropdown(reusableAction,"Patient Type",data.get("PatientTypeReprint"));
-        reusableAction.inputFieldByLabel("Date",data.get("dateReprint"));
+        newValidateAndSelectPopUpDropdown(reusableAction,"Patient Type",data.get("PatientTypeReprint"));
 
         String PatientTypeReprint=data.get("PatientTypeReprint");
-        if ((!"Review".equalsIgnoreCase(PatientTypeReprint))){
+        if (("Review".equalsIgnoreCase(PatientTypeReprint))){
+            reusableAction.inputFieldByLabelPopup("Date",data.get("dateReprint"));
             dropdownReader.refreshDropdown("Reprint");
             validateAndSelectDropdown(reusableAction,"Reprint",data.get("ReprintChoice"));
         }
-        reusableAction.inputFieldByLabel("UIN",data.get("UIN"));
+        reusableAction.inputFieldByLabelPopup("UIN",data.get("uinReprint"));
+        reusableAction.pressKey("Enter");
         dropdownReader.refreshDropdown("Receipt");
-        validateAndSelectDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
-        reusableAction.buttonClick("Submit");
+        newValidateAndSelectPopUpDropdown(reusableAction,"Receipt",data.get("ReceiptReprint"));
+        reusableAction.buttonClickPopup("Submit");
+        reusableAction.closeNewWindow();
     }
 
     // RECALL  ---> COMPLETED
     public void verifyRecall(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data) throws IOException {
         reusableAction.buttonClick("Recall");
-        opPage.inputFieldByLabelPopup("UIN",data.get("uinReprint"));
-        opPage.buttonClickPopup("Submit");
+        reusableAction.inputFieldByLabelPopup("UIN",data.get("uinReprint"));
+        reusableAction.buttonClickPopup("Submit");
     }
 
     // ROUTE CARD  ---> COMPLETED
-    public void verifyRouteCard(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data) throws IOException {
+    public void verifyRouteCard(ReusableCode reusableAction,Map<String, String> data) throws IOException {
         reusableAction.buttonClick("Route Card");
-        opPage.inputFieldByLabelPopup("UIN",data.get("uinRouteCard"));
-        opPage.buttonClickPopup("Submit");
-        reusableAction.closeNewWindow();
+        reusableAction.inputFieldByLabelPopup("UIN",data.get("uinRouteCard"));
+        reusableAction.buttonClickPopup("Submit");                       
+        // reusableAction.closeNewWindow();
     }
 
     // VIEW COLLECTION  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
@@ -618,7 +627,7 @@ public class OPRegistrationTest extends BaseTest {
             String collection = opPage.getView("View Collection");
             Excel.updateCell("Extra collection", column, "Total Collection Registration", collection);
         }
-        opPage.buttonClickPopup("OK");
+        reusableAction.buttonClickPopup("OK");
     }
 
     // UNIT LOAD  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
