@@ -99,24 +99,6 @@ public class Excel {
 
     
     // RETURNS THE LAST COLUMN 
-    // public static int getLastDataColumn(String sheetName) {
-
-    //     try (FileInputStream fis = new FileInputStream(FILE_PATH);
-    //         Workbook workbook = new XSSFWorkbook(fis)) {
-    //         Sheet sheet = workbook.getSheet(sheetName);
-    //         int lastColumn = 0;
-    //         for (int i = 0; i <= sheet.getLastRowNum(); i++) {
-    //             Row row = sheet.getRow(i);
-    //             if (row != null) {
-    //                 lastColumn = Math.max(lastColumn, row.getLastCellNum() - 1);
-    //             }
-    //         }
-    //         return lastColumn;
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return 0;
-    // }
     public static int getLastDataColumn(String sheetName) {
 
     try (FileInputStream fis = new FileInputStream(FILE_PATH);

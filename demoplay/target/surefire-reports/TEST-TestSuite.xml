@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="21.373" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="26.628" tests="1" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\INTERN~1\AppData\Local\Temp\surefire11223979998069880287\surefirebooter16912986698285829394.jar C:\Users\intern 7\AppData\Local\Temp\surefire11223979998069880287 2026-07-23T17-17-52_719-jvmRun1 surefire2752266558326282008tmp surefire_010354170522801016800tmp"/>
+    <property name="sun.java.command" value="C:\Users\INTERN~1\AppData\Local\Temp\surefire16027163049002564399\surefirebooter13256191572162024168.jar C:\Users\intern 7\AppData\Local\Temp\surefire16027163049002564399 2026-07-24T17-47-25_080-jvmRun1 surefire9767375897265619285tmp surefire_015033320225750592610tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\intern 7\playmaven\demoplay\target\test-classes;C:\Users\intern 7\playmaven\demoplay\target\classes;C:\Users\intern 7\.m2\repository\com\microsoft\playwright\playwright\1.54.0\playwright-1.54.0.jar;C:\Users\intern 7\.m2\repository\com\google\code\gson\gson\2.12.1\gson-2.12.1.jar;C:\Users\intern 7\.m2\repository\com\google\errorprone\error_prone_annotations\2.36.0\error_prone_annotations-2.36.0.jar;C:\Users\intern 7\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\intern 7\.m2\repository\com\microsoft\playwright\driver\1.54.0\driver-1.54.0.jar;C:\Users\intern 7\.m2\repository\com\microsoft\playwright\driver-bundle\1.54.0\driver-bundle-1.54.0.jar;C:\Users\intern 7\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\intern 7\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\intern 7\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\intern 7\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\intern 7\.m2\repository\org\apache\poi\poi-ooxml\5.2.5\poi-ooxml-5.2.5.jar;C:\Users\intern 7\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.5\poi-ooxml-lite-5.2.5.jar;C:\Users\intern 7\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.0\xmlbeans-5.2.0.jar;C:\Users\intern 7\.m2\repository\org\apache\commons\commons-compress\1.25.0\commons-compress-1.25.0.jar;C:\Users\intern 7\.m2\repository\commons-io\commons-io\2.15.0\commons-io-2.15.0.jar;C:\Users\intern 7\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\intern 7\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\intern 7\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\intern 7\.m2\repository\org\apache\poi\poi\5.2.5\poi-5.2.5.jar;C:\Users\intern 7\.m2\repository\commons-codec\commons-codec\1.16.0\commons-codec-1.16.0.jar;C:\Users\intern 7\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\intern 7\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\intern 7\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.4\jackson-databind-2.18.4.jar;C:\Users\intern 7\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.4\jackson-core-2.18.4.jar;C:\Users\intern 7\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.4\jackson-annotations-2.18.4.jar;C:\Users\intern 7\.m2\repository\net\sourceforge\tess4j\tess4j\5.12.0\tess4j-5.12.0.jar;C:\Users\intern 7\.m2\repository\net\java\dev\jna\jna\5.14.0\jna-5.14.0.jar;C:\Users\intern 7\.m2\repository\com\github\jai-imageio\jai-imageio-core\1.4.0\jai-imageio-core-1.4.0.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\pdfbox\3.0.2\pdfbox-3.0.2.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\pdfbox-io\3.0.2\pdfbox-io-3.0.2.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\fontbox\3.0.2\fontbox-3.0.2.jar;C:\Users\intern 7\.m2\repository\commons-logging\commons-logging\1.3.0\commons-logging-1.3.0.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\pdfbox-tools\3.0.2\pdfbox-tools-3.0.2.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\pdfbox-debugger\3.0.2\pdfbox-debugger-3.0.2.jar;C:\Users\intern 7\.m2\repository\info\picocli\picocli\4.7.5\picocli-4.7.5.jar;C:\Users\intern 7\.m2\repository\org\apache\pdfbox\jbig2-imageio\3.0.4\jbig2-imageio-3.0.4.jar;C:\Users\intern 7\.m2\repository\net\sourceforge\lept4j\lept4j\1.19.1\lept4j-1.19.1.jar;C:\Users\intern 7\.m2\repository\org\jboss\jboss-vfs\3.2.17.Final\jboss-vfs-3.2.17.Final.jar;C:\Users\intern 7\.m2\repository\org\jboss\logging\jboss-logging\3.1.4.GA\jboss-logging-3.1.4.GA.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\INTERN~1\AppData\Local\Temp\surefire11223979998069880287\surefirebooter16912986698285829394.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\INTERN~1\AppData\Local\Temp\surefire16027163049002564399\surefirebooter13256191572162024168.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.9+7-LTS-338"/>
@@ -58,80 +58,61 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="verifySmallModuleInsideOpRegistration" classname="tests.OPRegistrationTest" time="13.771">
-    <failure message="Error {&#10;  message=&apos;Target page, context or browser has been closed&#10;  name=&apos;TargetClosedError&#10;  stack=&apos;TargetClosedError: Target page, context or browser has been closed&#10;    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)&#10;}&#10;Call log:&#10;-   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)&#10;-     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;&#10;-   - attempting click action&#10;-     2 × waiting for element to be visible, enabled and stable&#10;-       - element is visible, enabled and stable&#10;-       - scrolling into view if needed&#10;-       - done scrolling&#10;-       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events&#10;-     - retrying click action&#10;-     - waiting 20ms&#10;-     2 × waiting for element to be visible, enabled and stable&#10;-       - element is visible, enabled and stable&#10;-       - scrolling into view if needed&#10;-       - done scrolling&#10;-       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events&#10;-     - retrying click action&#10;-       - waiting 100ms&#10;-     9 × waiting for element to be visible, enabled and stable&#10;-       - element is visible, enabled and stable&#10;-       - scrolling into view if needed&#10;-       - done scrolling&#10;-       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events&#10;-     - retrying click action&#10;-       - waiting 500ms&#10;" type="com.microsoft.playwright.impl.TargetClosedError"><![CDATA[com.microsoft.playwright.impl.TargetClosedError: 
+  <testcase name="verifyOPRegistration" classname="tests.OPRegistrationTest" time="17.979">
+    <failure message="Error {&#10;  message=&apos;Target page, context or browser has been closed&#10;  name=&apos;TargetClosedError&#10;  stack=&apos;TargetClosedError: Target page, context or browser has been closed&#10;    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)&#10;    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)&#10;    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)&#10;    at process.processImmediate (node:internal/timers:485:21)&#10;}" type="com.microsoft.playwright.impl.TargetClosedError">com.microsoft.playwright.impl.TargetClosedError: 
 Error {
   message='Target page, context or browser has been closed
   name='TargetClosedError
   stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[normalize-space()='View Collection']")
--     - locator resolved to <button class="bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition">…</button>
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
-	at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-	at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
+	at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+	at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
 Caused by: com.microsoft.playwright.impl.TargetClosedError: 
 Error {
   message='Target page, context or browser has been closed
   name='TargetClosedError
   stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[normalize-space()='View Collection']")
--     - locator resolved to <button class="bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition">…</button>
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
-	at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-	at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
-]]></failure>
+	at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+	at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
+</failure>
     <system-out><![CDATA[Login Successful
-Last Column = 1
+Last Column = 2
+Executing Person Data in Column: 1
+Total Normal Dropdowns : 15
+Dropdown JSON loaded successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Dropdown JSON saved successfully.
+Total Custom Dropdowns : 0
+All dropdowns captured successfully.
+Dropdown JSON saved successfully.
+Normal dropdown refreshed : Patient Category:
+[Select,  COMMUNITY CENTER ,  CORPORATE ,  FULL PAYMENT ,  VISION CENTER ]
+Dropdown JSON saved successfully.
+Normal dropdown refreshed : Next of Kin
+Dropdown JSON saved successfully.
+Normal dropdown refreshed : Country
 ]]></system-out>
     <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation

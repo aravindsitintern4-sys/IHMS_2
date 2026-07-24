@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
@@ -17,6 +19,7 @@ public class DropdownReader {
     // LOAD EXISTING JSON SO REFRESHING A DROPDOWN DOESN'T OVERWRITE PREVIOUS DATA 
     // private Map<String, List<String>> dropdownMap =new LinkedHashMap<>(JsonUtil.getDropdownMap());
     private Map<String, List<String>> dropdownMap = new LinkedHashMap<>();
+    
 
     public DropdownReader(Page page) {
         this.page = page;
@@ -87,20 +90,70 @@ public class DropdownReader {
     }
 
 
-    public void captureTableDropdown(String tableHeader) throws IOException {
-        page.locator("//td[normalize-space()='" + tableHeader + "']/following-sibling::td//button").click();
+    public void captureTableDropdown() throws IOException {
 
-        page.locator("//input[@placeholder='Search...']").waitFor();
+    Locator headers = page.locator("//table//thead//th");
+    int headerCount = headers.count();
+    System.out.println("Total Table Columns : " + headerCount);
 
-        List<String> options = page.locator("//div[@role='option']").allTextContents();
-
-        List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(options));
-
-        dropdownMap.put(tableHeader, uniqueOptions);
-        JsonUtil.writeJson(dropdownMap);    
-
-        page.keyboard().press("Escape");
+    Locator dataRows = page.locator("//table//tbody//tr");
+    if (dataRows.count() == 0) {
+        System.out.println("No data rows found in table.");
+        return;
     }
+
+    Locator firstRow = dataRows.first();
+    Locator tds = firstRow.locator("td");
+    int tdCount = tds.count();
+
+    // GET THE DROPDOWN BY HEADER
+    for (int headerIndex = 1; headerIndex < headerCount; headerIndex++) {
+
+        String labelName = headers.nth(headerIndex).textContent()
+                .replace("*", "")
+                .trim();
+
+        if (labelName.isEmpty() || labelName.equalsIgnoreCase("Action")) {
+            continue;
+        }
+
+        int tdIndex = headerIndex - 1;
+        if (tdIndex >= tdCount) {
+            System.out.println("Table Header : " + labelName);
+            continue;
+        }
+
+        Locator cell = tds.nth(tdIndex);
+        Locator selects = cell.locator("select");
+
+        if (selects.count() == 0) {
+            System.out.println("No dropdown found for column : " + labelName);
+            continue;
+        }
+
+        System.out.println("Reading : " + labelName);
+        Locator dropdownSelect = selects.first();
+
+        List<String> rawOptions = dropdownSelect.locator("option").allTextContents();
+        List<String> cleanOptions = new ArrayList<>();
+        for (String opt : rawOptions) {
+            String trimmed = opt.trim();
+            if (!trimmed.isEmpty() && !trimmed.equalsIgnoreCase("Select")) {
+                cleanOptions.add(trimmed);
+            }
+        }
+
+        List<String> uniqueOptions = new ArrayList<>(new LinkedHashSet<>(cleanOptions));
+        dropdownMap.put(labelName, uniqueOptions);
+        System.out.println("Stored : " + labelName + " -> " + uniqueOptions.size() + " options");
+    }
+
+    JsonUtil.writeJson(dropdownMap);
+    System.out.println("Table dropdowns captured successfully.");
+}
+
+    
+
 
 
     // SOME DROPDOWNS ARE ENABLE AFTER SOME ACTIONS DONE FOR THOSE DROPDOWN THIS CAPTURESINGLEDROPDOWN METHOD IS USED 

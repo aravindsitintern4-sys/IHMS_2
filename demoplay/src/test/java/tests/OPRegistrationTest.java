@@ -142,7 +142,7 @@ public void verifyOPRegistration() throws IOException {
 
     for (int column = 1; column <= lastColumn; column++) {
 
-        // INITIAL METHOS CALLING
+        // INITIAL METHODS CALLING
         TestContext ctx = CallInitialMethods("OP Modules", "Outpatient Registration","opRegistrationData",column);
 
         boolean isColumnEmpty = ctx.data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
@@ -320,13 +320,14 @@ public void verifyOPRegistration() throws IOException {
             // dropdownReader.refreshDropdown("Payment Type:");
             validateAndSelectDropdown(ctx.reusableAction,"Payment Type:",ctx.data.get("PaymentType"));
             String PaymentType = ctx.data.get("PaymentType");
+            // AUTOMATION NOT WORK FOR OTHERS OPTION
             if (("OTHERS".equalsIgnoreCase(PaymentType))){
                 ctx.dropdownReader.captureDropdownWithoutLabel("Select Counter");
                 validateAndSelectCounter(ctx.reusableAction,"Select Counter",ctx.data.get("selectCounter"));
                 ctx.reusableAction.buttonClick("Select");                  
                 ctx.reusableAction.buttonClick("Yes");  
-                ctx.reusableAction.testClick("Credit Card");
-                // reusableAction.closeIcon("Select Counter");    
+                // ctx.reusableAction.testClick("Credit Card");
+                ctx.reusableAction.closeIcon("Select Counter");    
             }
             else{    
                 ctx.reusableAction.linkIcon("+"); 
@@ -476,11 +477,11 @@ public void verifyOPRegistration() throws IOException {
     } 
     
     public void newValidateAndSelectPopUpDropdown(ReusableCode reusableAction,String label,String value) {
-            if (!JsonUtil.containsOption(label, value)) {
-                throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
-            }
-            reusableAction.selectDropdownByLabelInsidePopup(label, value);
+        if (!JsonUtil.containsOption(label, value)) {
+            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
         }
+        reusableAction.selectDropdownByLabelInsidePopup(label, value);
+    }
 
 
 //  @Test
@@ -560,7 +561,7 @@ public void verifyOPRegistration() throws IOException {
 
 
 // SMALL MODULES ----> REPRINT,RECALL,UNIT LOAD,ROUTE CARD,VIEW COLLECTION FROM REGISTRATION PAGE
-@Test(priority = 2)
+// @Test(priority = 2)
 public void verifySmallModuleInsideOpRegistration() throws IOException {
 
     int lastColumn = Excel.getLastDataColumn("Extra collection");
@@ -570,15 +571,15 @@ public void verifySmallModuleInsideOpRegistration() throws IOException {
 
         TestContext ctx = CallInitialMethods("OP Modules", "Outpatient Registration","Extra collection",column);
 
-        // verifyReprint(ctx.reusableAction,ctx.opPage,ctx.dropdownReader,ctx.data);
+        verifyReprint(ctx.reusableAction,ctx.opPage,ctx.dropdownReader,ctx.data);
 
-        // verifyRecall(ctx.reusableAction, ctx.opPage, ctx.data); 
-
-        verifyRouteCard(ctx.reusableAction, ctx.data);
+        verifyRecall(ctx.reusableAction, ctx.opPage, ctx.data); 
 
         verifyViewCollection(ctx.reusableAction, ctx.opPage, ctx.data, ctx.column);
 
-        verifyUnitLoad(ctx.reusableAction, ctx.opPage, ctx.data, ctx.column);   
+        verifyUnitLoad(ctx.reusableAction, ctx.opPage, ctx.data, ctx.column);  
+        
+        verifyRouteCard(ctx.reusableAction, ctx.data);
     }
 
 }
@@ -616,8 +617,9 @@ public void verifySmallModuleInsideOpRegistration() throws IOException {
     public void verifyRouteCard(ReusableCode reusableAction,Map<String, String> data) throws IOException {
         reusableAction.buttonClick("Route Card");
         reusableAction.inputFieldByLabelPopup("UIN",data.get("uinRouteCard"));
-        reusableAction.buttonClickPopup("Submit");                       
-        // reusableAction.closeNewWindow();
+        reusableAction.capturePages();
+        reusableAction.buttonClickPopup("Submit");
+        reusableAction.closeNewWindowForce();
     }
 
     // VIEW COLLECTION  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
@@ -631,7 +633,7 @@ public void verifySmallModuleInsideOpRegistration() throws IOException {
     }
 
     // UNIT LOAD  ---> COMPLETED ---> VALUE STORED IN "view collection" SHEET
-   public void verifyUnitLoad(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data,int column) throws IOException {
+    public void verifyUnitLoad(ReusableCode reusableAction,OPRegistrationPage opPage,Map<String, String> data,int column) throws IOException {
         reusableAction.buttonClick("Unit Load");
         if (opPage.isPopupVisible("Unit Load")) {
             String unitLoad = opPage.getUnitLoadTable("Unit Load");

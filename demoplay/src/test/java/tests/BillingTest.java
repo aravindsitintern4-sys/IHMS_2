@@ -26,7 +26,7 @@ import tests.OPRegistrationTest;
 
 public class BillingTest extends BaseTest {
     
-    // @Test(priority = 3)
+    // @Test(priority = 8)
     public void verifyBilling() throws IOException {
         
         int lastColumn = Excel.getLastDataColumn("Billing Data");
@@ -35,7 +35,7 @@ public class BillingTest extends BaseTest {
 
         for (int column = 1; column <= lastColumn; column++) {
 
-            // INITIAL METHOS CALLING
+            // INITIAL METHODS CALLING
             TestContext ctx = CallInitialMethods("Billing", "Bill Entry","Billing Data",column);
 
             boolean isColumnEmpty = ctx.data.values().stream().allMatch(value -> value == null || value.trim().isEmpty());
@@ -46,12 +46,30 @@ public class BillingTest extends BaseTest {
             System.out.println("Executing Person Data in Column: " + column);
 
             ctx.dropdownReader.captureAllDropdownOptions();
+            ctx.dropdownReader.captureTableDropdown();
 
             ctx.reusableAction.inputFieldByLabel("UIN", ctx.data.get("uinBilling"));
             ctx.reusableAction.pressKey("Enter");
             ctx.reusableAction.inputFieldByLabelPopup("Enter 3 Digit Pin",ctx.data.get("pin number"));
-            ctx.billPage.selectTableDropdown("Test Name",ctx.data.get("test name"));
+            ValidationCustomTableDropdown(ctx.billPage,"Test Name",ctx.data.get("test name"));
+            ValidationNormalTableDropdown(ctx.billPage,"Test Location",ctx.data.get("test location"));
+            ctx.reusableAction.pressKey("Enter");
         }    
+    }
+
+
+    public void ValidationCustomTableDropdown(BillingPage billPage,String label,String value) {
+        if (!JsonUtil.containsOption(label, value)) {
+            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+        }
+        billPage.selectCustomTableDropdown(label,value);
+    }
+
+    public void ValidationNormalTableDropdown(BillingPage billPage,String label,String value) {
+        if (!JsonUtil.containsOption(label, value)) {
+            throw new RuntimeException("Option '" + value +"' not found under '" + label + "' in JSON.");
+        }
+        billPage.selectNormalTableDropdown(label,value);
     }
 
 }

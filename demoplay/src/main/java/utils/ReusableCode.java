@@ -1,6 +1,7 @@
 package utils;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.Assert;
@@ -17,9 +18,11 @@ import locators.Locator;
 public class ReusableCode {
 
     private Page page;
+    private Page parentPage;
 
     public ReusableCode(Page page) {
         this.page = page;
+        this.parentPage = page;
     } 
 
     // TOAST MESSAGE VALIDATION
@@ -78,7 +81,11 @@ public class ReusableCode {
          
     // RADIO BUTTON
     public void selectRadioByLabel(String labelName, String option) {
-        String radioBtn ="//label[contains(normalize-space(),'%s')]/following-sibling::div//label[contains(normalize-space(),'%s')]/input";
+        // String radioBtn ="//label[contains(normalize-space(),'%s')]/following-sibling::div//label[contains(normalize-space(),'%s')]/input";
+        String radioBtn =
+        "//label[contains(normalize-space(),'%1$s')]/following-sibling::div//label[contains(normalize-space(),'%2$s')]/input" +
+        " | " +
+        "//label[normalize-space()='%1$s']/following-sibling::label[.//span[contains(normalize-space(),'%2$s')]]//input";
         String radioLoc = String.format(radioBtn,labelName,option);
         page.locator(radioLoc).check();
     }
@@ -179,6 +186,35 @@ public class ReusableCode {
     }
 
 
+  private List<Page> beforePages;
+
+    public void capturePages() {
+        beforePages = new ArrayList<>(page.context().pages());
+    }
+
+    public void closeNewWindowForce() {
+        // Wait up to 10 seconds for a new window
+        for (int i = 0; i < 300; i++) {
+            if (page.context().pages().size() > beforePages.size()) {
+                break;
+            }
+            page.waitForTimeout(100);
+        }
+
+        List<Page> afterPages = page.context().pages();
+
+        for (Page p : afterPages) {
+            if (!beforePages.contains(p)) {
+                p.close();
+                break;
+            }
+        }
+
+        page.bringToFront();
+    }
+
+
+
     // POPUP 
 
      //  INPUT FIELD
@@ -197,9 +233,34 @@ public class ReusableCode {
     }
     
     public void buttonClickPopup(String btnName) {
-        String buttonClick = "//div[contains(@class,'fixed')]//button[normalize-space()='%s']";
-        page.click(String.format(buttonClick,btnName));
+        // String buttonClick = "//div[contains(@class,'fixed')]//button[normalize-space()='%s']";
+        String buttonClick = "//div[contains(@class,'fixed')]//button[normalize-space()='%s' or .//span[normalize-space()='%s']]";
+        page.click(String.format(buttonClick,btnName,btnName));
     } 
 
+
+    //  COMMON ARROW FOR SUBMENU OPTION IN PAGE ----> <-----
+    public void clickNextArrow() {
+        page.locator("//button[.//img[contains(@src,'arrow-1.png')]]").first().click();
+    }
+
+    public void navigateToSubmenu(String submenu,String expandedSubMenu) {
+        clickNextArrow();
+
+        // EXAMPLE ----> INSIDE "OUTPATIENT REGISTRATION" SUBMENU
+        String submenuLoc = "//button[contains(@class,'submenu-toggle')][.//span[normalize-space()='%s']]" +
+                            "//span[contains(@class,'caret-icon')]";
+        page.click(String.format(submenuLoc,submenu));
+
+        // EXAMPLE ----> INSIDE SUBMENU "EDIT ADDRESS" EXPANDED SUBMENU
+        String expandedSubmenuLoc= "//ul[contains(@class,'child-menu')]//span[normalize-space()='%s']";
+        page.click(String.format(expandedSubmenuLoc,expandedSubMenu));
+    }
+
+
+    public String getFieldValueByLabel(String label) {
+        String inputXpath = "//label[normalize-space()='" + label + "']/following::input[1]";
+        return page.locator(inputXpath).inputValue();
+    }
 
 }

@@ -9,89 +9,42 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Surefire suite</th></tr>
-<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">20,941</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Surefire test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">26,078</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifySmallModuleInsideOpRegistration</a></td><td rowspan="1">1784807280600</td><td rowspan="1">13755</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Surefire suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Surefire test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.OPRegistrationTest</td><td><a href="#m0">verifyOPRegistration</a></td><td rowspan="1">1784895454082</td><td rowspan="1">17978</td></tr></tbody>
 </table>
-<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifySmallModuleInsideOpRegistration</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">com.microsoft.playwright.impl.TargetClosedError: Error {
+<h2>Surefire test</h2><h3 id="m0">tests.OPRegistrationTest#verifyOPRegistration</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
 	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
 	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at utils.ReusableCode.buttonClick(ReusableCode.java:52)
-	at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-	at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
+	at com.microsoft.playwright.impl.KeyboardImpl.typeImpl(KeyboardImpl.java:71)
+	at com.microsoft.playwright.impl.KeyboardImpl.type(KeyboardImpl.java:62)
+	at utils.ReusableCode.inputFieldByLabel(ReusableCode.java:79)
+	at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+	at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
 	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 39 more
+	... 38 more
 ... Removed 30 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

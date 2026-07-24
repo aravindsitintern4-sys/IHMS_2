@@ -2,94 +2,47 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-07-23T17:17:53 IST" name="Surefire suite" finished-at="2026-07-23T17:18:14 IST" duration-ms="20941">
+  <suite started-at="2026-07-24T17:47:26 IST" name="Surefire suite" finished-at="2026-07-24T17:47:52 IST" duration-ms="26078">
     <groups>
     </groups>
-    <test started-at="2026-07-23T17:17:53 IST" name="Surefire test" finished-at="2026-07-23T17:18:14 IST" duration-ms="20941">
+    <test started-at="2026-07-24T17:47:26 IST" name="Surefire test" finished-at="2026-07-24T17:47:52 IST" duration-ms="26078">
       <class name="tests.OPRegistrationTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@6b4a4e18]" started-at="2026-07-23T17:17:53 IST" name="setup" finished-at="2026-07-23T17:18:00 IST" duration-ms="6875" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.OPRegistrationTest@6293abcc]" started-at="2026-07-24T17:47:26 IST" name="setup" finished-at="2026-07-24T17:47:34 IST" duration-ms="7668" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifySmallModuleInsideOpRegistration()[pri:2, instance:tests.OPRegistrationTest@6b4a4e18]" started-at="2026-07-23T17:18:00 IST" name="verifySmallModuleInsideOpRegistration" finished-at="2026-07-23T17:18:14 IST" duration-ms="13755" status="FAIL">
+        <test-method signature="verifyOPRegistration()[pri:1, instance:tests.OPRegistrationTest@6293abcc]" started-at="2026-07-24T17:47:34 IST" name="verifyOPRegistration" finished-at="2026-07-24T17:47:52 IST" duration-ms="17978" status="FAIL">
           <exception class="com.microsoft.playwright.impl.TargetClosedError">
             <message>
               <![CDATA[Error {
   message='Target page, context or browser has been closed
   name='TargetClosedError
   stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
-}
-Call log:
--   - waiting for locator("//button[normalize-space()='View Collection']")
--     - locator resolved to <button class="bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition">…</button>
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-]]>
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
+}]]>
             </message>
             <full-stacktrace>
               <![CDATA[com.microsoft.playwright.impl.TargetClosedError: Error {
   message='Target page, context or browser has been closed
   name='TargetClosedError
   stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[normalize-space()='View Collection']")
--     - locator resolved to <button class="bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition">…</button>
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
 at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
 at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
 at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-at com.microsoft.playwright.Page.click(Page.java:3931)
-at utils.ReusableCode.buttonClick(ReusableCode.java:52)
-at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
+at com.microsoft.playwright.impl.KeyboardImpl.typeImpl(KeyboardImpl.java:71)
+at com.microsoft.playwright.impl.KeyboardImpl.type(KeyboardImpl.java:62)
+at utils.ReusableCode.inputFieldByLabel(ReusableCode.java:79)
+at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -125,45 +78,22 @@ Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
   message='Target page, context or browser has been closed
   name='TargetClosedError
   stack='TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator("//button[normalize-space()='View Collection']")
--     - locator resolved to <button class="bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition">…</button>
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - <div _ngcontent-ng-c3945334500="" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted">…</div> from <app-spinner _nghost-ng-c3945334500="">…</app-spinner> subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
 at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
 at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-... 39 more
+... 38 more
 ]]>
             </full-stacktrace>
           </exception> <!-- com.microsoft.playwright.impl.TargetClosedError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifySmallModuleInsideOpRegistration -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@6b4a4e18]" started-at="2026-07-23T17:18:14 IST" name="tearDown" finished-at="2026-07-23T17:18:14 IST" duration-ms="269" status="PASS">
+        </test-method> <!-- verifyOPRegistration -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.OPRegistrationTest@6293abcc]" started-at="2026-07-24T17:47:52 IST" name="tearDown" finished-at="2026-07-24T17:47:52 IST" duration-ms="378" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

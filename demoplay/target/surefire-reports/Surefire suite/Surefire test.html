@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Jul 23 17:17:53 IST 2026</td>
+<td>Started on:</td><td>Fri Jul 24 17:47:26 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>20 seconds (20941 ms)</td>
+<tr><td>Total time:</td><td>26 seconds (26078 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,129 +76,58 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration()'><b>verifySmallModuleInsideOpRegistration</b><br>Test class: tests.OPRegistrationTest</td>
+<td title='tests.OPRegistrationTest.verifyOPRegistration()'><b>verifyOPRegistration</b><br>Test class: tests.OPRegistrationTest</td>
 <td><div><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
 	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
 	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at utils.ReusableCode.buttonClick(ReusableCode.java:52)
-	at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-	at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
+	at com.microsoft.playwright.impl.KeyboardImpl.typeImpl(KeyboardImpl.java:71)
+	at com.microsoft.playwright.impl.KeyboardImpl.type(KeyboardImpl.java:62)
+	at utils.ReusableCode.inputFieldByLabel(ReusableCode.java:79)
+	at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+	at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
 	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 39 more
-... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace205615258", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace205615258'><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
+	... 38 more
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1418102907", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1418102907'><pre>com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:54)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:138)
 	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:131)
 	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:124)
-	at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:241)
-	at com.microsoft.playwright.impl.PageImpl.click(PageImpl.java:680)
-	at com.microsoft.playwright.Page.click(Page.java:3931)
-	at utils.ReusableCode.buttonClick(ReusableCode.java:52)
-	at tests.OPRegistrationTest.verifyViewCollection(OPRegistrationTest.java:625)
-	at tests.OPRegistrationTest.verifySmallModuleInsideOpRegistration(OPRegistrationTest.java:579)
+	at com.microsoft.playwright.impl.KeyboardImpl.typeImpl(KeyboardImpl.java:71)
+	at com.microsoft.playwright.impl.KeyboardImpl.type(KeyboardImpl.java:62)
+	at utils.ReusableCode.inputFieldByLabel(ReusableCode.java:79)
+	at tests.OPRegistrationTest.verifyForeignerNationality(OPRegistrationTest.java:440)
+	at tests.OPRegistrationTest.verifyOPRegistration(OPRegistrationTest.java:218)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -234,41 +163,18 @@ Caused by: com.microsoft.playwright.impl.TargetClosedError: Error {
   message=&apos;Target page, context or browser has been closed
   name=&apos;TargetClosedError
   stack=&apos;TargetClosedError: Target page, context or browser has been closed
-    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-4679922677312607798\package\lib\server\dispatchers\dispatcher.js:333:15)
+    at DispatcherConnection.dispatch (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\dispatchers\dispatcher.js:256:69)
+    at transport.onmessage (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\cli\driver.js:53:59)
+    at Immediate._onImmediate (C:\Users\INTERN~1\AppData\Local\Temp\playwright-java-17939783913780642023\package\lib\server\utils\pipeTransport.js:76:16)
+    at process.processImmediate (node:internal/timers:485:21)
 }
-Call log:
--   - waiting for locator(&quot;//button[normalize-space()=&apos;View Collection&apos;]&quot;)
--     - locator resolved to &lt;button class=&quot;bg-white text-[#405189] border border-[#40518991] border-b-[3px] border-b-[#405189] px-6 py-2 rounded hover:bg-[#405189] hover:text-white transition&quot;&gt;…&lt;/button&gt;
--   - attempting click action
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--     - waiting 20ms
--     2 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 100ms
--     9 × waiting for element to be visible, enabled and stable
--       - element is visible, enabled and stable
--       - scrolling into view if needed
--       - done scrolling
--       - &lt;div _ngcontent-ng-c3945334500=&quot;&quot; class=&quot;fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ng-star-inserted&quot;&gt;…&lt;/div&gt; from &lt;app-spinner _nghost-ng-c3945334500=&quot;&quot;&gt;…&lt;/app-spinner&gt; subtree intercepts pointer events
--     - retrying click action
--       - waiting 500ms
-
 	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:259)
 	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:214)
 	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:136)
-	... 39 more
+	... 38 more
 </pre></div></td>
-<td>13</td>
-<td>tests.OPRegistrationTest@6b4a4e18</td></tr>
+<td>17</td>
+<td>tests.OPRegistrationTest@6293abcc</td></tr>
 </table><p>
 </body>
 </html>

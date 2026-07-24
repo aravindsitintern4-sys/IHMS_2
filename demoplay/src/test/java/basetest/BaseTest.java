@@ -72,6 +72,7 @@ import java.util.Map;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 
@@ -115,10 +116,7 @@ public class BaseTest {
     }
 
     // COMMON INITIAL METHOD
-    public TestContext CallInitialMethods(String mainMenu,
-                                          String subMenu,
-                                          String sheetName,
-                                          int column) {
+    public TestContext CallInitialMethods(String mainMenu,String subMenu,String sheetName,int column) {
 
         Map<String, String> data = Excel.getTestData(sheetName, column);
 
@@ -127,15 +125,12 @@ public class BaseTest {
         Page ihmsPage;
 
         try {
-
-            // If IHMS opens in new tab
+            // If IHMS OPENS IN NEW TAB
             ihmsPage = page.waitForPopup(() -> {
                 dashboard.clickDashboardOption("IHMS");
             });
-
         } catch (PlaywrightException e) {
-
-            // If IHMS opens in same tab
+            // If IHMS OPENS IN SAME TAB
             dashboard.clickDashboardOption("IHMS");
             page.waitForLoadState();
             ihmsPage = page;
@@ -147,7 +142,8 @@ public class BaseTest {
 
         reusableAction.clickMenuAndSelectSubMenu(mainMenu, subMenu);
 
-        ihmsPage.locator("//select").first().waitFor();
+        //  DYNAMIC FLOW FOR CHECKING DROPDOWN
+        waitForDropdownIfPresent(ihmsPage);
 
         DropdownReader dropdownReader = new DropdownReader(ihmsPage);
 
@@ -171,4 +167,24 @@ public class BaseTest {
             pf.closeBrowser();
         }
     }
+
+
+
+    // WAIT FOR SELECT DROPDOWN WHEN PAGE OPEN
+    private void waitForDropdownIfPresent(Page ihmsPage) {
+        Locator selects = ihmsPage.locator("//select");
+        try {
+            selects.first().waitFor(new Locator.WaitForOptions().setTimeout(5000));
+        } catch (PlaywrightException e) {
+            System.out.println("No <select> dropdown found on this page - continuing without wait.");
+        }
+    }
+
+
+    
 }
+
+
+
+
+

@@ -1,5 +1,6 @@
 tests\BillingTest.class
 tests\OPRegistrationTest.class
+tests\EditAddressTest.class
 tests\TestContext.class
 basetest\BaseTest.class
 tests\LoginTest.class

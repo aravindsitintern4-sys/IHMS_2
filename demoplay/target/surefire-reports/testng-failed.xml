@@ -7,7 +7,7 @@
         <methods>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="verifySmallModuleInsideOpRegistration"/>
+          <include name="verifyOPRegistration"/>
         </methods>
       </class> <!-- tests.OPRegistrationTest -->
     </classes>
